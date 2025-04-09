@@ -31,7 +31,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-24 sm:py-32 relative z-10">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Formación especializada en Ingeniería y Minería
+              CCD: Centro de Capacitación y Desarrollo
             </h1>
             <p className="text-xl mb-8 text-white/90">
               Accede a cursos de alta calidad impartidos por profesionales

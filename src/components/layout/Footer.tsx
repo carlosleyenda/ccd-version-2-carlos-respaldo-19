@@ -10,10 +10,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-              EduMining
+              CCD
             </h3>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Plataforma especializada en cursos de ingeniería, minería y gestión.
+              Centro de Capacitación y Desarrollo especializado en cursos de ingeniería, minería y gestión.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
@@ -110,7 +110,7 @@ const Footer = () => {
         
         <div className="mt-8 border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            &copy; {currentYear} EduMining. Todos los derechos reservados.
+            &copy; {currentYear} CCD - Centro de Capacitación y Desarrollo. Todos los derechos reservados.
           </p>
           <div className="mt-4 md:mt-0">
             <select

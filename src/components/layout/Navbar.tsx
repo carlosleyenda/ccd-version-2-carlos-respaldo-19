@@ -51,8 +51,9 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
               <Menu className="h-5 w-5" />
             </Button>
             <Link to="/" className="flex-shrink-0 flex items-center ml-2 lg:ml-0">
-              <span className="text-mining-700 dark:text-mining-300 font-bold text-xl">Edu</span>
-              <span className="text-engineering-700 dark:text-engineering-300 font-bold text-xl">Mining</span>
+              <span className="text-management-700 dark:text-management-300 font-bold text-xl">C</span>
+              <span className="text-engineering-700 dark:text-engineering-300 font-bold text-xl">C</span>
+              <span className="text-mining-700 dark:text-mining-300 font-bold text-xl">D</span>
             </Link>
           </div>
           
