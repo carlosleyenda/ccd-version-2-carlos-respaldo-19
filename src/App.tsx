@@ -9,6 +9,11 @@ import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import LiveCourses from "./pages/LiveCourses";
 import NotFound from "./pages/NotFound";
+import CourseView from "./pages/CourseView";
+import CourseLive from "./pages/CourseLive";
+import CoursePreview from "./pages/CoursePreview";
+import CourseLesson from "./pages/CourseLesson";
+import InstructorProfile from "./pages/InstructorProfile";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
@@ -63,15 +68,11 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/live-courses" element={<LiveCourses />} />
-            {/* Future routes to add here:
-              - /course/:id
-              - /engineering
-              - /mining
-              - /management
-              - /settings
-              - /profile
-              - /certifications
-            */}
+            <Route path="/course/:id" element={<CourseView />} />
+            <Route path="/course/:id/live" element={<CourseLive />} />
+            <Route path="/course/:id/preview" element={<CoursePreview />} />
+            <Route path="/course/lesson/:id" element={<CourseLesson />} />
+            <Route path="/instructor/:name" element={<InstructorProfile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
