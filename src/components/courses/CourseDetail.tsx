@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -17,6 +18,7 @@ import {
   CheckCircle2,
   Lock,
   BookmarkCheck,
+  PlayCircle, // Added the missing PlayCircle import
 } from "lucide-react";
 
 interface CourseModule {
