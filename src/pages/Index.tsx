@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,12 +13,38 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { GraduationCap, BookOpen, Video, TrendingUp, CheckCircle2, ArrowRight } from "lucide-react";
+import { toast } from "sonner";
 
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleExploreCoursesClick = () => {
+    navigate("/courses");
+    toast.success("Explorando cursos disponibles");
+  };
+
+  const handlePlansClick = () => {
+    toast.info("Próximamente: Detalles de planes de membresía");
+  };
+
+  const handleCategoryClick = (category: string) => {
+    navigate(`/${category}`);
+    toast.success(`Explorando cursos de ${category === 'engineering' ? 'Ingeniería' : category === 'mining' ? 'Minería' : 'Gestión'}`);
+  };
+
+  const handleViewAllCoursesClick = () => {
+    navigate("/courses");
+    toast.success("Mostrando todos los cursos disponibles");
+  };
+
+  const handleAccessAccountClick = () => {
+    navigate("/dashboard");
+    toast.success("Accediendo a tu cuenta");
   };
 
   return (
@@ -39,10 +65,19 @@ const Index = () => {
               carrera profesional.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-mining-500 hover:bg-mining-600">
+              <Button 
+                size="lg" 
+                className="bg-mining-500 hover:bg-mining-600"
+                onClick={handleExploreCoursesClick}
+              >
                 Explorar cursos
               </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 border-white text-white">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-white/10 hover:bg-white/20 border-white text-white"
+                onClick={handlePlansClick}
+              >
                 Planes de membresía
               </Button>
             </div>
@@ -176,7 +211,11 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter className="pt-4">
-                <Button variant="ghost" className="w-full text-engineering-600 hover:text-engineering-800 dark:text-engineering-400 dark:hover:text-engineering-300 hover:bg-engineering-50 dark:hover:bg-engineering-900/20 justify-between">
+                <Button 
+                  variant="ghost" 
+                  className="w-full text-engineering-600 hover:text-engineering-800 dark:text-engineering-400 dark:hover:text-engineering-300 hover:bg-engineering-50 dark:hover:bg-engineering-900/20 justify-between"
+                  onClick={() => handleCategoryClick("engineering")}
+                >
                   <span>Ver cursos</span>
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
@@ -214,7 +253,11 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter className="pt-4">
-                <Button variant="ghost" className="w-full text-mining-600 hover:text-mining-800 dark:text-mining-400 dark:hover:text-mining-300 hover:bg-mining-50 dark:hover:bg-mining-900/20 justify-between">
+                <Button 
+                  variant="ghost" 
+                  className="w-full text-mining-600 hover:text-mining-800 dark:text-mining-400 dark:hover:text-mining-300 hover:bg-mining-50 dark:hover:bg-mining-900/20 justify-between"
+                  onClick={() => handleCategoryClick("mining")}
+                >
                   <span>Ver cursos</span>
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
@@ -252,7 +295,11 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter className="pt-4">
-                <Button variant="ghost" className="w-full text-management-600 hover:text-management-800 dark:text-management-400 dark:hover:text-management-300 hover:bg-management-50 dark:hover:bg-management-900/20 justify-between">
+                <Button 
+                  variant="ghost" 
+                  className="w-full text-management-600 hover:text-management-800 dark:text-management-400 dark:hover:text-management-300 hover:bg-management-50 dark:hover:bg-management-900/20 justify-between"
+                  onClick={() => handleCategoryClick("management")}
+                >
                   <span>Ver cursos</span>
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
@@ -271,14 +318,21 @@ const Index = () => {
               Únete a miles de profesionales que han potenciado su carrera con nuestros programas formativos.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-white text-mining-800 hover:bg-gray-100">
+              <Button 
+                size="lg" 
+                className="bg-white text-mining-800 hover:bg-gray-100"
+                onClick={handleViewAllCoursesClick}
+              >
                 Ver todos los cursos
               </Button>
-              <Link to="/dashboard">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                  Acceder a mi cuenta
-                </Button>
-              </Link>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white text-white hover:bg-white/10"
+                onClick={handleAccessAccountClick}
+              >
+                Acceder a mi cuenta
+              </Button>
             </div>
           </div>
         </div>

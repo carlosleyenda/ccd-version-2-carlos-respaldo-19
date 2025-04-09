@@ -17,6 +17,8 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { CourseDetailProps, levelLabel } from "./types";
 import { CourseModule } from "./types";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface CourseSidebarProps {
   instructor: CourseDetailProps["instructor"];
@@ -41,10 +43,35 @@ export const CourseSidebar = ({
   isLive = false,
   modules,
 }: CourseSidebarProps) => {
+  const navigate = useNavigate();
   const totalLessons = modules.reduce(
     (count, module) => count + module.lessons.length,
     0
   );
+
+  const handleContinueLearning = () => {
+    toast.success("Continuando con tu aprendizaje");
+    // En una aplicación real, esto llevaría a la última lección vista
+    navigate("/course/lesson/last-viewed");
+  };
+
+  const handleJoinLiveCourse = () => {
+    toast.success("Uniéndote al curso en vivo");
+    // En una aplicación real, esto abriría la transmisión en vivo
+    window.open("/live-classroom", "_blank");
+  };
+
+  const handleEnrollCourse = () => {
+    toast.success("¡Inscripción exitosa!");
+    // En una aplicación real, esto procesaría la inscripción
+    setTimeout(() => navigate("/dashboard"), 1500);
+  };
+
+  const handleViewInstructorProfile = () => {
+    toast.info(`Viendo perfil de ${instructor.name}`);
+    // En una aplicación real, esto navegaría al perfil del instructor
+    navigate(`/instructor/${instructor.name.toLowerCase().replace(' ', '-')}`);
+  };
 
   return (
     <div className="border rounded-lg p-6 space-y-6 sticky top-24">
@@ -55,18 +82,30 @@ export const CourseSidebar = ({
             <span className="font-medium">{progress}%</span>
           </div>
           <Progress value={progress} className="h-1.5" />
-          <Button variant="view" className="w-full mt-3 group">
+          <Button 
+            variant="view" 
+            className="w-full mt-3 group"
+            onClick={handleContinueLearning}
+          >
             <Play className="h-4 w-4 mr-1 group-hover:animate-pulse" />
             <span>Continuar aprendiendo</span>
           </Button>
         </div>
       ) : isLive ? (
-        <Button variant="join" className="w-full group">
+        <Button 
+          variant="join" 
+          className="w-full group"
+          onClick={handleJoinLiveCourse}
+        >
           <PlayCircle className="h-4 w-4 mr-1 group-hover:animate-pulse" />
           <span>Unirme al curso en vivo</span>
         </Button>
       ) : (
-        <Button variant="enroll" className="w-full group">
+        <Button 
+          variant="enroll" 
+          className="w-full group"
+          onClick={handleEnrollCourse}
+        >
           <BookmarkCheck className="h-4 w-4 mr-1 group-hover:animate-pulse" />
           <span>Inscribirme al curso</span>
         </Button>
@@ -86,7 +125,10 @@ export const CourseSidebar = ({
             <span>{totalLessons} lecciones</span>
           </li>
           <li className="flex items-center text-sm">
-            <Download className="h-4 w-4 mr-3 text-gray-500" />
+            <Download 
+              className="h-4 w-4 mr-3 text-gray-500 cursor-pointer hover:text-primary" 
+              onClick={() => toast.info("Descargando recursos del curso...")}
+            />
             <span>Recursos descargables</span>
           </li>
           <li className="flex items-center text-sm">
@@ -94,7 +136,10 @@ export const CourseSidebar = ({
             <span>Certificado de finalización</span>
           </li>
           <li className="flex items-center text-sm">
-            <MessageSquare className="h-4 w-4 mr-3 text-gray-500" />
+            <MessageSquare 
+              className="h-4 w-4 mr-3 text-gray-500 cursor-pointer hover:text-primary" 
+              onClick={() => toast.info("Abriendo foro de discusión...")}
+            />
             <span>Foro de discusión</span>
           </li>
         </ul>
@@ -128,7 +173,10 @@ export const CourseSidebar = ({
       
       <div className="space-y-3">
         <h4 className="font-medium">Instructor</h4>
-        <div className="flex items-center">
+        <div 
+          className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors"
+          onClick={handleViewInstructorProfile}
+        >
           <img
             src={instructor.avatar}
             alt={instructor.name}

@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Moon, Sun, Bell, Search, User, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 interface NavbarProps {
   toggleSidebar: () => void;
@@ -16,12 +17,49 @@ interface NavbarProps {
 
 const Navbar = ({ toggleSidebar }: NavbarProps) => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     document.documentElement.classList.toggle("dark");
     localStorage.setItem("theme", newTheme);
+    toast.success(`Tema cambiado a ${newTheme === "light" ? "claro" : "oscuro"}`);
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      toast.info(`Buscando: ${searchTerm}`);
+      // En una aplicación real, esto redirigiría a resultados de búsqueda
+      setSearchTerm("");
+    }
+  };
+
+  const handleNotificationClick = (notification: string) => {
+    toast.info(`Notificación: ${notification}`);
+    // En una aplicación real, esto podría marcar la notificación como leída
+  };
+
+  const handleProfileAction = (action: string) => {
+    switch (action) {
+      case "profile":
+        navigate("/profile");
+        toast.info("Navegando al perfil");
+        break;
+      case "settings":
+        navigate("/settings");
+        toast.info("Navegando a configuración");
+        break;
+      case "logout":
+        // En una aplicación real, esto ejecutaría la lógica de cierre de sesión
+        toast.success("Cerrando sesión...");
+        setTimeout(() => navigate("/"), 1000);
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -59,7 +97,7 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
           
           <div className="hidden md:flex flex-1 items-center justify-center px-2 lg:px-0">
             <div className="max-w-lg w-full">
-              <div className="relative">
+              <form onSubmit={handleSearch} className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />
                 </div>
@@ -67,8 +105,10 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
                   className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white dark:bg-gray-800 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary text-sm"
                   placeholder="Buscar cursos, certificaciones..."
                   type="search"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
-              </div>
+              </form>
             </div>
           </div>
           
@@ -91,13 +131,19 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-80">
                 <div className="px-4 py-2 font-medium border-b">Notificaciones</div>
-                <DropdownMenuItem className="cursor-pointer">
+                <DropdownMenuItem 
+                  className="cursor-pointer"
+                  onClick={() => handleNotificationClick("Nuevo curso disponible")}
+                >
                   <div className="flex flex-col">
                     <span className="font-medium">Nuevo curso disponible</span>
                     <span className="text-sm text-gray-500">Seguridad Minera Avanzada</span>
                   </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
+                <DropdownMenuItem 
+                  className="cursor-pointer"
+                  onClick={() => handleNotificationClick("Clase en vivo hoy")}
+                >
                   <div className="flex flex-col">
                     <span className="font-medium">Clase en vivo hoy</span>
                     <span className="text-sm text-gray-500">Procesos de Extracción - 18:00</span>
@@ -113,9 +159,24 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem className="cursor-pointer">Perfil</DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">Configuración</DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">Cerrar sesión</DropdownMenuItem>
+                <DropdownMenuItem 
+                  className="cursor-pointer"
+                  onClick={() => handleProfileAction("profile")}
+                >
+                  Perfil
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  className="cursor-pointer"
+                  onClick={() => handleProfileAction("settings")}
+                >
+                  Configuración
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  className="cursor-pointer"
+                  onClick={() => handleProfileAction("logout")}
+                >
+                  Cerrar sesión
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

@@ -9,34 +9,75 @@ import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import LiveCourses from "./pages/LiveCourses";
 import NotFound from "./pages/NotFound";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/live-courses" element={<LiveCourses />} />
-          {/* Future routes to add here:
-            - /course/:id
-            - /engineering
-            - /mining
-            - /management
-            - /settings
-            - /profile
-            - /certifications
-          */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Agregar rutas temporales para desarrollo
+  useEffect(() => {
+    // Este código es solo para desarrollo y simulará redirecciones en rutas que aún no existen
+    const handleNavigation = () => {
+      const path = window.location.pathname;
+      
+      // Lista de rutas que aún no están implementadas pero a las que se puede intentar navegar
+      const tempRoutes = [
+        "/engineering",
+        "/mining",
+        "/management",
+        "/profile",
+        "/settings",
+        "/course/",
+        "/instructor/",
+        "/live-classroom",
+      ];
+      
+      // Si la ruta actual comienza con alguna de las rutas temporales, redireccionar a dashboard
+      const shouldRedirect = tempRoutes.some(route => path.startsWith(route));
+      
+      if (shouldRedirect && path !== "/dashboard" && path !== "/courses" && path !== "/live-courses") {
+        console.log(`Ruta ${path} aún no implementada. Redireccionando a dashboard.`);
+        window.history.pushState({}, "", "/dashboard");
+      }
+    };
+    
+    // Verificar al cargar la página
+    handleNavigation();
+    
+    // Escuchar cambios de URL
+    window.addEventListener("popstate", handleNavigation);
+    
+    return () => {
+      window.removeEventListener("popstate", handleNavigation);
+    };
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/live-courses" element={<LiveCourses />} />
+            {/* Future routes to add here:
+              - /course/:id
+              - /engineering
+              - /mining
+              - /management
+              - /settings
+              - /profile
+              - /certifications
+            */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

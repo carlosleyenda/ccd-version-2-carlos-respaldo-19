@@ -1,10 +1,11 @@
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ExternalLink, Clock, Users, Star, PlayCircle, BookmarkPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export interface CourseCardProps {
   id: string;
@@ -39,6 +40,8 @@ const CourseCard = ({
   liveDate,
   featured = false,
 }: CourseCardProps) => {
+  const navigate = useNavigate();
+  
   const categoryLabel = {
     engineering: "Ingeniería",
     mining: "Minería",
@@ -49,6 +52,18 @@ const CourseCard = ({
     beginner: "Principiante",
     intermediate: "Intermedio",
     advanced: "Avanzado",
+  };
+
+  const handleJoinNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast.success(`Uniéndote al curso en vivo: ${title}`);
+    navigate(`/course/${id}/live`);
+  };
+
+  const handlePreview = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast.info(`Vista previa del curso: ${title}`);
+    navigate(`/course/${id}/preview`);
   };
 
   return (
@@ -92,12 +107,22 @@ const CourseCard = ({
         {/* Overlay with quick action button */}
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
           {isLive ? (
-            <Button variant="join" size="sm" className="transform scale-90 group-hover:scale-100 transition-transform">
+            <Button 
+              variant="join" 
+              size="sm" 
+              className="transform scale-90 group-hover:scale-100 transition-transform"
+              onClick={handleJoinNow}
+            >
               <PlayCircle className="h-4 w-4 mr-1" />
               Unirme ahora
             </Button>
           ) : (
-            <Button variant="view" size="sm" className="transform scale-90 group-hover:scale-100 transition-transform">
+            <Button 
+              variant="view" 
+              size="sm" 
+              className="transform scale-90 group-hover:scale-100 transition-transform"
+              onClick={handlePreview}
+            >
               <PlayCircle className="h-4 w-4 mr-1" />
               Vista previa
             </Button>
@@ -151,6 +176,11 @@ const CourseCard = ({
         <Link
           to={`/course/${id}`}
           className="group"
+          onClick={(e) => {
+            e.preventDefault();
+            toast.success(`Accediendo al curso: ${title}`);
+            navigate(`/course/${id}`);
+          }}
         >
           <Button 
             variant={isLive ? "join" : "view"}
