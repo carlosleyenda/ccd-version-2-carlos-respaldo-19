@@ -8,10 +8,12 @@ import { Button } from "@/components/ui/button";
 import CourseCard from "@/components/dashboard/CourseCard";
 import { Mail, LinkedinIcon, GraduationCap, Users, Star } from "lucide-react";
 import { toast } from "sonner";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const InstructorProfile = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { name } = useParams();
+  const isMobile = useIsMobile();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -56,12 +58,12 @@ const InstructorProfile = () => {
       <div className="flex flex-1">
         <Sidebar isOpen={sidebarOpen} />
         
-        <div className="flex-1 lg:ml-64">
+        <div className={`flex-1 transition-all duration-300 ${!isMobile && sidebarOpen ? 'lg:ml-64' : ''}`}>
           <main className="p-4">
             <div className="max-w-6xl mx-auto">
               {/* Profile header */}
               <div className="flex flex-col md:flex-row gap-6 mb-8">
-                <div className="md:w-48">
+                <div className="md:w-48 mx-auto md:mx-0">
                   <img
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80"
                     alt="Instructor"
@@ -70,12 +72,12 @@ const InstructorProfile = () => {
                 </div>
                 
                 <div className="flex-1">
-                  <h1 className="text-2xl font-bold mb-2">Dr. Carlos Rodríguez</h1>
-                  <p className="text-gray-500 dark:text-gray-400 mb-4">
+                  <h1 className="text-2xl font-bold mb-2 text-center md:text-left">Dr. Carlos Rodríguez</h1>
+                  <p className="text-gray-500 dark:text-gray-400 mb-4 text-center md:text-left">
                     Ingeniero de Minas Senior con más de 15 años de experiencia
                   </p>
                   
-                  <div className="flex flex-wrap gap-4 mb-6">
+                  <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-6">
                     <div className="flex items-center gap-2">
                       <GraduationCap className="h-5 w-5 text-gray-500" />
                       <span>2 cursos</span>
@@ -90,7 +92,7 @@ const InstructorProfile = () => {
                     </div>
                   </div>
                   
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
                     <Button 
                       variant="outline"
                       className="flex items-center gap-2"

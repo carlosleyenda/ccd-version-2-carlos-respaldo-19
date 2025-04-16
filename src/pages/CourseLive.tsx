@@ -7,11 +7,13 @@ import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { MessageCircle, Users, Clock, Share2 } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const CourseLive = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -28,7 +30,7 @@ const CourseLive = () => {
       <div className="flex flex-1">
         <Sidebar isOpen={sidebarOpen} />
         
-        <div className="flex-1 lg:ml-64">
+        <div className={`flex-1 transition-all duration-300 ${!isMobile && sidebarOpen ? 'lg:ml-64' : ''}`}>
           <main className="p-4">
             <div className="max-w-6xl mx-auto">
               {/* Video container */}
@@ -53,12 +55,12 @@ const CourseLive = () => {
                   <h1 className="text-2xl font-bold mb-2">
                     Técnicas Avanzadas de Minería Subterránea
                   </h1>
-                  <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
-                    <span className="flex items-center">
+                  <div className="flex flex-wrap items-center space-x-4 text-sm text-gray-500 mb-4">
+                    <span className="flex items-center mb-2">
                       <Users className="h-4 w-4 mr-1" />
                       324 participantes
                     </span>
-                    <span className="flex items-center">
+                    <span className="flex items-center mb-2">
                       <Clock className="h-4 w-4 mr-1" />
                       1h 45m restantes
                     </span>
@@ -78,7 +80,7 @@ const CourseLive = () => {
 
                 {/* Chat section */}
                 <div className="lg:col-span-1">
-                  <div className="border rounded-lg h-[600px] flex flex-col bg-white dark:bg-gray-800">
+                  <div className="border rounded-lg h-[400px] lg:h-[600px] flex flex-col bg-white dark:bg-gray-800">
                     <div className="p-4 border-b">
                       <h2 className="font-semibold flex items-center gap-2">
                         <MessageCircle className="h-4 w-4" />

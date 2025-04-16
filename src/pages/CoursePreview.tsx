@@ -7,11 +7,13 @@ import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { PlayCircle, BookOpen, CheckCircle2, Lock } from "lucide-react";
 import { toast } from "sonner";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const CoursePreview = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -29,7 +31,7 @@ const CoursePreview = () => {
       <div className="flex flex-1">
         <Sidebar isOpen={sidebarOpen} />
         
-        <div className="flex-1 lg:ml-64">
+        <div className={`flex-1 transition-all duration-300 ${!isMobile && sidebarOpen ? 'lg:ml-64' : ''}`}>
           <main className="p-4">
             <div className="max-w-6xl mx-auto">
               {/* Preview video */}
@@ -52,7 +54,7 @@ const CoursePreview = () => {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2">
+                <div className="lg:col-span-2 order-2 lg:order-1">
                   <h1 className="text-2xl font-bold mb-4">
                     Técnicas Avanzadas de Minería Subterránea
                   </h1>
@@ -76,13 +78,13 @@ const CoursePreview = () => {
                         </div>
                         <div className="space-y-2">
                           <div className="flex items-center text-sm">
-                            <PlayCircle className="h-4 w-4 mr-2 text-gray-500" />
-                            <span>1.1 Conceptos Fundamentales</span>
-                            <CheckCircle2 className="h-4 w-4 ml-auto text-green-500" />
+                            <PlayCircle className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
+                            <span className="line-clamp-1">1.1 Conceptos Fundamentales</span>
+                            <CheckCircle2 className="h-4 w-4 ml-auto text-green-500 flex-shrink-0" />
                           </div>
                           <div className="flex items-center text-sm text-gray-500">
-                            <Lock className="h-4 w-4 mr-2" />
-                            <span>1.2 Evaluación Inicial</span>
+                            <Lock className="h-4 w-4 mr-2 flex-shrink-0" />
+                            <span className="line-clamp-1">1.2 Evaluación Inicial</span>
                           </div>
                         </div>
                       </div>
@@ -94,12 +96,12 @@ const CoursePreview = () => {
                         </div>
                         <div className="space-y-2">
                           <div className="flex items-center text-sm text-gray-500">
-                            <Lock className="h-4 w-4 mr-2" />
-                            <span>2.1 Métodos de Excavación</span>
+                            <Lock className="h-4 w-4 mr-2 flex-shrink-0" />
+                            <span className="line-clamp-1">2.1 Métodos de Excavación</span>
                           </div>
                           <div className="flex items-center text-sm text-gray-500">
-                            <Lock className="h-4 w-4 mr-2" />
-                            <span>2.2 Prácticas Seguras</span>
+                            <Lock className="h-4 w-4 mr-2 flex-shrink-0" />
+                            <span className="line-clamp-1">2.2 Prácticas Seguras</span>
                           </div>
                         </div>
                       </div>
@@ -107,7 +109,7 @@ const CoursePreview = () => {
                   </div>
                 </div>
 
-                <div className="lg:col-span-1">
+                <div className="lg:col-span-1 order-1 lg:order-2 mb-6 lg:mb-0">
                   <div className="border rounded-lg p-6 sticky top-24">
                     <div className="space-y-6">
                       <div className="text-center">
@@ -129,15 +131,15 @@ const CoursePreview = () => {
                         <h4 className="font-medium">Este curso incluye:</h4>
                         <ul className="space-y-2">
                           <li className="flex items-center text-sm">
-                            <BookOpen className="h-4 w-4 mr-2 text-gray-500" />
+                            <BookOpen className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
                             40 horas de contenido
                           </li>
                           <li className="flex items-center text-sm">
-                            <PlayCircle className="h-4 w-4 mr-2 text-gray-500" />
+                            <PlayCircle className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
                             150 lecciones
                           </li>
                           <li className="flex items-center text-sm">
-                            <CheckCircle2 className="h-4 w-4 mr-2 text-gray-500" />
+                            <CheckCircle2 className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
                             Certificado al completar
                           </li>
                         </ul>

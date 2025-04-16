@@ -6,10 +6,12 @@ import Sidebar from "@/components/layout/Sidebar";
 import Footer from "@/components/layout/Footer";
 import CourseDetail from "@/components/courses/CourseDetail";
 import { toast } from "sonner";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const CourseView = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
+  const isMobile = useIsMobile();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -83,7 +85,7 @@ const CourseView = () => {
       
       <div className="flex flex-1">
         <Sidebar isOpen={sidebarOpen} />
-        <div className="flex-1 lg:ml-64">
+        <div className={`flex-1 transition-all duration-300 ${!isMobile && sidebarOpen ? 'lg:ml-64' : ''}`}>
           <CourseDetail {...courseData} />
         </div>
       </div>
