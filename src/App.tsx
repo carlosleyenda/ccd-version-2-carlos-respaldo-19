@@ -14,6 +14,9 @@ import CourseLive from "./pages/CourseLive";
 import CoursePreview from "./pages/CoursePreview";
 import CourseLesson from "./pages/CourseLesson";
 import InstructorProfile from "./pages/InstructorProfile";
+import Certifications from "./pages/Certifications";
+import Schedule from "./pages/Schedule";
+import Forums from "./pages/Forums";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
@@ -73,6 +76,9 @@ const App = () => {
             <Route path="/course/:id/preview" element={<CoursePreview />} />
             <Route path="/course/lesson/:id" element={<CourseLesson />} />
             <Route path="/instructor/:name" element={<InstructorProfile />} />
+            <Route path="/certifications" element={<Certifications />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/forums" element={<Forums />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
