@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { BadgeCheck, CreditCard, FileCheck, Info } from "lucide-react";
+import { BadgeCheck, CreditCard, FileCheck, Info, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -32,6 +32,7 @@ interface AccreditationOptionsProps {
 export const AccreditationOptions = ({ certificateId, certificateTitle }: AccreditationOptionsProps) => {
   const [selectedOption, setSelectedOption] = useState<AccreditationOption | null>(null);
   const [open, setOpen] = useState(false);
+  const [successfulAccreditation, setSuccessfulAccreditation] = useState<AccreditationOption | null>(null);
   
   const form = useForm<AccreditationFormValues>({
     defaultValues: {
@@ -68,7 +69,50 @@ export const AccreditationOptions = ({ certificateId, certificateTitle }: Accred
   const handleSubmit = form.handleSubmit((data) => {
     toast.success(`Solicitud de acreditación enviada con éxito. Método de pago: ${data.paymentMethod === "card" ? "Tarjeta" : "Transferencia"}`);
     setOpen(false);
+    // In a real app, we would send this to the backend and then update the UI after a successful response
+    setSuccessfulAccreditation(selectedOption);
   });
+
+  if (successfulAccreditation) {
+    return (
+      <div className="py-4">
+        <div className="rounded-lg bg-green-50 p-6 text-center">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+            <Check className="h-6 w-6 text-green-600" />
+          </div>
+          <h3 className="mt-3 text-lg font-medium text-green-800">¡Acreditación en proceso!</h3>
+          <p className="mt-2 text-sm text-green-700">
+            Tu solicitud de acreditación con {successfulAccreditation.organization} ha sido enviada correctamente. 
+            Recibirás más información sobre el proceso por correo electrónico.
+          </p>
+          <div className="mt-4">
+            <div className="rounded-md bg-white p-4 shadow-sm border">
+              <div className="flex">
+                {successfulAccreditation.icon}
+                <div className="ml-3 text-left">
+                  <h4 className="text-sm font-medium text-gray-900">{successfulAccreditation.name}</h4>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Certificado: {certificateTitle}
+                  </p>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Costo: {successfulAccreditation.cost.toLocaleString("es-PE")} {successfulAccreditation.currency}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6">
+            <Button 
+              onClick={() => setSuccessfulAccreditation(null)} 
+              variant="outline"
+            >
+              Solicitar otra acreditación
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
