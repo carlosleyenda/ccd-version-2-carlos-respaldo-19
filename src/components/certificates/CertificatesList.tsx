@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Award, Download, Calendar, ExternalLink } from "lucide-react";
+import { Award, Download, Calendar, ExternalLink, BadgeCheck } from "lucide-react";
 import { 
   Card, 
   CardContent, 
@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import { AccreditationOptions } from "./AccreditationOptions";
 
 type Certificate = {
   id: string;
@@ -26,6 +28,8 @@ type Certificate = {
 
 export const CertificatesList = () => {
   const [activeTab, setActiveTab] = useState<string>("all");
+  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+  const [showAccreditation, setShowAccreditation] = useState(false);
   
   // Mock certificates data - in a real app, this would come from an API
   const certificates: Certificate[] = [
@@ -86,6 +90,11 @@ export const CertificatesList = () => {
   const handleVerify = (id: string) => {
     toast.info("Verificando autenticidad del certificado...");
     // In a real app, this would verify the certificate
+  };
+
+  const openAccreditationOptions = (certificate: Certificate) => {
+    setSelectedCertificate(certificate);
+    setShowAccreditation(true);
   };
 
   return (
@@ -167,7 +176,7 @@ export const CertificatesList = () => {
                     </div>
                   </CardContent>
                   
-                  <CardFooter className="flex justify-between gap-2 flex-wrap">
+                  <CardFooter className="flex flex-wrap gap-2">
                     <Button 
                       variant="outline" 
                       size="sm" 
@@ -186,6 +195,17 @@ export const CertificatesList = () => {
                       <ExternalLink className="h-4 w-4 mr-1" />
                       <span className="text-xs">Verificar</span>
                     </Button>
+                    {certificate.type === "completed" && (
+                      <Button 
+                        variant="default" 
+                        size="sm" 
+                        className="w-full mt-2"
+                        onClick={() => openAccreditationOptions(certificate)}
+                      >
+                        <BadgeCheck className="h-4 w-4 mr-1" />
+                        <span className="text-xs">Solicitar Acreditación</span>
+                      </Button>
+                    )}
                   </CardFooter>
                 </Card>
               ))}
@@ -204,6 +224,24 @@ export const CertificatesList = () => {
           )}
         </TabsContent>
       </Tabs>
+
+      <Dialog open={showAccreditation} onOpenChange={setShowAccreditation}>
+        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Solicitar Acreditación Profesional</DialogTitle>
+            <DialogDescription>
+              Elija una organización para acreditar su certificado y obtener reconocimiento profesional.
+            </DialogDescription>
+          </DialogHeader>
+          {selectedCertificate && (
+            <AccreditationOptions 
+              certificateId={selectedCertificate.id}
+              certificateTitle={selectedCertificate.title}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
+
