@@ -9,6 +9,8 @@ import { AccreditationOptions } from "./AccreditationOptions";
 import { CertificateCard } from "./CertificateCard";
 import { CertificateView } from "./CertificateView";
 import { Certificate } from "./types";
+import { useCertificates } from "./hooks/useCertificates";
+import { CertificatesEmptyState } from "./CertificatesEmptyState";
 
 export const CertificatesList = () => {
   const [activeTab, setActiveTab] = useState<string>("all");
@@ -16,56 +18,7 @@ export const CertificatesList = () => {
   const [showAccreditation, setShowAccreditation] = useState(false);
   const [showCertificateView, setShowCertificateView] = useState(false);
   
-  // Mock certificates data - in a real app, this would come from an API
-  const certificates: Certificate[] = [
-    {
-      id: "cert-1",
-      title: "Diploma en Minería Subterránea",
-      issueDate: "2024-02-15",
-      course: "Técnicas Avanzadas de Minería Subterránea",
-      instructor: "Dr. Carlos Rodríguez",
-      type: "completed",
-      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: "cert-2",
-      title: "Certificado de Seguridad en Excavaciones",
-      issueDate: "2023-11-10",
-      expiryDate: "2025-11-10",
-      course: "Seguridad y Prevención en Minería",
-      instructor: "Ing. María Sánchez",
-      type: "completed",
-      image: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?auto=format&fit=crop&w=800&q=80",
-      accredited: {
-        organization: "CIP",
-        accreditationDate: "2023-12-05",
-        verificationId: "CIP-2023-1235"
-      }
-    },
-    {
-      id: "cert-3",
-      title: "Gestión Ambiental Minera",
-      issueDate: "2024-04-01",
-      course: "Impacto Ambiental en Minería",
-      instructor: "Dra. Ana Martínez",
-      type: "in-progress",
-      image: "https://images.unsplash.com/photo-1557434440-30fd8ae3d22e?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: "cert-4",
-      title: "Técnico en Topografía Minera",
-      issueDate: "2022-09-15",
-      expiryDate: "2024-03-15",
-      course: "Topografía Avanzada para Minería",
-      instructor: "Ing. Felipe Torres",
-      type: "expired",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
-    },
-  ];
-
-  const filteredCertificates = activeTab === "all" 
-    ? certificates 
-    : certificates.filter(cert => cert.type === activeTab);
+  const { certificates, filteredCertificates } = useCertificates(activeTab);
 
   const handleViewDetails = (certificate: Certificate) => {
     setSelectedCertificate(certificate);
@@ -115,16 +68,7 @@ export const CertificatesList = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <Award className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium mb-2">No hay certificados disponibles</h3>
-              <p className="text-gray-500 mb-6">
-                No tienes certificados en esta categoría actualmente.
-              </p>
-              <Button onClick={() => setActiveTab("all")}>
-                Ver todos los certificados
-              </Button>
-            </div>
+            <CertificatesEmptyState onViewAll={() => setActiveTab("all")} />
           )}
         </TabsContent>
       </Tabs>
