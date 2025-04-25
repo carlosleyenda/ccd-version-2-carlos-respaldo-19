@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "@/components/layout/Navbar";
-import Sidebar from "@/components/layout/Sidebar";
-import Footer from "@/components/layout/Footer";
+import PageLayout from "@/components/layout/PageLayout";
 import DashboardStats from "@/components/dashboard/DashboardStats";
 import CourseCard, { CourseCardProps } from "@/components/dashboard/CourseCard";
 import { Button } from "@/components/ui/button";
@@ -186,129 +183,109 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar toggleSidebar={toggleSidebar} />
+    <PageLayout title="Dashboard" subtitle="Bienvenido de nuevo, Carlos. Continúa con tu aprendizaje.">
+      <div className="mt-4 md:mt-0 flex space-x-2 mb-6">
+        <Button variant="outline" size="sm" className="flex items-center gap-1">
+          <Bell className="h-4 w-4" />
+          <span>Notificaciones</span>
+        </Button>
+        <Button variant="outline" size="sm" className="flex items-center gap-1">
+          <Calendar className="h-4 w-4" />
+          <span>Calendario</span>
+        </Button>
+      </div>
+            
+      <DashboardStats />
       
-      <div className="flex flex-1">
-        <Sidebar isOpen={sidebarOpen} />
+      <div className="mt-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+          <h2 className="text-xl font-bold">Tus cursos en progreso</h2>
+          <Link to="/courses" className="text-primary hover:underline mt-2 md:mt-0">
+            Ver todos los cursos
+          </Link>
+        </div>
         
-        <div className="flex-1 lg:ml-64 pt-16 transition-all duration-200 ease-in-out">
-          <main className="p-4 md:p-6 max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-              <div>
-                <h1 className="text-2xl font-bold">Dashboard</h1>
-                <p className="text-gray-500 dark:text-gray-400 mt-1">
-                  Bienvenido de nuevo, Carlos. Continúa con tu aprendizaje.
-                </p>
-              </div>
-              <div className="mt-4 md:mt-0 flex space-x-2">
-                <Button variant="outline" size="sm" className="flex items-center gap-1">
-                  <Bell className="h-4 w-4" />
-                  <span>Notificaciones</span>
-                </Button>
-                <Button variant="outline" size="sm" className="flex items-center gap-1">
-                  <Calendar className="h-4 w-4" />
-                  <span>Calendario</span>
-                </Button>
-              </div>
-            </div>
-            
-            <DashboardStats />
-            
-            <div className="mt-8">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                <h2 className="text-xl font-bold">Tus cursos en progreso</h2>
-                <Link to="/courses" className="text-primary hover:underline mt-2 md:mt-0">
-                  Ver todos los cursos
-                </Link>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {inProgressCourses.map((course) => (
-                  <CourseCard key={course.id} {...course} />
-                ))}
-              </div>
-            </div>
-            
-            <div className="mt-12">
-              <h2 className="text-xl font-bold mb-6">Actividades recientes</h2>
-              
-              <Tabs defaultValue="recommended" className="w-full">
-                <TabsList className="grid grid-cols-3 mb-6">
-                  <TabsTrigger value="recommended">Recomendados</TabsTrigger>
-                  <TabsTrigger value="live">Cursos en Vivo</TabsTrigger>
-                  <TabsTrigger value="events">Eventos</TabsTrigger>
-                </TabsList>
-                
-                <TabsContent value="recommended">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {recommendedCourses.map((course) => (
-                      <CourseCard key={course.id} {...course} />
-                    ))}
-                  </div>
-                </TabsContent>
-                
-                <TabsContent value="live">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {liveCourses.map((course) => (
-                      <CourseCard key={course.id} {...course} />
-                    ))}
-                  </div>
-                </TabsContent>
-                
-                <TabsContent value="events">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {upcomingEvents.map((event) => (
-                      <div key={event.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="bg-mining-100 dark:bg-mining-900/30 text-mining-800 dark:text-mining-300 text-xs font-medium px-2.5 py-0.5 rounded">
-                            Próximo evento
-                          </div>
-                          <span className="text-sm text-gray-500 dark:text-gray-400">{event.date}</span>
-                        </div>
-                        <h3 className="font-semibold mb-2">{event.title}</h3>
-                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
-                          <Clock className="h-4 w-4 mr-1" />
-                          <span>{event.time}</span>
-                        </div>
-                        <div className="text-sm">Instructor: {event.instructor}</div>
-                        <div className="mt-4">
-                          <Button className="w-full" variant="outline">
-                            Agregar al calendario
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </div>
-            
-            <div className="mt-12 mb-8">
-              <h2 className="text-xl font-bold mb-6">Tus logros</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {achievements.map((achievement) => (
-                  <div key={achievement.id} className="border rounded-lg p-6 flex items-center space-x-4 hover:shadow-md transition-shadow bg-white dark:bg-gray-800">
-                    <div className="flex-shrink-0">
-                      {achievement.icon}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">{achievement.title}</h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {achievement.date}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </main>
-          
-          <Footer />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {inProgressCourses.map((course) => (
+            <CourseCard key={course.id} {...course} />
+          ))}
         </div>
       </div>
-    </div>
+      
+      <div className="mt-12">
+        <h2 className="text-xl font-bold mb-6">Actividades recientes</h2>
+        
+        <Tabs defaultValue="recommended" className="w-full">
+          <TabsList className="grid grid-cols-3 mb-6">
+            <TabsTrigger value="recommended">Recomendados</TabsTrigger>
+            <TabsTrigger value="live">Cursos en Vivo</TabsTrigger>
+            <TabsTrigger value="events">Eventos</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="recommended">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {recommendedCourses.map((course) => (
+                <CourseCard key={course.id} {...course} />
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="live">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {liveCourses.map((course) => (
+                <CourseCard key={course.id} {...course} />
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="events">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {upcomingEvents.map((event) => (
+                <div key={event.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="bg-mining-100 dark:bg-mining-900/30 text-mining-800 dark:text-mining-300 text-xs font-medium px-2.5 py-0.5 rounded">
+                      Próximo evento
+                    </div>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{event.date}</span>
+                  </div>
+                  <h3 className="font-semibold mb-2">{event.title}</h3>
+                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                    <Clock className="h-4 w-4 mr-1" />
+                    <span>{event.time}</span>
+                  </div>
+                  <div className="text-sm">Instructor: {event.instructor}</div>
+                  <div className="mt-4">
+                    <Button className="w-full" variant="outline">
+                      Agregar al calendario
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+      
+      <div className="mt-12 mb-8">
+        <h2 className="text-xl font-bold mb-6">Tus logros</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {achievements.map((achievement) => (
+            <div key={achievement.id} className="border rounded-lg p-6 flex items-center space-x-4 hover:shadow-md transition-shadow bg-white dark:bg-gray-800">
+              <div className="flex-shrink-0">
+                {achievement.icon}
+              </div>
+              <div>
+                <h3 className="font-semibold">{achievement.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {achievement.date}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </PageLayout>
   );
 };
 
