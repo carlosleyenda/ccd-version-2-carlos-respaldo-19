@@ -2,16 +2,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  Sidebar as ShadcnSidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-} from "@/components/ui/sidebar";
-import {
   LayoutDashboard,
   BookOpen,
   Video,
@@ -123,81 +113,88 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
   ];
 
   return (
-    <ShadcnSidebar className={cn(isOpen ? "translate-x-0" : "-translate-x-full", "fixed inset-y-0 z-20 w-64")}>
-      <SidebarContent>
-        {menuGroups.map((group, index) => (
-          <SidebarGroup key={index}>
-            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
+    <div className={cn(
+      "fixed inset-y-0 z-20 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-transform duration-200 ease-in-out",
+      isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+    )}>
+      <div className="flex flex-col h-full py-4">
+        <div className="px-4 pb-2">
+          <Link to="/" className="flex items-center space-x-1">
+            <span className="text-management-700 dark:text-management-300 font-bold text-xl">C</span>
+            <span className="text-engineering-700 dark:text-engineering-300 font-bold text-xl">C</span>
+            <span className="text-mining-700 dark:text-mining-300 font-bold text-xl">D</span>
+          </Link>
+        </div>
+        
+        <div className="flex-1 overflow-y-auto px-3 py-2">
+          {menuGroups.map((group, index) => (
+            <div key={index} className="mb-6">
+              <h2 className="mb-2 px-4 text-xs font-semibold text-gray-500 dark:text-gray-400">
+                {group.label}
+              </h2>
+              <ul className="space-y-1">
                 {group.items.map((item, itemIndex) => (
-                  <SidebarMenuItem key={itemIndex}>
-                    <SidebarMenuButton asChild>
-                      <Link
-                        to={item.to}
-                        className={cn(
-                          "flex w-full items-center px-3 py-2 text-sm",
-                          currentPath === item.to
-                            ? "bg-primary text-primary-foreground"
-                            : "text-muted-foreground hover:bg-muted"
-                        )}
-                      >
-                        {item.icon}
-                        <span className="ml-3 flex-1">{item.text}</span>
-                        {item.badge && (
-                          <span className="ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
-                            {item.badge}
-                          </span>
-                        )}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
-
-        <SidebarGroup className="mt-auto">
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {footerItems.map((item, index) => (
-                <SidebarMenuItem key={index}>
-                  <SidebarMenuButton asChild>
+                  <li key={itemIndex}>
                     <Link
                       to={item.to}
                       className={cn(
-                        "flex w-full items-center px-3 py-2 text-sm",
+                        "flex w-full items-center px-3 py-2 text-sm rounded-md",
                         currentPath === item.to
                           ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:bg-muted"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
                       )}
                     >
                       {item.icon}
-                      <span className="ml-3">{item.text}</span>
+                      <span className="ml-3 flex-1">{item.text}</span>
+                      {item.badge && (
+                        <span className="ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
+                          {item.badge}
+                        </span>
+                      )}
                     </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <div className="p-4">
-          <div className="rounded-lg bg-mining-50 p-3 dark:bg-mining-900/30">
-            <h3 className="text-sm font-medium text-mining-900 dark:text-mining-200">
-              Plan Actual: Gratuito
-            </h3>
-            <p className="mt-1 text-xs text-mining-700 dark:text-mining-300">
-              Actualiza a Premium para acceso completo
-            </p>
-            <button className="mt-2 w-full rounded-md bg-mining-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-mining-700">
-              Actualizar Plan
-            </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        
+        <div className="border-t border-gray-200 dark:border-gray-800 pt-2 px-3">
+          <ul className="space-y-1">
+            {footerItems.map((item, index) => (
+              <li key={index}>
+                <Link
+                  to={item.to}
+                  className={cn(
+                    "flex w-full items-center px-3 py-2 text-sm rounded-md",
+                    currentPath === item.to
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  )}
+                >
+                  {item.icon}
+                  <span className="ml-3">{item.text}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          
+          <div className="p-4">
+            <div className="rounded-lg bg-mining-50 p-3 dark:bg-mining-900/30">
+              <h3 className="text-sm font-medium text-mining-900 dark:text-mining-200">
+                Plan Actual: Gratuito
+              </h3>
+              <p className="mt-1 text-xs text-mining-700 dark:text-mining-300">
+                Actualiza a Premium para acceso completo
+              </p>
+              <button className="mt-2 w-full rounded-md bg-mining-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-mining-700">
+                Actualizar Plan
+              </button>
+            </div>
           </div>
         </div>
-      </SidebarContent>
-    </ShadcnSidebar>
+      </div>
+    </div>
   );
 };
 
