@@ -1,8 +1,5 @@
-
 import { useState } from "react";
-import Navbar from "@/components/layout/Navbar";
-import Sidebar from "@/components/layout/Sidebar";
-import Footer from "@/components/layout/Footer";
+import PageLayout from "@/components/layout/PageLayout";
 import CourseCard, { CourseCardProps } from "@/components/dashboard/CourseCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -17,7 +14,6 @@ const Courses = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  // Sample courses data
   const allCourses: CourseCardProps[] = [
     {
       id: "course-1",
@@ -133,164 +129,141 @@ const Courses = () => {
     },
   ];
 
-  // Filter courses by category
   const engineeringCourses = allCourses.filter(course => course.category === "engineering");
   const miningCourses = allCourses.filter(course => course.category === "mining");
   const managementCourses = allCourses.filter(course => course.category === "management");
   
-  // My courses is a subset of allCourses with progress > 0
   const myCourses = allCourses.filter(course => course.progress && course.progress > 0);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar toggleSidebar={toggleSidebar} />
-      
-      <div className="flex flex-1">
-        <Sidebar isOpen={sidebarOpen} />
+    <PageLayout title="Cursos" subtitle="Explora nuestra biblioteca de cursos especializados.">
+      <div className="mt-4 md:mt-0 flex flex-col sm:flex-row gap-2">
+        <div className="relative">
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
+          <Input
+            type="search"
+            placeholder="Buscar cursos..."
+            className="pl-8 w-full sm:w-64"
+          />
+        </div>
         
-        <div className="flex-1 lg:ml-64 transition-all duration-200 ease-in-out">
-          <main className="p-4 md:p-6 max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-              <div>
-                <h1 className="text-2xl font-bold">Cursos</h1>
-                <p className="text-gray-500 dark:text-gray-400 mt-1">
-                  Explora nuestra biblioteca de cursos especializados.
-                </p>
-              </div>
-              
-              <div className="mt-4 md:mt-0 flex flex-col sm:flex-row gap-2">
-                <div className="relative">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
-                  <Input
-                    type="search"
-                    placeholder="Buscar cursos..."
-                    className="pl-8 w-full sm:w-64"
-                  />
-                </div>
-                
-                <Select defaultValue="all">
-                  <SelectTrigger className="w-full sm:w-40">
-                    <div className="flex items-center">
-                      <Filter className="mr-2 h-4 w-4" />
-                      <SelectValue placeholder="Filtrar por" />
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos los cursos</SelectItem>
-                    <SelectItem value="popular">Más populares</SelectItem>
-                    <SelectItem value="recent">Más recientes</SelectItem>
-                    <SelectItem value="price-low">Precio: Bajo a Alto</SelectItem>
-                    <SelectItem value="price-high">Precio: Alto a Bajo</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+        <Select defaultValue="all">
+          <SelectTrigger className="w-full sm:w-40">
+            <div className="flex items-center">
+              <Filter className="mr-2 h-4 w-4" />
+              <SelectValue placeholder="Filtrar por" />
+            </div>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todos los cursos</SelectItem>
+            <SelectItem value="popular">Más populares</SelectItem>
+            <SelectItem value="recent">Más recientes</SelectItem>
+            <SelectItem value="price-low">Precio: Bajo a Alto</SelectItem>
+            <SelectItem value="price-high">Precio: Alto a Bajo</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      
+      <Tabs defaultValue="all" className="w-full mt-6">
+        <TabsList className="grid grid-cols-2 sm:grid-cols-5 mb-6">
+          <TabsTrigger value="all">Todos</TabsTrigger>
+          <TabsTrigger value="my-courses">Mis Cursos</TabsTrigger>
+          <TabsTrigger value="engineering">Ingeniería</TabsTrigger>
+          <TabsTrigger value="mining">Minería</TabsTrigger>
+          <TabsTrigger value="management">Gestión</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="all">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <BookOpen className="h-4 w-4" />
+              <span>{allCourses.length} cursos disponibles</span>
             </div>
             
-            <Tabs defaultValue="all" className="w-full">
-              <TabsList className="grid grid-cols-2 sm:grid-cols-5 mb-6">
-                <TabsTrigger value="all">Todos</TabsTrigger>
-                <TabsTrigger value="my-courses">Mis Cursos</TabsTrigger>
-                <TabsTrigger value="engineering">Ingeniería</TabsTrigger>
-                <TabsTrigger value="mining">Minería</TabsTrigger>
-                <TabsTrigger value="management">Gestión</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="all">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                    <BookOpen className="h-4 w-4" />
-                    <span>{allCourses.length} cursos disponibles</span>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                    <Clock className="h-4 w-4" />
-                    <span>Duración total: 225h+</span>
-                  </div>
-                </div>
-                
-                <Separator className="mb-6" />
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {allCourses.map((course) => (
-                    <CourseCard key={course.id} {...course} />
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="my-courses">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                    <BookOpen className="h-4 w-4" />
-                    <span>{myCourses.length} cursos en progreso</span>
-                  </div>
-                </div>
-                
-                <Separator className="mb-6" />
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {myCourses.map((course) => (
-                    <CourseCard key={course.id} {...course} />
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="engineering">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                    <BookOpen className="h-4 w-4" />
-                    <span>{engineeringCourses.length} cursos de ingeniería</span>
-                  </div>
-                </div>
-                
-                <Separator className="mb-6" />
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {engineeringCourses.map((course) => (
-                    <CourseCard key={course.id} {...course} />
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="mining">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                    <BookOpen className="h-4 w-4" />
-                    <span>{miningCourses.length} cursos de minería</span>
-                  </div>
-                </div>
-                
-                <Separator className="mb-6" />
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {miningCourses.map((course) => (
-                    <CourseCard key={course.id} {...course} />
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="management">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                    <BookOpen className="h-4 w-4" />
-                    <span>{managementCourses.length} cursos de gestión</span>
-                  </div>
-                </div>
-                
-                <Separator className="mb-6" />
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {managementCourses.map((course) => (
-                    <CourseCard key={course.id} {...course} />
-                  ))}
-                </div>
-              </TabsContent>
-            </Tabs>
-          </main>
+            <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <Clock className="h-4 w-4" />
+              <span>Duración total: 225h+</span>
+            </div>
+          </div>
           
-          <Footer />
-        </div>
-      </div>
-    </div>
+          <Separator className="mb-6" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {allCourses.map((course) => (
+              <CourseCard key={course.id} {...course} />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="my-courses">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <BookOpen className="h-4 w-4" />
+              <span>{myCourses.length} cursos en progreso</span>
+            </div>
+          </div>
+          
+          <Separator className="mb-6" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {myCourses.map((course) => (
+              <CourseCard key={course.id} {...course} />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="engineering">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <BookOpen className="h-4 w-4" />
+              <span>{engineeringCourses.length} cursos de ingeniería</span>
+            </div>
+          </div>
+          
+          <Separator className="mb-6" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {engineeringCourses.map((course) => (
+              <CourseCard key={course.id} {...course} />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="mining">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <BookOpen className="h-4 w-4" />
+              <span>{miningCourses.length} cursos de minería</span>
+            </div>
+          </div>
+          
+          <Separator className="mb-6" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {miningCourses.map((course) => (
+              <CourseCard key={course.id} {...course} />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="management">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <BookOpen className="h-4 w-4" />
+              <span>{managementCourses.length} cursos de gestión</span>
+            </div>
+          </div>
+          
+          <Separator className="mb-6" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {managementCourses.map((course) => (
+              <CourseCard key={course.id} {...course} />
+            ))}
+          </div>
+        </TabsContent>
+      </Tabs>
+    </PageLayout>
   );
 };
 
