@@ -16,7 +16,6 @@ const Dashboard = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  // Sample course data
   const inProgressCourses: CourseCardProps[] = [
     {
       id: "course-1",
@@ -141,7 +140,6 @@ const Dashboard = () => {
     },
   ];
 
-  // Upcoming events data
   const upcomingEvents = [
     {
       id: 1,
@@ -166,7 +164,6 @@ const Dashboard = () => {
     },
   ];
 
-  // Achievements data
   const achievements = [
     {
       id: 1,
@@ -195,7 +192,7 @@ const Dashboard = () => {
       <div className="flex flex-1">
         <Sidebar isOpen={sidebarOpen} />
         
-        <div className="flex-1 lg:ml-64 transition-all duration-200 ease-in-out">
+        <div className="flex-1 lg:ml-64 pt-16 transition-all duration-200 ease-in-out">
           <main className="p-4 md:p-6 max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
               <div>

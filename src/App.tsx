@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,18 +16,18 @@ import InstructorProfile from "./pages/InstructorProfile";
 import Certifications from "./pages/Certifications";
 import Schedule from "./pages/Schedule";
 import Forums from "./pages/Forums";
+import Engineering from "./pages/Engineering";
+import Mining from "./pages/Mining";
+import Management from "./pages/Management";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Agregar rutas temporales para desarrollo
   useEffect(() => {
-    // Este código es solo para desarrollo y simulará redirecciones en rutas que aún no existen
     const handleNavigation = () => {
       const path = window.location.pathname;
       
-      // Lista de rutas que aún no están implementadas pero a las que se puede intentar navegar
       const tempRoutes = [
         "/engineering",
         "/mining",
@@ -40,7 +39,6 @@ const App = () => {
         "/live-classroom",
       ];
       
-      // Si la ruta actual comienza con alguna de las rutas temporales, redireccionar a dashboard
       const shouldRedirect = tempRoutes.some(route => path.startsWith(route));
       
       if (shouldRedirect && path !== "/dashboard" && path !== "/courses" && path !== "/live-courses") {
@@ -49,10 +47,8 @@ const App = () => {
       }
     };
     
-    // Verificar al cargar la página
     handleNavigation();
     
-    // Escuchar cambios de URL
     window.addEventListener("popstate", handleNavigation);
     
     return () => {
@@ -79,6 +75,9 @@ const App = () => {
             <Route path="/certifications" element={<Certifications />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/forums" element={<Forums />} />
+            <Route path="/engineering" element={<Engineering />} />
+            <Route path="/mining" element={<Mining />} />
+            <Route path="/management" element={<Management />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
