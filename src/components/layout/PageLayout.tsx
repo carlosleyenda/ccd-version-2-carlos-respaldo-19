@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
 import Footer from "@/components/layout/Footer";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -31,10 +32,10 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         <Sidebar isOpen={sidebarOpen} />
         
         <div className={cn(
-          "flex-1 pt-16 transition-all duration-300 ease-in-out",
-          isMobile ? "w-full" : "lg:ml-64"
+          "flex-1 transition-all duration-300 ease-in-out pt-16",
+          isMobile ? "w-full" : sidebarOpen ? "lg:ml-64" : "lg:ml-0"
         )}>
-          <main className="p-4 md:p-6 max-w-7xl mx-auto">
+          <main className="p-4 md:p-6 max-w-7xl mx-auto w-full">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
               <div>
                 <h1 className="text-2xl font-bold">{title}</h1>
@@ -55,8 +56,5 @@ const PageLayout: React.FC<PageLayoutProps> = ({
     </div>
   );
 };
-
-// Importamos cn desde utils
-import { cn } from "@/lib/utils";
 
 export default PageLayout;

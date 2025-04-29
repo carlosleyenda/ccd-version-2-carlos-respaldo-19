@@ -8,7 +8,9 @@ const Forums = () => {
       title="Foros de Discusión" 
       subtitle="Comunícate con otros estudiantes y profesores sobre los temas de tu interés"
     >
-      <ForumsList />
+      <div className="w-full">
+        <ForumsList />
+      </div>
     </PageLayout>
   );
 };
