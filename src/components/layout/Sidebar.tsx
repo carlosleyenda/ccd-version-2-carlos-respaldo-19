@@ -13,6 +13,8 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -21,6 +23,7 @@ interface SidebarProps {
 const Sidebar = ({ isOpen }: SidebarProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const isMobile = useIsMobile();
 
   const menuGroups = [
     {
@@ -112,17 +115,23 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
     },
   ];
 
+  // Solo mostramos el sidebar si está abierto (en móvil) o estamos en desktop
+  const sidebarVisible = isOpen || !isMobile;
+
   return (
     <div className={cn(
-      "fixed inset-y-0 z-20 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-transform duration-200 ease-in-out",
-      isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+      "fixed inset-y-0 left-0 z-20 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-all duration-300 ease-in-out transform",
+      sidebarVisible ? "translate-x-0" : "-translate-x-full",
+      !isMobile && "lg:translate-x-0" // En desktop siempre mostramos, pero puede ser contraído
     )}>
       <div className="flex flex-col h-full py-4">
         <div className="px-4 pb-2">
           <Link to="/" className="flex items-center space-x-1">
-            <span className="text-management-700 dark:text-management-300 font-bold text-xl">C</span>
-            <span className="text-engineering-700 dark:text-engineering-300 font-bold text-xl">C</span>
-            <span className="text-mining-700 dark:text-mining-300 font-bold text-xl">D</span>
+            <img 
+              src="/lovable-uploads/222ebd34-3bc5-4f1d-8b3c-79ac998b8b9c.png" 
+              alt="CCD Logo" 
+              className="h-10 w-auto"
+            />
           </Link>
         </div>
         
@@ -147,9 +156,9 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
                       {item.icon}
                       <span className="ml-3 flex-1">{item.text}</span>
                       {item.badge && (
-                        <span className="ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
+                        <Badge variant="outline" className="ml-auto">
                           {item.badge}
-                        </span>
+                        </Badge>
                       )}
                     </Link>
                   </li>

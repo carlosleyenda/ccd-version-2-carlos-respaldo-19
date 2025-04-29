@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
 import Footer from "@/components/layout/Footer";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   subtitle 
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isMobile = useIsMobile();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -28,7 +30,10 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       <div className="flex flex-1">
         <Sidebar isOpen={sidebarOpen} />
         
-        <div className="flex-1 lg:ml-64 pt-16 transition-all duration-200 ease-in-out">
+        <div className={cn(
+          "flex-1 pt-16 transition-all duration-300 ease-in-out",
+          isMobile ? "w-full" : "lg:ml-64"
+        )}>
           <main className="p-4 md:p-6 max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
               <div>
@@ -50,5 +55,8 @@ const PageLayout: React.FC<PageLayoutProps> = ({
     </div>
   );
 };
+
+// Importamos cn desde utils
+import { cn } from "@/lib/utils";
 
 export default PageLayout;
