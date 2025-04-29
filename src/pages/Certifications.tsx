@@ -8,7 +8,7 @@ const Certifications = () => {
       title="Mis Certificaciones" 
       subtitle="Gestiona y visualiza tus certificados obtenidos"
     >
-      <div className="w-full">
+      <div className="w-full relative z-10">
         <CertificatesList />
       </div>
     </PageLayout>

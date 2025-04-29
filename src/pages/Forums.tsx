@@ -8,7 +8,7 @@ const Forums = () => {
       title="Foros de Discusión" 
       subtitle="Comunícate con otros estudiantes y profesores sobre los temas de tu interés"
     >
-      <div className="w-full">
+      <div className="w-full relative z-10">
         <ForumsList />
       </div>
     </PageLayout>

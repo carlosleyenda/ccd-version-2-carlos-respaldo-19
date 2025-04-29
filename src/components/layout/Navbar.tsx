@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Moon, Sun, Bell, Search, User, Menu } from "lucide-react";
@@ -19,6 +18,19 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  // Listen for custom sidebar toggle event
+  useEffect(() => {
+    const handleToggleEvent = () => {
+      toggleSidebar();
+    };
+    
+    document.addEventListener('toggle-sidebar', handleToggleEvent);
+    
+    return () => {
+      document.removeEventListener('toggle-sidebar', handleToggleEvent);
+    };
+  }, [toggleSidebar]);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -84,14 +96,21 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
               variant="ghost" 
               size="icon" 
               onClick={toggleSidebar} 
-              className="lg:hidden"
+              className="mr-2"
             >
               <Menu className="h-5 w-5" />
             </Button>
-            <Link to="/" className="flex-shrink-0 flex items-center ml-2 lg:ml-0">
-              <span className="text-management-700 dark:text-management-300 font-bold text-xl">C</span>
-              <span className="text-engineering-700 dark:text-engineering-300 font-bold text-xl">C</span>
-              <span className="text-mining-700 dark:text-mining-300 font-bold text-xl">D</span>
+            <Link to="/" className="flex-shrink-0 flex items-center">
+              <img 
+                src="/lovable-uploads/222ebd34-3bc5-4f1d-8b3c-79ac998b8b9c.png" 
+                alt="CCD Logo" 
+                className="h-8 w-auto mr-2"
+              />
+              <span className="font-bold text-xl hidden sm:flex">
+                <span className="text-management-700 dark:text-management-300">C</span>
+                <span className="text-engineering-700 dark:text-engineering-300">C</span>
+                <span className="text-mining-700 dark:text-mining-300">D</span>
+              </span>
             </Link>
           </div>
           

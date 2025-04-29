@@ -33,7 +33,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         
         <div className={cn(
           "flex-1 transition-all duration-300 ease-in-out pt-16",
-          isMobile ? "w-full" : sidebarOpen ? "lg:ml-64" : "lg:ml-0"
+          sidebarOpen ? "lg:ml-64" : "lg:ml-0"
         )}>
           <main className="p-4 md:p-6 max-w-7xl mx-auto w-full">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
@@ -47,7 +47,9 @@ const PageLayout: React.FC<PageLayoutProps> = ({
               </div>
             </div>
 
-            {children}
+            <div className="w-full relative z-10">
+              {children}
+            </div>
           </main>
           
           <Footer />
