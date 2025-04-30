@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
 import Footer from "@/components/layout/Footer";
@@ -23,6 +23,19 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  // Add event listener for sidebar toggle
+  useEffect(() => {
+    const handleSidebarToggle = () => {
+      setSidebarOpen(!sidebarOpen);
+    };
+    
+    document.addEventListener('toggle-sidebar', handleSidebarToggle);
+    
+    return () => {
+      document.removeEventListener('toggle-sidebar', handleSidebarToggle);
+    };
+  }, [sidebarOpen]);
 
   return (
     <div className="min-h-screen flex flex-col w-full">
