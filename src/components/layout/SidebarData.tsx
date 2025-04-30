@@ -10,6 +10,8 @@ import {
   Users,
   Settings,
   HelpCircle,
+  Trophy,
+  ShoppingBag,
 } from "lucide-react";
 
 export const getSidebarMenuGroups = () => [
@@ -63,6 +65,12 @@ export const getSidebarMenuGroups = () => [
     label: "Mi Progreso",
     items: [
       {
+        icon: <Trophy size={20} />,
+        text: "Ranking",
+        to: "/ranking",
+        badge: "Popular",
+      },
+      {
         icon: <Award size={20} />,
         text: "Certificaciones",
         to: "/certifications",
@@ -84,6 +92,12 @@ export const getSidebarMenuGroups = () => [
         text: "Foros",
         to: "/forums",
         badge: null,
+      },
+      {
+        icon: <ShoppingBag size={20} />,
+        text: "Tienda",
+        to: "/store",
+        badge: "Nuevo",
       },
     ],
   },

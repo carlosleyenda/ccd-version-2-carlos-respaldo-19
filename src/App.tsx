@@ -1,95 +1,44 @@
-
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import LiveCourses from "./pages/LiveCourses";
-import NotFound from "./pages/NotFound";
-import CourseView from "./pages/CourseView";
-import CourseLive from "./pages/CourseLive";
-import CoursePreview from "./pages/CoursePreview";
-import CourseLesson from "./pages/CourseLesson";
-import CourseExam from "./pages/CourseExam";
-import InstructorProfile from "./pages/InstructorProfile";
-import Certifications from "./pages/Certifications";
-import Schedule from "./pages/Schedule";
-import Forums from "./pages/Forums";
 import Engineering from "./pages/Engineering";
 import Mining from "./pages/Mining";
 import Management from "./pages/Management";
-import Pricing from "./pages/Pricing";
-import { useEffect } from "react";
-
-const queryClient = new QueryClient();
+import Certifications from "./pages/Certifications";
+import Schedule from "./pages/Schedule";
+import Forums from "./pages/Forums";
+import CourseView from "./pages/CourseView";
+import CourseLesson from "./pages/CourseLesson";
+import CourseExam from "./pages/CourseExam";
+import Ranking from "./pages/Ranking"; // Add the import for Ranking page
+import NotFound from "./pages/NotFound";
+import Store from "./pages/Store"; // Add import for Store page
 
 const App = () => {
-  useEffect(() => {
-    const handleNavigation = () => {
-      const path = window.location.pathname;
-      
-      const tempRoutes = [
-        "/engineering",
-        "/mining",
-        "/management",
-        "/profile",
-        "/settings",
-        "/instructor/",
-        "/live-classroom",
-      ];
-      
-      const shouldRedirect = tempRoutes.some(route => path.startsWith(route));
-      
-      if (shouldRedirect && path !== "/dashboard" && path !== "/courses" && path !== "/live-courses") {
-        console.log(`Ruta ${path} aún no implementada. Redireccionando a dashboard.`);
-        window.history.pushState({}, "", "/dashboard");
-      }
-    };
-    
-    handleNavigation();
-    
-    window.addEventListener("popstate", handleNavigation);
-    
-    return () => {
-      window.removeEventListener("popstate", handleNavigation);
-    };
-  }, []);
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <SidebarProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/live-courses" element={<LiveCourses />} />
-              <Route path="/course/:id" element={<CourseView />} />
-              <Route path="/course/:id/live" element={<CourseLive />} />
-              <Route path="/course/:id/preview" element={<CoursePreview />} />
-              <Route path="/course/lesson/:id" element={<CourseLesson />} />
-              <Route path="/course/:id/exam/:examId" element={<CourseExam />} />
-              <Route path="/instructor/:name" element={<InstructorProfile />} />
-              <Route path="/certifications" element={<Certifications />} />
-              <Route path="/schedule" element={<Schedule />} />
-              <Route path="/forums" element={<Forums />} />
-              <Route path="/engineering" element={<Engineering />} />
-              <Route path="/mining" element={<Mining />} />
-              <Route path="/management" element={<Management />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </SidebarProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/live-courses" element={<LiveCourses />} />
+        <Route path="/engineering" element={<Engineering />} />
+        <Route path="/mining" element={<Mining />} />
+        <Route path="/management" element={<Management />} />
+        <Route path="/certifications" element={<Certifications />} />
+        <Route path="/schedule" element={<Schedule />} />
+        <Route path="/forums" element={<Forums />} />
+        <Route path="/course/:id" element={<CourseView />} />
+        <Route path="/course/lesson/:id" element={<CourseLesson />} />
+        <Route path="/course/exam/:id" element={<CourseExam />} />
+        <Route path="/ranking" element={<Ranking />} /> {/* Add the route for Ranking */}
+        <Route path="/store" element={<Store />} /> {/* Add route for Store */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 };
 
