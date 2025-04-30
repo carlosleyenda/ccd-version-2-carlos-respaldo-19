@@ -1,4 +1,3 @@
-
 import { 
   Clock, 
   FileText, 
@@ -62,9 +61,17 @@ export const CourseSidebar = ({
   };
 
   const handleEnrollCourse = () => {
-    toast.success("¡Inscripción exitosa!");
-    // En una aplicación real, esto procesaría la inscripción
-    setTimeout(() => navigate("/dashboard"), 1500);
+    // Comprobar si el usuario tiene una suscripción activa
+    // En una aplicación real, esto se verificaría con el estado de autenticación
+    const hasActiveSubscription = false; // Simulamos que no tiene suscripción
+    
+    if (hasActiveSubscription) {
+      toast.success("¡Inscripción exitosa!");
+      setTimeout(() => navigate("/dashboard"), 1500);
+    } else {
+      toast.info("Se requiere suscripción para inscribirse en este curso");
+      navigate("/pricing"); // Redirigir a la página de precios
+    }
   };
 
   const handleViewInstructorProfile = () => {

@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { ExternalLink, Clock, Users, Star, PlayCircle, BookmarkPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -211,8 +210,8 @@ const CourseCard = ({
             if (showContinueButton || progress > 0) {
               handleContinueCourse(e);
             } else {
-              toast.success(`Accediendo al curso: ${title}`);
-              navigate(`/course/${id}`);
+              // Si no está inscrito, redirigir a la vista previa en lugar del curso completo
+              handlePreview(e);
             }
           }}
         >

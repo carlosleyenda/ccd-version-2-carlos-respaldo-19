@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
@@ -13,9 +14,11 @@ import Forums from "./pages/Forums";
 import CourseView from "./pages/CourseView";
 import CourseLesson from "./pages/CourseLesson";
 import CourseExam from "./pages/CourseExam";
-import Ranking from "./pages/Ranking"; // Add the import for Ranking page
+import CoursePreview from "./pages/CoursePreview"; // Importamos CoursePreview
+import Ranking from "./pages/Ranking";
 import NotFound from "./pages/NotFound";
-import Store from "./pages/Store"; // Add import for Store page
+import Store from "./pages/Store";
+import Pricing from "./pages/Pricing"; // Importamos la página de Pricing
 
 const App = () => {
   return (
@@ -32,10 +35,12 @@ const App = () => {
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/forums" element={<Forums />} />
         <Route path="/course/:id" element={<CourseView />} />
+        <Route path="/course/:id/preview" element={<CoursePreview />} /> {/* Ruta para la vista previa */}
         <Route path="/course/lesson/:id" element={<CourseLesson />} />
         <Route path="/course/exam/:id" element={<CourseExam />} />
-        <Route path="/ranking" element={<Ranking />} /> {/* Add the route for Ranking */}
-        <Route path="/store" element={<Store />} /> {/* Add route for Store */}
+        <Route path="/ranking" element={<Ranking />} />
+        <Route path="/store" element={<Store />} />
+        <Route path="/pricing" element={<Pricing />} /> {/* Ruta para la página de precios */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
