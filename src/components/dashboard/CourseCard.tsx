@@ -22,6 +22,7 @@ export interface CourseCardProps {
   isLive?: boolean;
   liveDate?: string;
   featured?: boolean;
+  showContinueButton?: boolean;
 }
 
 const CourseCard = ({
@@ -39,6 +40,7 @@ const CourseCard = ({
   isLive = false,
   liveDate,
   featured = false,
+  showContinueButton = false,
 }: CourseCardProps) => {
   const navigate = useNavigate();
   
@@ -64,6 +66,12 @@ const CourseCard = ({
     e.preventDefault();
     toast.info(`Vista previa del curso: ${title}`);
     navigate(`/course/${id}/preview`);
+  };
+
+  const handleContinueCourse = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast.success(`Continuando curso: ${title}`);
+    navigate(`/course/lesson/${id}`);
   };
 
   return (
@@ -178,16 +186,20 @@ const CourseCard = ({
           className="group"
           onClick={(e) => {
             e.preventDefault();
-            toast.success(`Accediendo al curso: ${title}`);
-            navigate(`/course/${id}`);
+            if (showContinueButton || progress > 0) {
+              handleContinueCourse(e);
+            } else {
+              toast.success(`Accediendo al curso: ${title}`);
+              navigate(`/course/${id}`);
+            }
           }}
         >
           <Button 
-            variant={isLive ? "join" : "view"}
+            variant={isLive ? "join" : (showContinueButton || progress > 0) ? "success" : "view"}
             size="sm" 
             className="flex items-center gap-1 transform group-hover:translate-x-0.5 transition-transform"
           >
-            <span>{isLive ? "Unirme" : "Ver curso"}</span>
+            <span>{isLive ? "Unirme" : (showContinueButton || progress > 0) ? "Continuar" : "Ver curso"}</span>
             <ExternalLink className="h-3.5 w-3.5 group-hover:animate-pulse" />
           </Button>
         </Link>
