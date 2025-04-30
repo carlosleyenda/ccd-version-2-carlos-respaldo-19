@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +14,7 @@ import CourseView from "./pages/CourseView";
 import CourseLive from "./pages/CourseLive";
 import CoursePreview from "./pages/CoursePreview";
 import CourseLesson from "./pages/CourseLesson";
+import CourseExam from "./pages/CourseExam";
 import InstructorProfile from "./pages/InstructorProfile";
 import Certifications from "./pages/Certifications";
 import Schedule from "./pages/Schedule";
@@ -36,7 +38,6 @@ const App = () => {
         "/management",
         "/profile",
         "/settings",
-        "/course/",
         "/instructor/",
         "/live-classroom",
       ];
@@ -74,6 +75,7 @@ const App = () => {
               <Route path="/course/:id/live" element={<CourseLive />} />
               <Route path="/course/:id/preview" element={<CoursePreview />} />
               <Route path="/course/lesson/:id" element={<CourseLesson />} />
+              <Route path="/course/:id/exam/:examId" element={<CourseExam />} />
               <Route path="/instructor/:name" element={<InstructorProfile />} />
               <Route path="/certifications" element={<Certifications />} />
               <Route path="/schedule" element={<Schedule />} />

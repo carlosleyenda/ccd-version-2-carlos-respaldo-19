@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -11,14 +12,24 @@ import {
   MessageCircle,
   BookOpen,
   CheckCircle,
-  X
+  X,
+  FileText,
+  PenLine,
+  PlayCircle
 } from "lucide-react";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
+import LessonContent from "@/components/lessons/LessonContent";
+import LessonModules from "@/components/lessons/LessonModules";
+import LessonResources from "@/components/lessons/LessonResources";
+import LessonSurvey from "@/components/lessons/LessonSurvey";
+import LessonChat from "@/components/lessons/LessonChat";
+import LessonProgress from "@/components/lessons/LessonProgress";
 
 const CourseLesson = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showModules, setShowModules] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>("content");
   const { id } = useParams();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -48,6 +59,11 @@ const CourseLesson = () => {
     toast.success("¡Lección completada!");
     // En una app real, esto actualizaría el progreso del usuario
   };
+  
+  const navigateToCourseExam = () => {
+    toast.info("Navegando al examen del módulo...");
+    navigate(`/course/${id}/exam/module-1`);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -63,7 +79,7 @@ const CourseLesson = () => {
               {/* Video section */}
               <div className="bg-black aspect-video relative">
                 <div className="absolute inset-0 flex items-center justify-center text-white">
-                  <span>Contenido de la lección</span>
+                  <PlayCircle className="h-16 w-16 cursor-pointer hover:scale-105 transition-transform" />
                 </div>
               </div>
 
@@ -108,20 +124,42 @@ const CourseLesson = () => {
                 </div>
               </div>
 
-              {/* Lesson content */}
-              <div className="flex-1 overflow-y-auto p-4">
-                <div className="max-w-6xl mx-auto">
+              {/* Lesson tabs and content */}
+              <div className="flex-1 overflow-y-auto">
+                <div className="max-w-6xl mx-auto p-4">
                   <h1 className="text-2xl font-bold mb-4">
                     1.1 Conceptos Fundamentales
                   </h1>
                   
-                  <div className="prose dark:prose-invert max-w-none">
-                    <p>
-                      En esta lección, exploraremos los conceptos fundamentales
-                      de la minería subterránea y su importancia en la industria
-                      moderna.
-                    </p>
-                  </div>
+                  <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full mt-4">
+                    <TabsList className="grid grid-cols-5 mb-6">
+                      <TabsTrigger value="content">Contenido</TabsTrigger>
+                      <TabsTrigger value="resources">Recursos</TabsTrigger>
+                      <TabsTrigger value="chat">Discusión</TabsTrigger>
+                      <TabsTrigger value="survey">Encuesta</TabsTrigger>
+                      <TabsTrigger value="progress">Progreso</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="content">
+                      <LessonContent />
+                    </TabsContent>
+                    
+                    <TabsContent value="resources">
+                      <LessonResources />
+                    </TabsContent>
+                    
+                    <TabsContent value="chat">
+                      <LessonChat />
+                    </TabsContent>
+                    
+                    <TabsContent value="survey">
+                      <LessonSurvey />
+                    </TabsContent>
+                    
+                    <TabsContent value="progress">
+                      <LessonProgress onGoToExam={navigateToCourseExam} />
+                    </TabsContent>
+                  </Tabs>
                 </div>
               </div>
             </div>
@@ -148,32 +186,7 @@ const CourseLesson = () => {
                 </div>
 
                 <div className="flex-1 overflow-y-auto">
-                  <div className="p-4 space-y-4">
-                    {/* Module */}
-                    <div>
-                      <h3 className="font-medium mb-2">Módulo 1: Introducción</h3>
-                      <ul className="space-y-2">
-                        <li>
-                          <Button
-                            variant="ghost"
-                            className="w-full justify-start text-sm font-normal bg-accent"
-                          >
-                            <BookOpen className="h-4 w-4 mr-2" />
-                            1.1 Conceptos Fundamentales
-                          </Button>
-                        </li>
-                        <li>
-                          <Button
-                            variant="ghost"
-                            className="w-full justify-start text-sm font-normal"
-                          >
-                            <BookOpen className="h-4 w-4 mr-2" />
-                            1.2 Evaluación Inicial
-                          </Button>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  <LessonModules />
                 </div>
               </div>
             </div>
