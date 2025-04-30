@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import DashboardCourses from "@/components/dashboard/DashboardCourses";
 import DashboardActivities from "@/components/dashboard/DashboardActivities";
 import AchievementsList from "@/components/dashboard/AchievementsList";
+import UserRanking from "@/components/dashboard/UserRanking";
 import { 
   inProgressCourses, 
   recommendedCourses, 
@@ -16,6 +17,18 @@ import {
 } from "@/components/dashboard/dashboardData";
 
 const Dashboard = () => {
+  // Ensure all courses have valid images
+  const validateCoursesImages = (courses) => {
+    return courses.map(course => ({
+      ...course,
+      image: course.image || "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
+    }));
+  };
+  
+  const validatedInProgressCourses = validateCoursesImages(inProgressCourses);
+  const validatedRecommendedCourses = validateCoursesImages(recommendedCourses);
+  const validatedLiveCourses = validateCoursesImages(liveCourses);
+
   return (
     <PageLayout title="Dashboard" subtitle="Bienvenido de nuevo, Carlos. Continúa con tu aprendizaje.">
       <div className="mt-4 md:mt-0 flex space-x-2 mb-6">
@@ -30,10 +43,11 @@ const Dashboard = () => {
       </div>
             
       <DashboardStats />
-      <DashboardCourses courses={inProgressCourses} />
+      <DashboardCourses courses={validatedInProgressCourses} />
+      <UserRanking />
       <DashboardActivities 
-        recommendedCourses={recommendedCourses}
-        liveCourses={liveCourses}
+        recommendedCourses={validatedRecommendedCourses}
+        liveCourses={validatedLiveCourses}
         upcomingEvents={upcomingEvents}
       />
       <AchievementsList achievements={achievements} />

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import CourseDetail from "@/components/courses/CourseDetail";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 const CourseView = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -16,6 +17,19 @@ const CourseView = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+  
+  // Handle sidebar toggle event
+  useEffect(() => {
+    const handleSidebarToggle = () => {
+      setSidebarOpen(!sidebarOpen);
+    };
+    
+    document.addEventListener('toggle-sidebar', handleSidebarToggle);
+    
+    return () => {
+      document.removeEventListener('toggle-sidebar', handleSidebarToggle);
+    };
+  }, [sidebarOpen]);
 
   // Mock course data - in a real app, this would come from an API
   const courseData = {
@@ -80,17 +94,19 @@ const CourseView = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col w-full">
       <Navbar toggleSidebar={toggleSidebar} />
       
-      <div className="flex flex-1">
+      <div className="flex flex-1 w-full">
         <Sidebar isOpen={sidebarOpen} />
-        <div className={`flex-1 transition-all duration-300 ${!isMobile && sidebarOpen ? 'lg:ml-64' : ''}`}>
+        <div className={cn(
+          "flex-1 transition-all duration-300 ease-in-out pt-16 w-full",
+          !isMobile && sidebarOpen ? 'lg:ml-64' : ''
+        )}>
           <CourseDetail {...courseData} />
+          <Footer />
         </div>
       </div>
-      
-      <Footer />
     </div>
   );
 };

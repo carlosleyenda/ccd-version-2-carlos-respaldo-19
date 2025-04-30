@@ -44,6 +44,27 @@ const CourseCard = ({
 }: CourseCardProps) => {
   const navigate = useNavigate();
   
+  // Fallback image in case the provided image is broken
+  const fallbackImage = "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80";
+  
+  // Get appropriate category-related image if needed
+  const getCategoryFallbackImage = () => {
+    switch (category) {
+      case "engineering":
+        return "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80";
+      case "mining":
+        return "https://images.unsplash.com/photo-1626438366685-c6dbad875f0b?auto=format&fit=crop&w=800&q=80";
+      case "management":
+        return "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80";
+      default:
+        return fallbackImage;
+    }
+  };
+  
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = getCategoryFallbackImage();
+  };
+  
   const categoryLabel = {
     engineering: "Ingeniería",
     mining: "Minería",
@@ -82,9 +103,10 @@ const CourseCard = ({
     )}>
       <div className="relative overflow-hidden">
         <img
-          src={image}
+          src={image || getCategoryFallbackImage()}
           alt={title}
           className="w-full h-48 object-cover object-center transform group-hover:scale-105 transition-all duration-500"
+          onError={handleImageError}
         />
         {isLive && (
           <div className="absolute top-3 right-3 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-medium flex items-center">

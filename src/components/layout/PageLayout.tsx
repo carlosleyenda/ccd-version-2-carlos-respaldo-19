@@ -41,12 +41,12 @@ const PageLayout: React.FC<PageLayoutProps> = ({
     <div className="min-h-screen flex flex-col w-full">
       <Navbar toggleSidebar={toggleSidebar} />
       
-      <div className="flex flex-1">
+      <div className="flex flex-1 w-full">
         <Sidebar isOpen={sidebarOpen} />
         
         <div className={cn(
-          "flex-1 transition-all duration-300 ease-in-out pt-16",
-          sidebarOpen ? "lg:ml-64" : "lg:ml-0"
+          "flex-1 transition-all duration-300 ease-in-out pt-16 w-full",
+          !isMobile && sidebarOpen ? "lg:ml-64" : "lg:ml-0"
         )}>
           <main className="p-4 md:p-6 max-w-7xl mx-auto w-full">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
