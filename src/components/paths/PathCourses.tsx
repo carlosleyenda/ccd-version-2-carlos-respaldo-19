@@ -20,7 +20,7 @@ const PathCourses: React.FC<PathCoursesProps> = ({ path }) => {
         <Card key={course.id} className={course.completed ? "border-green-200" : ""}>
           <CardHeader className="pb-2">
             <div className="flex justify-between items-center">
-              <Badge variant={course.completed ? "success" : "outline"}>
+              <Badge variant={course.completed ? "secondary" : "outline"} className={course.completed ? "bg-green-100 text-green-600" : ""}>
                 {course.completed ? "Completado" : `Módulo ${index + 1}`}
               </Badge>
               {course.completed ? (
