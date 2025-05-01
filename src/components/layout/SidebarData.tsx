@@ -12,6 +12,10 @@ import {
   HelpCircle,
   Trophy,
   ShoppingBag,
+  UserRound,
+  Layers,
+  BookText,
+  FileText,
 } from "lucide-react";
 
 export const getSidebarMenuGroups = () => [
@@ -85,6 +89,29 @@ export const getSidebarMenuGroups = () => [
     ],
   },
   {
+    label: "Desarrollo",
+    items: [
+      {
+        icon: <Layers size={20} />,
+        text: "Rutas de Aprendizaje",
+        to: "/learning-paths",
+        badge: "Nuevo",
+      },
+      {
+        icon: <FileText size={20} />,
+        text: "Evaluaciones",
+        to: "/assessment",
+        badge: null,
+      },
+      {
+        icon: <BookText size={20} />,
+        text: "Recursos",
+        to: "/resources",
+        badge: null,
+      },
+    ],
+  },
+  {
     label: "Comunidad",
     items: [
       {
@@ -104,6 +131,11 @@ export const getSidebarMenuGroups = () => [
 ];
 
 export const getSidebarFooterItems = () => [
+  {
+    icon: <UserRound size={20} />,
+    text: "Mi Perfil",
+    to: "/profile",
+  },
   {
     icon: <Settings size={20} />,
     text: "Configuración",

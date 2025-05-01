@@ -14,11 +14,16 @@ import Forums from "./pages/Forums";
 import CourseView from "./pages/CourseView";
 import CourseLesson from "./pages/CourseLesson";
 import CourseExam from "./pages/CourseExam";
-import CoursePreview from "./pages/CoursePreview"; // Importamos CoursePreview
+import CoursePreview from "./pages/CoursePreview";
 import Ranking from "./pages/Ranking";
 import NotFound from "./pages/NotFound";
 import Store from "./pages/Store";
-import Pricing from "./pages/Pricing"; // Importamos la página de Pricing
+import Pricing from "./pages/Pricing";
+import UserProfile from "./pages/UserProfile";
+import LearningPaths from "./pages/LearningPaths";
+import AssessmentCenter from "./pages/AssessmentCenter";
+import ResourceLibrary from "./pages/ResourceLibrary";
+import PathDetail from "./pages/PathDetail";
 
 const App = () => {
   return (
@@ -35,12 +40,20 @@ const App = () => {
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/forums" element={<Forums />} />
         <Route path="/course/:id" element={<CourseView />} />
-        <Route path="/course/:id/preview" element={<CoursePreview />} /> {/* Ruta para la vista previa */}
+        <Route path="/course/:id/preview" element={<CoursePreview />} />
         <Route path="/course/lesson/:id" element={<CourseLesson />} />
         <Route path="/course/exam/:id" element={<CourseExam />} />
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/store" element={<Store />} />
-        <Route path="/pricing" element={<Pricing />} /> {/* Ruta para la página de precios */}
+        <Route path="/pricing" element={<Pricing />} />
+        
+        {/* Nuevas rutas */}
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/learning-paths" element={<LearningPaths />} />
+        <Route path="/learning-paths/:id" element={<PathDetail />} />
+        <Route path="/assessment" element={<AssessmentCenter />} />
+        <Route path="/resources" element={<ResourceLibrary />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
