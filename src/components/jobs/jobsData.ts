@@ -127,6 +127,7 @@ export const jobListings: JobListing[] = [
     location: "Arequipa, Perú",
     type: "Tiempo completo",
     category: "mining",
+    experienceLevel: "Senior",
     description: "Buscamos un Ingeniero de Minas Senior con experiencia en operaciones de cobre para liderar proyectos de optimización y expansión en nuestra unidad minera en Arequipa.",
     responsibilities: [
       "Supervisar y optimizar operaciones mineras",
@@ -179,6 +180,7 @@ export const jobListings: JobListing[] = [
     location: "Lima, Perú",
     type: "Tiempo completo",
     category: "safety",
+    experienceLevel: "Mid",
     description: "Estamos buscando un Analista de Seguridad Minera para unirse a nuestro equipo. El candidato ideal tendrá experiencia en la identificación de riesgos y la implementación de medidas de seguridad en entornos mineros.",
     responsibilities: [
       "Realizar inspecciones de seguridad en las instalaciones mineras",
@@ -230,6 +232,7 @@ export const jobListings: JobListing[] = [
     location: "Cusco, Perú",
     type: "Tiempo completo",
     category: "mining",
+    experienceLevel: "Mid",
     description: "Global Mining Corp está buscando un Geólogo de Exploración para unirse a nuestro equipo. El candidato ideal tendrá experiencia en la exploración de minerales y la gestión de proyectos de exploración.",
     responsibilities: [
       "Planificar y ejecutar programas de exploración",
@@ -281,6 +284,7 @@ export const jobListings: JobListing[] = [
     location: "Arequipa, Perú",
     type: "Tiempo completo",
     category: "management",
+    experienceLevel: "Mid-Senior",
     description: "Andina Mining está buscando un Supervisor de Operaciones para unirse a nuestro equipo. El candidato ideal tendrá experiencia en la supervisión de operaciones mineras y la gestión de equipos.",
     responsibilities: [
       "Supervisar las operaciones diarias en la mina",
@@ -332,6 +336,7 @@ export const jobListings: JobListing[] = [
     location: "Lima, Perú",
     type: "Tiempo completo",
     category: "engineering",
+    experienceLevel: "Mid",
     description: "ProcessMet Technologies está buscando un Ingeniero Metalúrgico para unirse a nuestro equipo. El candidato ideal tendrá experiencia en el procesamiento de minerales y la optimización de procesos metalúrgicos.",
     responsibilities: [
       "Diseñar y optimizar procesos metalúrgicos",
@@ -383,6 +388,7 @@ export const jobListings: JobListing[] = [
     location: "Lima, Perú",
     type: "Tiempo completo",
     category: "management",
+    experienceLevel: "Mid",
     description: "EnviroSolutions está buscando un Ingeniero Ambiental para unirse a nuestro equipo. El candidato ideal tendrá experiencia en la gestión ambiental en la industria minera.",
     responsibilities: [
       "Desarrollar e implementar planes de gestión ambiental",
