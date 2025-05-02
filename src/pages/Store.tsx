@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PageLayout from "@/components/layout/PageLayout";
@@ -28,7 +27,7 @@ const Store = () => {
   const [wishlistItems, setWishlistItems] = useState<any[]>([]);
   const [showCart, setShowCart] = useState(false);
   const [showWishlist, setShowWishlist] = useState(false);
-  const [activeView, setActiveView] = useState("grid");
+  const [activeView, setActiveView] = useState<"grid" | "list">("grid");
   
   const [userData, setUserData] = useState({
     coins: 560,
