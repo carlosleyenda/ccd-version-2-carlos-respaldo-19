@@ -769,6 +769,9 @@ const additionalJobs: JobListing[] = [
   }
 ];
 
+// Combine main job listings with additional jobs
+export const allJobListings = [...jobListings, ...additionalJobs];
+
 // Update marketTrends to include new data properties
 export const marketTrends: MarketTrend = {
   skillsDemand: [
@@ -792,4 +795,40 @@ export const marketTrends: MarketTrend = {
     { year: "2021", engineering: 63000, mining: 68000, management: 78000 },
     { year: "2022", engineering: 67000, mining: 72000, management: 83000 },
     { year: "2023", engineering: 72000, mining: 78000, management: 89000 },
-    { year: "2024", engineering: 78000, mining: 85000, management: 9
+    { year: "2024", engineering: 78000, mining: 85000, management: 95000 }
+  ],
+  growingSkills: [
+    { name: "Inteligencia Artificial", growth: 18 },
+    { name: "Automatización", growth: 15 },
+    { name: "Sustentabilidad", growth: 12 },
+    { name: "Análisis de Datos", growth: 10 },
+    { name: "Gestión de Riesgos", growth: 8 }
+  ],
+  decliningSkills: [
+    { name: "Operación Manual", growth: -12 },
+    { name: "Procesamiento Tradicional", growth: -8 },
+    { name: "Métodos Antiguos de Exploración", growth: -5 },
+    { name: "Gestión No Digital", growth: -7 },
+    { name: "Técnicas Obsoletas", growth: -10 }
+  ],
+  locationStats: [
+    { location: "Lima", jobs: 245, percentChange: 5 },
+    { location: "Arequipa", jobs: 180, percentChange: 12 },
+    { location: "Cusco", jobs: 120, percentChange: 8 },
+    { location: "Cajamarca", jobs: 95, percentChange: 15 },
+    { location: "Piura", jobs: 75, percentChange: -2 }
+  ],
+  topDemandRoles: [
+    { role: "Ingeniero de Minas", demand: 95, salaryRange: "S/90,000 - S/140,000" },
+    { role: "Especialista Ambiental", demand: 85, salaryRange: "S/70,000 - S/110,000" },
+    { role: "Geólogo", demand: 80, salaryRange: "S/85,000 - S/120,000" },
+    { role: "Analista de Datos", demand: 78, salaryRange: "S/65,000 - S/95,000" },
+    { role: "Ingeniero de Seguridad", demand: 75, salaryRange: "S/75,000 - S/100,000" }
+  ],
+  recommendedCourses: [
+    { id: "course-trend-1", title: "Minería Digital", description: "Transformación digital en operaciones mineras", demandGrowth: 25 },
+    { id: "course-trend-2", title: "Gestión Ambiental Avanzada", description: "Estrategias sustentables para proyectos mineros", demandGrowth: 18 },
+    { id: "course-trend-3", title: "Análisis de Datos en Minería", description: "Técnicas de big data para optimización de operaciones", demandGrowth: 22 },
+    { id: "course-trend-4", title: "Seguridad 4.0", description: "Nuevas tecnologías para prevención de accidentes", demandGrowth: 15 }
+  ]
+};
