@@ -1,10 +1,12 @@
 
-import { Award, Calendar, FileCheck, Download, BadgeCheck, Share2, ExternalLink } from "lucide-react";
+import { Award, Calendar, FileCheck, Download, BadgeCheck, Share2, ExternalLink, Redo, PackageCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Certificate } from "./types";
+import { useState } from "react";
+import { AlertDialogContent, AlertDialog, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel } from "@/components/ui/alert-dialog";
 
 interface CertificateViewProps {
   certificate: Certificate | null;
@@ -19,6 +21,11 @@ export const CertificateView = ({
   onOpenChange,
   onRequestAccreditation
 }: CertificateViewProps) => {
+  const [showRenewDialog, setShowRenewDialog] = useState(false);
+  const [showPhysicalDialog, setShowPhysicalDialog] = useState(false);
+  const [isRenewing, setIsRenewing] = useState(false);
+  const [isRequestingPhysical, setIsRequestingPhysical] = useState(false);
+  
   if (!certificate) return null;
 
   const handleDownload = () => {
@@ -34,6 +41,27 @@ export const CertificateView = ({
   const handleVerify = () => {
     toast.info("Verificando autenticidad del certificado...");
     // In a real app, this would verify the certificate
+  };
+  
+  const handleRenew = () => {
+    setIsRenewing(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsRenewing(false);
+      setShowRenewDialog(false);
+      toast.success("¡Certificado renovado exitosamente!");
+      onOpenChange(false);
+    }, 1500);
+  };
+  
+  const handleRequestPhysical = () => {
+    setIsRequestingPhysical(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsRequestingPhysical(false);
+      setShowPhysicalDialog(false);
+      toast.success("Solicitud de certificado físico enviada. Recibirás un correo con los detalles de envío.");
+    }, 1500);
   };
 
   return (
@@ -128,6 +156,52 @@ export const CertificateView = ({
                   </p>
                 </div>
               </div>
+              
+              {certificate.type === "expired" && (
+                <div className="bg-red-50 p-4 rounded-md border border-red-200">
+                  <h3 className="flex items-center text-red-800 font-medium mb-2">
+                    <Redo className="h-5 w-5 mr-2 text-red-600" />
+                    Certificado Expirado
+                  </h3>
+                  <p className="text-sm text-red-700 mb-3">
+                    Este certificado ha expirado. Puede renovarlo para mantener su validez
+                    por un período adicional de 12 meses.
+                  </p>
+                  <Button 
+                    variant="destructive" 
+                    className="w-full"
+                    onClick={() => setShowRenewDialog(true)}
+                  >
+                    <Redo className="h-4 w-4 mr-2" />
+                    Renovar por S/99.00
+                  </Button>
+                </div>
+              )}
+              
+              {certificate.accredited && (
+                <div className="bg-green-50 p-4 rounded-md border border-green-200">
+                  <h3 className="flex items-center text-green-800 font-medium mb-2">
+                    <BadgeCheck className="h-5 w-5 mr-2 text-green-600 fill-green-200" />
+                    Certificado Acreditado
+                  </h3>
+                  <p className="text-sm text-green-700 mb-1">
+                    Este certificado está acreditado por <strong>{certificate.accredited.organization}</strong>
+                  </p>
+                  <p className="text-sm text-green-700">
+                    ID de verificación: {certificate.accredited.verificationId}
+                  </p>
+                  <div className="mt-3">
+                    <Button 
+                      variant="outline"
+                      className="w-full border-green-200 bg-green-100 hover:bg-green-200 text-green-800"
+                      onClick={() => setShowPhysicalDialog(true)}
+                    >
+                      <PackageCheck className="h-4 w-4 mr-2" />
+                      Solicitar certificado físico
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="space-y-4">
@@ -195,7 +269,7 @@ export const CertificateView = ({
                 </div>
               </div>
 
-              {certificate.type === "completed" && (
+              {certificate.type === "completed" && !certificate.accredited && (
                 <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
                   <h3 className="flex items-center text-amber-800 font-medium mb-2">
                     <BadgeCheck className="h-5 w-5 mr-2 text-amber-600" />
@@ -222,6 +296,126 @@ export const CertificateView = ({
           </div>
         </div>
       </DialogContent>
+      
+      {/* Renovar Certificado Dialog */}
+      <AlertDialog open={showRenewDialog} onOpenChange={setShowRenewDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Renovar Certificado</AlertDialogTitle>
+            <AlertDialogDescription>
+              Está a punto de renovar el certificado <span className="font-medium">{certificate?.title}</span>. 
+              La renovación extenderá la validez por 12 meses adicionales por un costo de S/99.00.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          
+          <div className="bg-gray-50 p-4 rounded-lg border my-4">
+            <h4 className="font-medium mb-2">Resumen de pago</h4>
+            <div className="flex justify-between items-center">
+              <span>Renovación de certificado</span>
+              <span>S/99.00</span>
+            </div>
+            <div className="flex justify-between items-center text-sm text-gray-500 mt-1">
+              <span>Vigencia</span>
+              <span>12 meses</span>
+            </div>
+            <Separator className="my-2" />
+            <div className="flex justify-between items-center font-bold">
+              <span>Total</span>
+              <span>S/99.00</span>
+            </div>
+          </div>
+          
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <Button 
+              variant="default"
+              onClick={handleRenew}
+              disabled={isRenewing}
+            >
+              {isRenewing ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Procesando...
+                </span>
+              ) : (
+                <>
+                  <Redo className="h-4 w-4 mr-2" />
+                  Confirmar renovación
+                </>
+              )}
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      
+      {/* Solicitar Certificado Físico Dialog */}
+      <AlertDialog open={showPhysicalDialog} onOpenChange={setShowPhysicalDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Solicitar Certificado Físico</AlertDialogTitle>
+            <AlertDialogDescription>
+              Solicite una versión física de su certificado acreditado que será enviada a su dirección postal.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          
+          <div className="space-y-4 my-4">
+            <div className="bg-green-50 p-3 rounded border border-green-200 text-sm text-green-800">
+              <p className="flex items-center gap-2">
+                <BadgeCheck className="h-4 w-4" />
+                <span>
+                  El certificado físico incluye sellos oficiales de {certificate?.accredited?.organization} y 
+                  firmas autorizadas en papel de alta calidad.
+                </span>
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 p-4 rounded-lg border">
+              <h4 className="font-medium mb-3">Información importante</h4>
+              <ul className="space-y-2 text-sm">
+                <li className="flex gap-2">
+                  <span className="text-blue-600">•</span>
+                  <span>El tiempo estimado de entrega es de 10-15 días hábiles.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-blue-600">•</span>
+                  <span>Se enviará a la dirección registrada en su perfil.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-blue-600">•</span>
+                  <span>Recibirá un código de seguimiento por correo electrónico.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <Button 
+              variant="default"
+              onClick={handleRequestPhysical}
+              disabled={isRequestingPhysical}
+            >
+              {isRequestingPhysical ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Procesando...
+                </span>
+              ) : (
+                <>
+                  <PackageCheck className="h-4 w-4 mr-2" />
+                  Confirmar solicitud
+                </>
+              )}
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Dialog>
   );
 };
