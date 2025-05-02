@@ -24,6 +24,8 @@ import LearningPaths from "./pages/LearningPaths";
 import AssessmentCenter from "./pages/AssessmentCenter";
 import ResourceLibrary from "./pages/ResourceLibrary";
 import PathDetail from "./pages/PathDetail";
+import JobBoard from "./pages/JobBoard";
+import AiAssistant from "./components/ai/AiAssistant";
 
 const App = () => {
   return (
@@ -47,15 +49,18 @@ const App = () => {
         <Route path="/store" element={<Store />} />
         <Route path="/pricing" element={<Pricing />} />
         
-        {/* Nuevas rutas */}
+        {/* Rutas */}
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/learning-paths" element={<LearningPaths />} />
         <Route path="/learning-paths/:id" element={<PathDetail />} />
         <Route path="/assessment" element={<AssessmentCenter />} />
         <Route path="/resources" element={<ResourceLibrary />} />
+        <Route path="/job-board" element={<JobBoard />} />
         
         <Route path="*" element={<NotFound />} />
       </Routes>
+      
+      <AiAssistant />
     </div>
   );
 };
