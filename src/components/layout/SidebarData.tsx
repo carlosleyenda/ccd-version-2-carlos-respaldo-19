@@ -4,7 +4,8 @@ import {
   BookOpen, Book, Clock, Award, 
   Calendar, Users, ShoppingBag, 
   CreditCard, BarChart3, Layers, 
-  FolderOpen, FileSpreadsheet, Briefcase
+  FolderOpen, FileSpreadsheet, Briefcase,
+  Settings, HelpCircle, User
 } from "lucide-react";
 
 export const SidebarData = [
@@ -133,3 +134,28 @@ export const SidebarData = [
     ],
   },
 ];
+
+// Add new functions to export the sidebar menu groups and footer items
+export const getSidebarMenuGroups = () => {
+  return SidebarData;
+};
+
+export const getSidebarFooterItems = () => {
+  return [
+    {
+      icon: <User className="h-5 w-5 mr-2" />,
+      text: "Mi Perfil",
+      to: "/profile",
+    },
+    {
+      icon: <Settings className="h-5 w-5 mr-2" />,
+      text: "Configuración",
+      to: "/settings",
+    },
+    {
+      icon: <HelpCircle className="h-5 w-5 mr-2" />,
+      text: "Ayuda",
+      to: "/help",
+    },
+  ];
+};
