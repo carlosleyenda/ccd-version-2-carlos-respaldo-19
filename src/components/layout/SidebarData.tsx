@@ -135,9 +135,17 @@ export const SidebarData = [
   },
 ];
 
-// Add new functions to export the sidebar menu groups and footer items
+// Transform SidebarData to match the MenuGroup structure expected by SidebarMenu
 export const getSidebarMenuGroups = () => {
-  return SidebarData;
+  return SidebarData.map(group => ({
+    label: group.title,
+    items: group.links.map(link => ({
+      icon: link.icon,
+      text: link.title,
+      to: link.path,
+      badge: link.notifications ? String(link.notifications) : null
+    }))
+  }));
 };
 
 export const getSidebarFooterItems = () => {
