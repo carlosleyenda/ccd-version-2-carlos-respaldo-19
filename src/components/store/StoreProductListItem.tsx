@@ -82,12 +82,12 @@ const StoreProductListItem = ({
             </div>
           </div>
           
-          <div className="flex items-center justify-between mt-4 pt-3 border-t">
+          <div className="flex flex-wrap items-center justify-between mt-4 pt-3 border-t gap-3">
             <div className="flex items-center space-x-1 bg-blue-50 px-2 py-1 rounded-md">
               <Gem className="h-5 w-5 text-blue-600" />
               <span className="font-semibold text-blue-700">{product.price}</span>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button 
                 size="sm" 
                 variant="outline"

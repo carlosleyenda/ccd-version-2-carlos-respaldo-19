@@ -89,7 +89,7 @@ const StoreProductCard = ({
           )}
         </div>
         
-        <div className="flex w-full gap-2">
+        <div className="grid grid-cols-3 w-full gap-1">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -100,10 +100,10 @@ const StoreProductCard = ({
                     e.stopPropagation();
                     onSelect(product);
                   }}
-                  className="flex-1"
+                  className="w-full px-1"
                 >
                   <Eye className="h-4 w-4 mr-1" />
-                  <span className="text-xs">Ver</span>
+                  <span className="text-xs truncate">Ver</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -119,11 +119,11 @@ const StoreProductCard = ({
               onAddToCart(product);
             }}
             disabled={product.price > userCoins || product.stock === 0}
-            className="flex-1"
+            className="w-full px-1"
             variant="outline"
           >
             <ShoppingBag className="h-4 w-4 mr-1" />
-            <span className="text-xs">Carrito</span>
+            <span className="text-xs truncate">Carrito</span>
           </Button>
           
           <Button 
@@ -133,10 +133,10 @@ const StoreProductCard = ({
               onBuy(product);
             }}
             disabled={product.price > userCoins || product.stock === 0}
-            className="flex-1"
+            className="w-full px-1"
           >
             <PackageCheck className="h-4 w-4 mr-1" />
-            <span className="text-xs">Comprar</span>
+            <span className="text-xs truncate">Comprar</span>
           </Button>
         </div>
       </CardFooter>

@@ -22,7 +22,7 @@ const StoreProductsList = ({
   userCoins
 }: StoreProductsListProps) => {
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col space-y-4">
       {products.map((product) => (
         <StoreProductListItem
           key={product.id}
