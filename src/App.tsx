@@ -25,6 +25,7 @@ import AssessmentCenter from "./pages/AssessmentCenter";
 import ResourceLibrary from "./pages/ResourceLibrary";
 import PathDetail from "./pages/PathDetail";
 import JobBoard from "./pages/JobBoard";
+import Referrals from "./pages/Referrals";
 import AiAssistant from "./components/ai/AiAssistant";
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
         <Route path="/assessment" element={<AssessmentCenter />} />
         <Route path="/resources" element={<ResourceLibrary />} />
         <Route path="/job-board" element={<JobBoard />} />
+        <Route path="/referrals" element={<Referrals />} />
         
         <Route path="*" element={<NotFound />} />
       </Routes>
