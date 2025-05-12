@@ -5,7 +5,7 @@ import { ReferralSection } from "@/components/referrals/ReferralSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { AlertCircle, Award, Cash, Diamond, Share2, UserPlus } from "lucide-react";
+import { AlertCircle, Award, Diamond, DollarSign, Share2, UserPlus } from "lucide-react";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useForm } from "react-hook-form";
@@ -121,7 +121,7 @@ const Referrals = () => {
                                 <div className="flex items-center">
                                   {reward.type === "Diamantes" ? 
                                     <Diamond className="h-4 w-4 mr-2 text-blue-600" /> : 
-                                    <Cash className="h-4 w-4 mr-2 text-green-600" />
+                                    <DollarSign className="h-4 w-4 mr-2 text-green-600" />
                                   }
                                   {reward.type}
                                 </div>

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Award, Cash, Copy, Diamond, Share2, UserPlus, Users } from "lucide-react";
+import { Award, Copy, Diamond, Share2, UserPlus, Users, DollarSign } from "lucide-react";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -189,7 +189,7 @@ export const ReferralSection = ({
                             htmlFor="cash"
                             className="flex flex-col items-center justify-center w-full p-3 border border-gray-200 rounded-md cursor-pointer peer-checked:border-blue-500 peer-checked:bg-blue-50 hover:bg-gray-50 transition-all"
                           >
-                            <Cash className="h-5 w-5 mb-1 text-green-600 peer-checked:text-green-700" />
+                            <DollarSign className="h-5 w-5 mb-1 text-green-600 peer-checked:text-green-700" />
                             <span className="text-sm font-medium">Efectivo</span>
                             <span className="text-xs text-gray-500">Para futuras renovaciones</span>
                           </label>
