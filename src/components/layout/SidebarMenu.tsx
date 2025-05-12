@@ -9,6 +9,7 @@ interface MenuItem {
   text: string;
   to: string;
   badge: string | null;
+  highlight?: boolean;
 }
 
 interface MenuGroup {
@@ -40,6 +41,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ menuGroups }) => {
                     "flex w-full items-center px-3 py-2 text-sm rounded-md",
                     currentPath === item.to
                       ? "bg-primary text-primary-foreground"
+                      : item.highlight
+                      ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >
@@ -48,6 +51,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ menuGroups }) => {
                   {item.badge && (
                     <Badge variant="outline" className="ml-auto">
                       {item.badge}
+                    </Badge>
+                  )}
+                  {item.highlight && (
+                    <Badge variant="outline" className="ml-auto bg-blue-100 text-blue-700 border-blue-200">
+                      Nuevo
                     </Badge>
                   )}
                 </Link>

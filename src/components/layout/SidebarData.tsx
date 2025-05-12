@@ -5,7 +5,7 @@ import {
   Calendar, Users, ShoppingBag, 
   CreditCard, BarChart3, Layers, 
   FolderOpen, FileSpreadsheet, Briefcase,
-  Settings, HelpCircle, User
+  Settings, HelpCircle, User, UserPlus
 } from "lucide-react";
 
 export const SidebarData = [
@@ -116,6 +116,12 @@ export const SidebarData = [
         icon: <Briefcase className="h-5 w-5" />,
         path: "/job-board",
       },
+      {
+        title: "Programa de Referidos",
+        icon: <UserPlus className="h-5 w-5" />,
+        path: "/referrals",
+        highlight: true,
+      },
     ],
   },
   {
@@ -143,7 +149,8 @@ export const getSidebarMenuGroups = () => {
       icon: link.icon,
       text: link.title,
       to: link.path,
-      badge: link.notifications ? String(link.notifications) : null
+      badge: link.notifications ? String(link.notifications) : null,
+      highlight: link.highlight || false
     }))
   }));
 };
