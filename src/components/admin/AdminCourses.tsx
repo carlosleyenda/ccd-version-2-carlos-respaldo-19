@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Table,
@@ -18,6 +17,10 @@ import {
   Edit,
   Trash2,
   MoreVertical,
+  BookOpen,
+  FileText,
+  Video,
+  Plus,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -30,10 +33,16 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const AdminCourses = () => {
   const [activeTab, setActiveTab] = useState("courses");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [moduleDialogOpen, setModuleDialogOpen] = useState(false);
+  const [lessonDialogOpen, setLessonDialogOpen] = useState(false);
+  const [selectedModule, setSelectedModule] = useState(null);
 
   // Datos de ejemplo para cursos
   const courses = [
@@ -103,6 +112,94 @@ const AdminCourses = () => {
     { name: "environment", title: "Medio Ambiente", courses: 11, color: "emerald" },
   ];
 
+  // Datos de ejemplo para módulos de cursos
+  const courseModules = [
+    {
+      id: "mod-1",
+      courseId: "ENG101",
+      title: "Introducción a la Ingeniería Civil",
+      description: "Conceptos básicos y fundamentos de la ingeniería civil",
+      duration: "4h 30m",
+      order: 1,
+      lessons: [
+        {
+          id: "les-1",
+          title: "Historia de la Ingeniería Civil",
+          type: "video",
+          duration: "45m",
+          order: 1
+        },
+        {
+          id: "les-2",
+          title: "Principios fundamentales",
+          type: "reading",
+          duration: "1h 15m",
+          order: 2
+        },
+        {
+          id: "les-3",
+          title: "Evaluación de conceptos básicos",
+          type: "quiz",
+          duration: "30m",
+          order: 3
+        }
+      ]
+    },
+    {
+      id: "mod-2",
+      courseId: "ENG101",
+      title: "Materiales de Construcción",
+      description: "Estudio de los materiales utilizados en la ingeniería civil",
+      duration: "6h 15m",
+      order: 2,
+      lessons: [
+        {
+          id: "les-4",
+          title: "Concreto y sus propiedades",
+          type: "video",
+          duration: "1h",
+          order: 1
+        },
+        {
+          id: "les-5",
+8 title: "Acero estructural",
+          type: "video",
+          duration: "55m",
+          order: 2
+        }
+      ]
+    },
+    {
+      id: "mod-3",
+      courseId: "MIN202",
+      title: "Normativas de Seguridad Minera",
+      description: "Marco legal y normativo de seguridad en minería",
+      duration: "5h",
+      order: 1,
+      lessons: [
+        {
+          id: "les-6",
+          title: "Legislación minera actual",
+          type: "reading",
+          duration: "2h",
+          order: 1
+        },
+        {
+          id: "les-7",
+          title: "Protocolos de seguridad",
+          type: "video",
+          duration: "1h 30m",
+          order: 2
+        }
+      ]
+    }
+  ];
+
+  // Función para obtener módulos por curso
+  const getModulesByCourse = (courseId) => {
+    return courseModules.filter(module => module.courseId === courseId);
+  };
+
   const getCategoryBadge = (category) => {
     switch(category) {
       case "engineering":
@@ -129,6 +226,24 @@ const AdminCourses = () => {
     }
   };
 
+  const getLessonTypeIcon = (type) => {
+    switch(type) {
+      case "video":
+        return <Video className="h-4 w-4 text-blue-500" />;
+      case "reading":
+        return <BookOpen className="h-4 w-4 text-green-500" />;
+      case "quiz":
+        return <FileText className="h-4 w-4 text-amber-500" />;
+      default:
+        return <BookOpen className="h-4 w-4" />;
+    }
+  };
+
+  const handleViewModules = (course) => {
+    setSelectedCourse(course);
+    setActiveTab("modules");
+  };
+
   return (
     <div className="space-y-4">
       <Tabs 
@@ -137,9 +252,10 @@ const AdminCourses = () => {
         onValueChange={setActiveTab}
         className="w-full"
       >
-        <TabsList className="grid w-full md:w-auto grid-cols-2 md:grid-cols-3 gap-2 mb-4">
+        <TabsList className="grid w-full md:w-auto grid-cols-2 md:grid-cols-4 gap-2 mb-4">
           <TabsTrigger value="courses">Cursos</TabsTrigger>
           <TabsTrigger value="categories">Categorías</TabsTrigger>
+          <TabsTrigger value="modules">Módulos</TabsTrigger>
           <TabsTrigger value="reviews">Reseñas</TabsTrigger>
         </TabsList>
         
@@ -204,6 +320,10 @@ const AdminCourses = () => {
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Acciones</DropdownMenuLabel>
                           <DropdownMenuSeparator />
+                          <DropdownMenuItem onClick={() => handleViewModules(course)}>
+                            <BookOpen className="h-4 w-4 mr-2" />
+                            Ver módulos
+                          </DropdownMenuItem>
                           <DropdownMenuItem>
                             <Eye className="h-4 w-4 mr-2" />
                             Ver curso
@@ -276,12 +396,222 @@ const AdminCourses = () => {
           </div>
         </TabsContent>
         
+        <TabsContent value="modules" className="space-y-6">
+          {selectedCourse && (
+            <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg mb-6">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-xl font-medium">{selectedCourse.title}</h3>
+                  <p className="text-sm text-gray-500">ID: {selectedCourse.id} · Instructor: {selectedCourse.instructor}</p>
+                </div>
+                <Button onClick={() => setActiveTab("courses")}>
+                  Volver a cursos
+                </Button>
+              </div>
+            </div>
+          )}
+          
+          <div className="flex justify-between items-center">
+            <h3 className="text-lg font-medium">Módulos del curso</h3>
+            <Dialog open={moduleDialogOpen} onOpenChange={setModuleDialogOpen}>
+              <DialogTrigger asChild>
+                <Button>
+                  <PlusCircle className="h-4 w-4 mr-2" />
+                  Nuevo módulo
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Añadir nuevo módulo</DialogTitle>
+                  <DialogDescription>
+                    Crea un nuevo módulo para este curso
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                  <div className="space-y-2">
+                    <label htmlFor="module-title" className="text-sm font-medium">Título</label>
+                    <Input id="module-title" placeholder="Título del módulo" />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="module-description" className="text-sm font-medium">Descripción</label>
+                    <Input id="module-description" placeholder="Descripción del módulo" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="module-order" className="text-sm font-medium">Orden</label>
+                      <Input id="module-order" type="number" placeholder="1" min="1" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="module-duration" className="text-sm font-medium">Duración estimada</label>
+                      <Input id="module-duration" placeholder="Ej: 4h 30m" />
+                    </div>
+                  </div>
+                  <div className="pt-4 flex justify-end space-x-2">
+                    <Button variant="outline" onClick={() => setModuleDialogOpen(false)}>Cancelar</Button>
+                    <Button onClick={() => setModuleDialogOpen(false)}>Guardar módulo</Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+          
+          <div className="space-y-4">
+            {selectedCourse ? (
+              getModulesByCourse(selectedCourse.id).length > 0 ? (
+                <Accordion type="single" collapsible className="w-full">
+                  {getModulesByCourse(selectedCourse.id).map((module) => (
+                    <AccordionItem key={module.id} value={module.id}>
+                      <AccordionTrigger className="hover:bg-gray-50 dark:hover:bg-gray-900/20 px-4">
+                        <div className="flex items-center justify-between w-full pr-4">
+                          <div className="flex items-center">
+                            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-sm mr-3">
+                              {module.order}
+                            </span>
+                            <div className="text-left">
+                              <span className="font-medium">{module.title}</span>
+                              <p className="text-xs text-gray-500">{module.lessons.length} lecciones · {module.duration}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Button variant="ghost" size="sm" onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedModule(module);
+                              setLessonDialogOpen(true);
+                            }}>
+                              <Plus className="h-4 w-4 mr-1" />
+                              Lección
+                            </Button>
+                            <Button variant="ghost" size="sm">
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="px-4 py-2 bg-gray-50 dark:bg-gray-900/10 mb-4">
+                          <p className="text-sm">{module.description}</p>
+                        </div>
+                        
+                        <div className="border rounded-md overflow-hidden">
+                          <Table>
+                            <TableHeader>
+                              <TableRow>
+                                <TableHead>Orden</TableHead>
+                                <TableHead>Título</TableHead>
+                                <TableHead>Tipo</TableHead>
+                                <TableHead>Duración</TableHead>
+                                <TableHead className="text-right">Acciones</TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {module.lessons.length > 0 ? (
+                                module.lessons.map((lesson) => (
+                                  <TableRow key={lesson.id}>
+                                    <TableCell className="font-medium">{lesson.order}</TableCell>
+                                    <TableCell>{lesson.title}</TableCell>
+                                    <TableCell>
+                                      <div className="flex items-center">
+                                        {getLessonTypeIcon(lesson.type)}
+                                        <span className="ml-2">
+                                          {lesson.type === 'video' ? 'Video' : 
+                                           lesson.type === 'reading' ? 'Lectura' : 
+                                           lesson.type === 'quiz' ? 'Evaluación' : lesson.type}
+                                        </span>
+                                      </div>
+                                    </TableCell>
+                                    <TableCell>{lesson.duration}</TableCell>
+                                    <TableCell className="text-right">
+                                      <div className="flex justify-end space-x-1">
+                                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                                          <Edit className="h-4 w-4" />
+                                        </Button>
+                                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-red-500">
+                                          <Trash2 className="h-4 w-4" />
+                                        </Button>
+                                      </div>
+                                    </TableCell>
+                                  </TableRow>
+                                ))
+                              ) : (
+                                <TableRow>
+                                  <TableCell colSpan={5} className="text-center py-4 text-gray-500">
+                                    No hay lecciones en este módulo
+                                  </TableCell>
+                                </TableRow>
+                              )}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              ) : (
+                <div className="border rounded-md p-8 text-center">
+                  <BookOpen className="h-12 w-12 mx-auto text-gray-300 mb-4" />
+                  <h3 className="text-lg font-medium mb-2">No hay módulos</h3>
+                  <p className="text-gray-500 mb-4">Este curso aún no tiene módulos creados.</p>
+                  <Button onClick={() => setModuleDialogOpen(true)}>
+                    <PlusCircle className="h-4 w-4 mr-2" />
+                    Crear primer módulo
+                  </Button>
+                </div>
+              )
+            ) : (
+              <div className="border rounded-md p-8 text-center">
+                <h3 className="text-lg font-medium mb-2">Selecciona un curso</h3>
+                <p className="text-gray-500">Selecciona un curso en la pestaña de cursos para administrar sus módulos.</p>
+              </div>
+            )}
+          </div>
+        </TabsContent>
+        
         <TabsContent value="reviews">
           <div className="rounded-md border p-4 text-center">
             <p className="text-gray-500">Módulo de reseñas en desarrollo</p>
           </div>
         </TabsContent>
       </Tabs>
+      
+      {/* Diálogo para añadir lección */}
+      <Dialog open={lessonDialogOpen} onOpenChange={setLessonDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Añadir nueva lección</DialogTitle>
+            <DialogDescription>
+              {selectedModule && `Añade una lección al módulo "${selectedModule.title}"`}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <label htmlFor="lesson-title" className="text-sm font-medium">Título</label>
+              <Input id="lesson-title" placeholder="Título de la lección" />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="lesson-type" className="text-sm font-medium">Tipo de lección</label>
+              <select id="lesson-type" className="w-full rounded-md border border-gray-300 p-2">
+                <option value="video">Video</option>
+                <option value="reading">Lectura</option>
+                <option value="quiz">Evaluación</option>
+              </select>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label htmlFor="lesson-order" className="text-sm font-medium">Orden</label>
+                <Input id="lesson-order" type="number" placeholder="1" min="1" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="lesson-duration" className="text-sm font-medium">Duración</label>
+                <Input id="lesson-duration" placeholder="Ej: 45m" />
+              </div>
+            </div>
+            <div className="pt-4 flex justify-end space-x-2">
+              <Button variant="outline" onClick={() => setLessonDialogOpen(false)}>Cancelar</Button>
+              <Button onClick={() => setLessonDialogOpen(false)}>Guardar lección</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
