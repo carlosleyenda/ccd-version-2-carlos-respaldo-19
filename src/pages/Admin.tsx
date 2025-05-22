@@ -10,6 +10,10 @@ import AdminReferrals from "@/components/admin/AdminReferrals";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import AdminSettings from "@/components/admin/AdminSettings";
 import AdminFinances from "@/components/admin/AdminFinances";
+import AdminEnrollments from "@/components/admin/AdminEnrollments";
+import AdminDocuments from "@/components/admin/AdminDocuments";
+import AdminSupport from "@/components/admin/AdminSupport";
+import AdminReports from "@/components/admin/AdminReports";
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -24,10 +28,18 @@ const Admin = () => {
         return <AdminCourses />;
       case "certifications":
         return <AdminCertifications />;
+      case "enrollments":
+        return <AdminEnrollments />;
+      case "documents":
+        return <AdminDocuments />;
+      case "support":
+        return <AdminSupport />;
       case "referrals":
         return <AdminReferrals />;
       case "finances":
         return <AdminFinances />;
+      case "reports":
+        return <AdminReports />;
       case "settings":
         return <AdminSettings />;
       default:

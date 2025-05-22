@@ -1,6 +1,9 @@
 
 import React from "react";
-import { Shield, Users, BookOpen, Award, UserPlus, BarChart2, Settings } from "lucide-react";
+import { 
+  Shield, Users, BookOpen, Award, UserPlus, BarChart2, Settings, 
+  FileText, HelpCircle, School, FileCheck
+} from "lucide-react";
 import { 
   Sidebar, 
   SidebarContent, 
@@ -25,8 +28,12 @@ const AdminSidebar = ({ activeTab, setActiveTab }: AdminSidebarProps) => {
     { id: "users", icon: Users, label: "Usuarios" },
     { id: "courses", icon: BookOpen, label: "Cursos" },
     { id: "certifications", icon: Award, label: "Certificaciones" },
+    { id: "enrollments", icon: School, label: "Matrículas" },
+    { id: "documents", icon: FileText, label: "Trámites" },
+    { id: "support", icon: HelpCircle, label: "Soporte" },
     { id: "referrals", icon: UserPlus, label: "Referidos" },
     { id: "finances", icon: BarChart2, label: "Finanzas" },
+    { id: "reports", icon: FileCheck, label: "Reportes" },
     { id: "settings", icon: Settings, label: "Configuración" },
   ];
 
