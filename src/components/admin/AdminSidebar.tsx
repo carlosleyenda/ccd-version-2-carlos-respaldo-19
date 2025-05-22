@@ -2,7 +2,7 @@
 import React from "react";
 import { 
   Shield, Users, BookOpen, Award, UserPlus, BarChart2, Settings, 
-  FileText, HelpCircle, School, FileCheck
+  FileText, HelpCircle, School, FileCheck, ShoppingBag, BookMarked, ClipboardList
 } from "lucide-react";
 import { 
   Sidebar, 
@@ -27,11 +27,14 @@ const AdminSidebar = ({ activeTab, setActiveTab }: AdminSidebarProps) => {
     { id: "dashboard", icon: BarChart2, label: "Resumen" },
     { id: "users", icon: Users, label: "Usuarios" },
     { id: "courses", icon: BookOpen, label: "Cursos" },
+    { id: "exams", icon: ClipboardList, label: "Exámenes" },
     { id: "certifications", icon: Award, label: "Certificaciones" },
     { id: "enrollments", icon: School, label: "Matrículas" },
     { id: "documents", icon: FileText, label: "Trámites" },
     { id: "support", icon: HelpCircle, label: "Soporte" },
     { id: "referrals", icon: UserPlus, label: "Referidos" },
+    { id: "store", icon: ShoppingBag, label: "Tienda" },
+    { id: "resources", icon: BookMarked, label: "Recursos" },
     { id: "finances", icon: BarChart2, label: "Finanzas" },
     { id: "reports", icon: FileCheck, label: "Reportes" },
     { id: "settings", icon: Settings, label: "Configuración" },

@@ -43,7 +43,7 @@ const AdminDocuments = () => {
     switch (status) {
       case "Pendiente": return "outline";
       case "En proceso": return "default";
-      case "Completado": return "success";
+      case "Completado": return "secondary";
       case "Rechazado": return "destructive";
       default: return "outline";
     }
@@ -52,7 +52,7 @@ const AdminDocuments = () => {
   const getBadgeForPriority = (priority) => {
     switch (priority) {
       case "Alta": return "destructive";
-      case "Media": return "warning";
+      case "Media": return "default";
       case "Baja": return "secondary";
       default: return "outline";
     }
