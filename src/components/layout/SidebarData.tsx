@@ -5,7 +5,8 @@ import {
   Calendar, Users, ShoppingBag, 
   CreditCard, BarChart3, Layers, 
   FolderOpen, FileSpreadsheet, Briefcase,
-  Settings, HelpCircle, User, UserPlus
+  Settings, HelpCircle, User, UserPlus,
+  Shield
 } from "lucide-react";
 
 export const SidebarData = [
@@ -136,6 +137,16 @@ export const SidebarData = [
         title: "Planes",
         icon: <CreditCard className="h-5 w-5" />,
         path: "/pricing",
+      },
+    ],
+  },
+  {
+    title: "Administración",
+    links: [
+      {
+        title: "Panel de Admin",
+        icon: <Shield className="h-5 w-5" />,
+        path: "/admin",
       },
     ],
   },
