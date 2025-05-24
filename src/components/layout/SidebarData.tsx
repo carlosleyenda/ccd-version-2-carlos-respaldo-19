@@ -79,7 +79,7 @@ export const SidebarData = [
         path: "/mining",
       },
       {
-        title: "Gestión",
+        title: "Gestión Pública",
         icon: (
           <svg
             className="h-5 w-5"

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Tabs,
@@ -43,25 +42,51 @@ const AdminCourses = () => {
   const [lessonModalOpen, setLessonModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedModule, setSelectedModule] = useState(null);
+  const [filterCategory, setFilterCategory] = useState("all");
 
-  // Dummy data
+  // Expanded course data with new categories
   const courses = [
-    { id: 1, title: "Introducción a la Minería", category: "Minería", level: "Principiante", students: 245, rating: 4.8 },
-    { id: 2, title: "Gestión de Proyectos Mineros", category: "Gestión", level: "Intermedio", students: 120, rating: 4.5 },
-    { id: 3, title: "Seguridad en Excavaciones", category: "Ingeniería", level: "Avanzado", students: 89, rating: 4.9 },
+    // Ingeniería
+    { id: 1, title: "Residencia y Supervisión de Obras Públicas y Privadas", category: "Ingeniería", level: "Avanzado", students: 245, rating: 4.8, price: 299 },
+    { id: 2, title: "BIM Revit Arquitectura", category: "Ingeniería", level: "Intermedio", students: 189, rating: 4.7, price: 199 },
+    { id: 3, title: "Topografía y Diseño de Carreteras con Civil 3D", category: "Ingeniería", level: "Avanzado", students: 156, rating: 4.9, price: 349 },
+    { id: 4, title: "Diseño de Estructuras Sismorresistentes", category: "Ingeniería", level: "Avanzado", students: 134, rating: 4.8, price: 299 },
+    { id: 5, title: "Mecánica de Suelos y Pavimentos", category: "Ingeniería", level: "Intermedio", students: 167, rating: 4.6, price: 249 },
+    
+    // Minería
+    { id: 6, title: "Perforación y Voladura en Minería Subterránea", category: "Minería", level: "Avanzado", students: 98, rating: 4.9, price: 399 },
+    { id: 7, title: "SSOMA Aplicado al Sector Minero", category: "Minería", level: "Intermedio", students: 234, rating: 4.7, price: 199 },
+    { id: 8, title: "Gestión Ambiental Minera", category: "Minería", level: "Avanzado", students: 112, rating: 4.8, price: 329 },
+    { id: 9, title: "Geomecánica Minera", category: "Minería", level: "Avanzado", students: 87, rating: 4.9, price: 379 },
+    { id: 10, title: "Ventilación Minera", category: "Minería", level: "Intermedio", students: 145, rating: 4.6, price: 279 },
+    
+    // Gestión Pública
+    { id: 11, title: "Contrataciones del Estado Ley N° 32069", category: "Gestión Pública", level: "Avanzado", students: 312, rating: 4.8, price: 249 },
+    { id: 12, title: "Sistema Invierte.PE", category: "Gestión Pública", level: "Intermedio", students: 278, rating: 4.7, price: 199 },
+    { id: 13, title: "Administración y Gestión Pública", category: "Gestión Pública", level: "Intermedio", students: 456, rating: 4.6, price: 179 },
+    { id: 14, title: "Derecho Penal y Delitos Contra la Administración Pública", category: "Gestión Pública", level: "Avanzado", students: 189, rating: 4.9, price: 299 },
+    { id: 15, title: "Power BI e Inteligencia Artificial", category: "Gestión Pública", level: "Intermedio", students: 234, rating: 4.8, price: 229 },
   ];
   
+  // Dummy data
   const modules = [
-    { id: 1, courseId: 1, title: "Fundamentos de Minería", lessons: 5, duration: "2h 30m" },
-    { id: 2, courseId: 1, title: "Tipos de Excavación", lessons: 4, duration: "1h 45m" },
-    { id: 3, courseId: 2, title: "Gestión de Recursos", lessons: 6, duration: "3h 15m" },
+    { id: 1, courseId: 1, title: "Fundamentos de Residencia", lessons: 8, duration: "4h 30m" },
+    { id: 2, courseId: 1, title: "Supervisión Técnica", lessons: 6, duration: "3h 15m" },
+    { id: 3, courseId: 6, title: "Técnicas de Perforación", lessons: 10, duration: "5h 45m" },
+    { id: 4, courseId: 11, title: "Marco Normativo Ley 32069", lessons: 12, duration: "6h 20m" },
   ];
   
   const lessons = [
-    { id: 1, moduleId: 1, title: "Historia de la Minería", type: "Video", duration: "15m" },
-    { id: 2, moduleId: 1, title: "Conceptos Básicos", type: "Lectura", duration: "20m" },
-    { id: 3, moduleId: 2, title: "Minería a Cielo Abierto", type: "Video", duration: "25m" },
+    { id: 1, moduleId: 1, title: "Introducción a la Residencia de Obras", type: "Video", duration: "25m" },
+    { id: 2, moduleId: 1, title: "Marco Legal y Normativo", type: "Lectura", duration: "35m" },
+    { id: 3, moduleId: 3, title: "Equipos de Perforación", type: "Video", duration: "40m" },
+    { id: 4, moduleId: 4, title: "Principios de la Ley 32069", type: "Video", duration: "30m" },
   ];
+
+  // Filter courses by category
+  const filteredCourses = courses.filter(course => 
+    filterCategory === "all" || course.category === filterCategory
+  );
 
   // Filter modules and lessons based on selection
   const filteredModules = modules.filter(module => 
@@ -100,7 +125,20 @@ const AdminCourses = () => {
         </TabsList>
 
         <TabsContent value="courses">
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-between mb-4">
+            <div className="flex gap-4">
+              <Select value={filterCategory} onValueChange={setFilterCategory}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue placeholder="Filtrar por categoría" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todas las categorías</SelectItem>
+                  <SelectItem value="Ingeniería">Ingeniería</SelectItem>
+                  <SelectItem value="Minería">Minería</SelectItem>
+                  <SelectItem value="Gestión Pública">Gestión Pública</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <Button onClick={() => handleOpenCourseModal()}>
               <Plus className="h-4 w-4 mr-2" />
               Nuevo Curso
@@ -116,17 +154,27 @@ const AdminCourses = () => {
                   <TableHead>Nivel</TableHead>
                   <TableHead>Estudiantes</TableHead>
                   <TableHead>Calificación</TableHead>
+                  <TableHead>Precio</TableHead>
                   <TableHead className="text-right">Acciones</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {courses.map((course) => (
+                {filteredCourses.map((course) => (
                   <TableRow key={course.id}>
                     <TableCell className="font-medium">{course.title}</TableCell>
-                    <TableCell>{course.category}</TableCell>
+                    <TableCell>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        course.category === 'Ingeniería' ? 'bg-blue-100 text-blue-700' :
+                        course.category === 'Minería' ? 'bg-amber-100 text-amber-700' :
+                        'bg-green-100 text-green-700'
+                      }`}>
+                        {course.category}
+                      </span>
+                    </TableCell>
                     <TableCell>{course.level}</TableCell>
                     <TableCell>{course.students}</TableCell>
                     <TableCell>{course.rating}/5</TableCell>
+                    <TableCell>S/ {course.price}</TableCell>
                     <TableCell className="text-right">
                       <Button variant="ghost" size="icon" onClick={() => handleOpenCourseModal(course)}>
                         <Edit2 className="h-4 w-4" />
@@ -149,7 +197,7 @@ const AdminCourses = () => {
                 const course = courses.find(c => c.id === parseInt(value));
                 setSelectedCourse(course);
               }}>
-                <SelectTrigger className="w-[250px]">
+                <SelectTrigger className="w-[300px]">
                   <SelectValue placeholder="Seleccionar curso" />
                 </SelectTrigger>
                 <SelectContent>
@@ -293,7 +341,7 @@ const AdminCourses = () => {
               <Input 
                 id="title" 
                 defaultValue={selectedCourse?.title || ""} 
-                placeholder="Ej: Introducción a la Minería"
+                placeholder="Ej: Residencia de Obras Públicas"
               />
             </div>
             
@@ -304,9 +352,9 @@ const AdminCourses = () => {
                   <SelectValue placeholder="Seleccionar categoría" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Minería">Minería</SelectItem>
                   <SelectItem value="Ingeniería">Ingeniería</SelectItem>
-                  <SelectItem value="Gestión">Gestión</SelectItem>
+                  <SelectItem value="Minería">Minería</SelectItem>
+                  <SelectItem value="Gestión Pública">Gestión Pública</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -326,11 +374,12 @@ const AdminCourses = () => {
             </div>
             
             <div className="grid gap-2">
-              <Label htmlFor="price">Precio</Label>
+              <Label htmlFor="price">Precio (S/)</Label>
               <Input 
                 id="price" 
                 type="number" 
-                placeholder="Ej: 49.99"
+                defaultValue={selectedCourse?.price || ""}
+                placeholder="Ej: 299"
               />
             </div>
             
@@ -391,7 +440,7 @@ const AdminCourses = () => {
               <Input 
                 id="moduleTitle" 
                 defaultValue={selectedModule?.title || ""} 
-                placeholder="Ej: Introducción a la Minería"
+                placeholder="Ej: Fundamentos de Residencia"
               />
             </div>
             
@@ -431,7 +480,7 @@ const AdminCourses = () => {
               <Label htmlFor="lessonTitle">Título</Label>
               <Input 
                 id="lessonTitle" 
-                placeholder="Ej: Introducción a Conceptos Básicos"
+                placeholder="Ej: Introducción a la Residencia de Obras"
               />
             </div>
             
@@ -455,7 +504,7 @@ const AdminCourses = () => {
               <Input 
                 id="lessonDuration" 
                 type="number" 
-                placeholder="Ej: 15"
+                placeholder="Ej: 25"
               />
             </div>
             

@@ -15,7 +15,7 @@ const LearningPaths = () => {
         <TabsList className="w-full max-w-xl mx-auto grid grid-cols-3 mb-8">
           <TabsTrigger value="engineering">Ingeniería</TabsTrigger>
           <TabsTrigger value="mining">Minería</TabsTrigger>
-          <TabsTrigger value="management">Gestión</TabsTrigger>
+          <TabsTrigger value="management">Gestión Pública</TabsTrigger>
         </TabsList>
         
         <TabsContent value="engineering">

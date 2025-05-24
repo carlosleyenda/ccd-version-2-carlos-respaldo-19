@@ -45,7 +45,7 @@ export interface CourseDetailProps {
 export const categoryLabel: Record<string, string> = {
   engineering: "Ingeniería",
   mining: "Minería",
-  management: "Gestión",
+  management: "Gestión Pública",
 };
 
 export const levelLabel: Record<string, string> = {
