@@ -17,13 +17,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { FileText, Search, FilePlus, FileCheck, Filter, Download, Clock } from "lucide-react";
+import { FileText, Search, FilePlus, FileCheck, Filter, Download, Clock, Package, Truck } from "lucide-react";
 
 const AdminDocuments = () => {
   const [activeTab, setActiveTab] = useState("pending");
   const [newDocumentModal, setNewDocumentModal] = useState(false);
 
-  // Dummy data
+  // Dummy data - documentos regulares
   const documents = [
     { id: "DOC-2023-001", type: "Certificación", student: "Laura Torres", requestDate: "2023-06-18", status: "Pendiente", priority: "Alta" },
     { id: "DOC-2023-002", type: "Constancia", student: "Carlos Méndez", requestDate: "2023-06-17", status: "En proceso", priority: "Media" },
@@ -32,11 +32,47 @@ const AdminDocuments = () => {
     { id: "DOC-2023-005", type: "Certificación", student: "Roberto Díaz", requestDate: "2023-06-14", status: "Rechazado", priority: "Media" },
   ];
 
+  // Dummy data - certificados físicos
+  const physicalCertificates = [
+    { 
+      id: "PHYS-2023-001", 
+      student: "Ana García", 
+      certificate: "Fundamentos de Ingeniería Civil",
+      requestDate: "2023-06-20", 
+      shippingType: "Lima Metropolitana", 
+      cost: 8, 
+      status: "Pendiente",
+      address: "Av. Arequipa 1234, Lima"
+    },
+    { 
+      id: "PHYS-2023-002", 
+      student: "Carlos Ruiz", 
+      certificate: "Seguridad Minera Avanzada",
+      requestDate: "2023-06-19", 
+      shippingType: "Express Nacional", 
+      cost: 25, 
+      status: "En tránsito",
+      address: "Jr. Cusco 567, Arequipa",
+      trackingCode: "PE123456789"
+    },
+    { 
+      id: "PHYS-2023-003", 
+      student: "María Fernández", 
+      certificate: "Gestión de Proyectos",
+      requestDate: "2023-06-18", 
+      shippingType: "Provincias", 
+      cost: 15, 
+      status: "Entregado",
+      address: "Av. Sol 890, Trujillo",
+      deliveryDate: "2023-06-22"
+    },
+  ];
+
   const stats = [
     { title: "Trámites Pendientes", value: 18, icon: <Clock className="h-4 w-4 text-amber-500" /> },
     { title: "Trámites en Proceso", value: 7, icon: <FileText className="h-4 w-4 text-blue-500" /> },
     { title: "Completados Hoy", value: 12, icon: <FileCheck className="h-4 w-4 text-green-500" /> },
-    { title: "Tiempo Promedio", value: "1.2 días", icon: <Clock className="h-4 w-4 text-purple-500" /> },
+    { title: "Certificados Físicos", value: 25, icon: <Package className="h-4 w-4 text-purple-500" /> },
   ];
 
   const getBadgeVariant = (status) => {
@@ -45,6 +81,8 @@ const AdminDocuments = () => {
       case "En proceso": return "default";
       case "Completado": return "secondary";
       case "Rechazado": return "destructive";
+      case "En tránsito": return "default";
+      case "Entregado": return "secondary";
       default: return "outline";
     }
   };
@@ -63,6 +101,13 @@ const AdminDocuments = () => {
     if (activeTab === "inprocess") return doc.status === "En proceso";
     if (activeTab === "completed") return doc.status === "Completado";
     if (activeTab === "rejected") return doc.status === "Rechazado";
+    return true;
+  });
+
+  const filteredPhysicalCerts = physicalCertificates.filter(cert => {
+    if (activeTab === "physical-pending") return cert.status === "Pendiente";
+    if (activeTab === "physical-transit") return cert.status === "En tránsito";
+    if (activeTab === "physical-delivered") return cert.status === "Entregado";
     return true;
   });
 
@@ -92,12 +137,15 @@ const AdminDocuments = () => {
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <div className="flex justify-between items-center">
-          <TabsList>
+          <TabsList className="grid grid-cols-8 w-full max-w-4xl">
             <TabsTrigger value="all">Todos</TabsTrigger>
             <TabsTrigger value="pending">Pendientes</TabsTrigger>
             <TabsTrigger value="inprocess">En Proceso</TabsTrigger>
             <TabsTrigger value="completed">Completados</TabsTrigger>
             <TabsTrigger value="rejected">Rechazados</TabsTrigger>
+            <TabsTrigger value="physical-pending">Físicos Pendientes</TabsTrigger>
+            <TabsTrigger value="physical-transit">En Tránsito</TabsTrigger>
+            <TabsTrigger value="physical-delivered">Entregados</TabsTrigger>
           </TabsList>
           <div className="flex gap-3 items-center">
             <Button variant="outline" size="sm">
@@ -119,6 +167,61 @@ const AdminDocuments = () => {
           </div>
         </div>
 
+        {/* Certificados Físicos Tabs */}
+        {["physical-pending", "physical-transit", "physical-delivered"].map((tab) => (
+          <TabsContent key={tab} value={tab} className="mt-4">
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>ID</TableHead>
+                    <TableHead>Estudiante</TableHead>
+                    <TableHead>Certificado</TableHead>
+                    <TableHead>Tipo Envío</TableHead>
+                    <TableHead>Costo</TableHead>
+                    <TableHead>Estado</TableHead>
+                    <TableHead>Tracking</TableHead>
+                    <TableHead className="text-right">Acciones</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredPhysicalCerts.length > 0 ? (
+                    filteredPhysicalCerts.map((cert) => (
+                      <TableRow key={cert.id}>
+                        <TableCell className="font-medium">{cert.id}</TableCell>
+                        <TableCell>{cert.student}</TableCell>
+                        <TableCell>{cert.certificate}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Truck className="h-4 w-4 text-gray-500" />
+                            {cert.shippingType}
+                          </div>
+                        </TableCell>
+                        <TableCell>S/ {cert.cost}</TableCell>
+                        <TableCell>
+                          <Badge variant={getBadgeVariant(cert.status)}>{cert.status}</Badge>
+                        </TableCell>
+                        <TableCell>{cert.trackingCode || "-"}</TableCell>
+                        <TableCell className="text-right">
+                          <Button variant="ghost" size="sm">Ver</Button>
+                          <Button variant="ghost" size="sm">Actualizar</Button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={8} className="text-center py-6">
+                        No hay certificados físicos que mostrar en esta categoría
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </TabsContent>
+        ))}
+
+        {/* Tabs existentes */}
         <TabsContent value="all" className="mt-4">
           <div className="rounded-md border">
             <Table>
@@ -229,6 +332,7 @@ const AdminDocuments = () => {
                     <SelectItem value="constancy">Constancia</SelectItem>
                     <SelectItem value="course-change">Cambio de Curso</SelectItem>
                     <SelectItem value="invoice">Factura</SelectItem>
+                    <SelectItem value="physical-cert">Certificado Físico</SelectItem>
                     <SelectItem value="other">Otro</SelectItem>
                   </SelectContent>
                 </Select>

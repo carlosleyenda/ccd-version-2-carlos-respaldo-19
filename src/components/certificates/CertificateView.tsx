@@ -56,13 +56,13 @@ export const CertificateView = ({
     }, 1500);
   };
   
-  const handleRequestPhysical = () => {
+  const handleRequestPhysical = (shippingOption: string, cost: number) => {
     setIsRequestingPhysical(true);
     // Simulate API call
     setTimeout(() => {
       setIsRequestingPhysical(false);
       setShowPhysicalDialog(false);
-      toast.success("Solicitud de certificado físico enviada. Recibirás un correo con los detalles de envío.");
+      toast.success(`Solicitud de certificado físico confirmada. Envío: ${shippingOption} - Costo: S/ ${cost}. Recibirás un correo con los detalles de pago y envío.`);
     }, 1500);
   };
 
