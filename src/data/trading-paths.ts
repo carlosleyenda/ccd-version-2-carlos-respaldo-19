@@ -4,9 +4,9 @@ import { LearningPath } from "@/components/paths/types";
 export const tradingPaths: LearningPath[] = [
   {
     id: "forex-mastery",
-    title: "Forex Mastery Program",
+    title: "Programa Maestro en Forex",
     description: "Domina el mercado de divisas desde cero hasta nivel profesional",
-    category: "management",
+    category: "forex",
     level: "Intermedio",
     duration: "12 semanas",
     progress: 0,
@@ -22,9 +22,9 @@ export const tradingPaths: LearningPath[] = [
   },
   {
     id: "crypto-trading",
-    title: "Cryptocurrency Trading Expert",
+    title: "Experto en Trading de Criptomonedas",
     description: "Especialízate en el trading de criptomonedas y DeFi",
-    category: "management",
+    category: "crypto",
     level: "Avanzado",
     duration: "10 semanas",
     progress: 0,
@@ -40,9 +40,9 @@ export const tradingPaths: LearningPath[] = [
   },
   {
     id: "stock-trading",
-    title: "Stock Market Professional",
+    title: "Profesional en Mercado de Valores",
     description: "Conviértete en un trader profesional de acciones",
-    category: "management", 
+    category: "stocks", 
     level: "Intermedio",
     duration: "14 semanas",
     progress: 0,
@@ -58,9 +58,9 @@ export const tradingPaths: LearningPath[] = [
   },
   {
     id: "algorithmic-trading",
-    title: "Algorithmic Trading Developer",
+    title: "Desarrollador de Trading Algorítmico",
     description: "Desarrolla bots de trading automatizado y estrategias cuantitativas",
-    category: "management",
+    category: "algorithmic",
     level: "Avanzado", 
     duration: "16 semanas",
     progress: 0,

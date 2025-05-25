@@ -5,27 +5,22 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, Trophy, Play, BookOpen } from "lucide-react";
 import { Assessment } from "./types";
-import { allAssessments } from "./assessmentData";
 
 interface AssessmentListProps {
+  assessments?: Assessment[];
   selectedCategory?: string;
   selectedLevel?: string;
   showCompleted?: boolean;
+  emptyMessage?: string;
 }
 
 const AssessmentList: React.FC<AssessmentListProps> = ({
+  assessments = [],
   selectedCategory = "all",
   selectedLevel = "all", 
-  showCompleted = true
+  showCompleted = true,
+  emptyMessage = "No se encontraron evaluaciones"
 }) => {
-  const [assessments] = useState<Assessment[]>(allAssessments);
-
-  const filteredAssessments = assessments.filter(assessment => {
-    if (selectedCategory !== "all" && assessment.category !== selectedCategory) return false;
-    if (selectedLevel !== "all" && assessment.level !== selectedLevel) return false;
-    return true;
-  });
-
   const getLevelColor = (level: string) => {
     switch (level) {
       case "Principiante": return "bg-green-100 text-green-800";
@@ -47,15 +42,47 @@ const AssessmentList: React.FC<AssessmentListProps> = ({
     }
   };
 
+  const getCategoryName = (category: string) => {
+    switch (category) {
+      case "forex": return "Forex";
+      case "crypto": return "Criptomonedas";
+      case "stocks": return "Acciones";
+      default: return "Trading";
+    }
+  };
+
+  const getTypeName = (type: string) => {
+    switch (type) {
+      case "practice": return "Práctica";
+      case "certification": return "Certificación";
+      case "skill-check": return "Evaluación";
+      default: return "Evaluación";
+    }
+  };
+
+  if (!assessments || assessments.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-gray-900 mb-2">
+          {emptyMessage}
+        </h3>
+        <p className="text-gray-500">
+          Explora nuestras otras categorías de evaluaciones de trading
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Evaluaciones de Trading</h2>
-        <p className="text-gray-600">{filteredAssessments.length} evaluaciones disponibles</p>
+        <p className="text-gray-600">{assessments.length} evaluaciones disponibles</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredAssessments.map((assessment) => (
+        {assessments.map((assessment) => (
           <Card key={assessment.id} className="hover:shadow-lg transition-shadow">
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
@@ -78,16 +105,13 @@ const AssessmentList: React.FC<AssessmentListProps> = ({
             <CardContent className="space-y-4">
               <div className="flex flex-wrap gap-2">
                 <Badge className={getCategoryColor(assessment.category)}>
-                  {assessment.category === "forex" ? "Forex" : 
-                   assessment.category === "crypto" ? "Criptomonedas" : 
-                   assessment.category === "stocks" ? "Acciones" : "Trading"}
+                  {getCategoryName(assessment.category)}
                 </Badge>
                 <Badge className={getLevelColor(assessment.level)}>
                   {assessment.level}
                 </Badge>
                 <Badge variant="outline">
-                  {assessment.type === "practice" ? "Práctica" :
-                   assessment.type === "certification" ? "Certificación" : "Evaluación"}
+                  {getTypeName(assessment.type)}
                 </Badge>
               </div>
               
