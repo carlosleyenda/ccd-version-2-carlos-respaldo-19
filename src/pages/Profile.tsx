@@ -1,17 +1,17 @@
 
 import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
-import { ProfileInfo } from "@/components/profile/ProfileInfo";
-import { AccountSettings } from "@/components/profile/AccountSettings";
-import { NotificationSettings } from "@/components/profile/NotificationSettings";
-import { SecuritySettings } from "@/components/profile/SecuritySettings";
+import ProfileInfo from "@/components/profile/ProfileInfo";
+import AccountSettings from "@/components/profile/AccountSettings";
+import NotificationSettings from "@/components/profile/NotificationSettings";
+import SecuritySettings from "@/components/profile/SecuritySettings";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Profile = () => {
   return (
     <PageLayout 
-      title="Mi Perfil" 
-      subtitle="Gestiona tu información personal y configuración de cuenta"
+      title="Mi Perfil de Trader" 
+      subtitle="Gestiona tu información personal y configuración de trading"
     >
       <div className="w-full">
         <Tabs defaultValue="profile" className="w-full">

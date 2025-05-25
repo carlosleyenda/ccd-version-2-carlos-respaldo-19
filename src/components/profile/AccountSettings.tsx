@@ -1,184 +1,98 @@
 
 import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
-const AccountSettings = () => {
-  const form = useForm({
-    defaultValues: {
-      language: "Español",
-      timezone: "UTC-05:00 (América/Lima)",
-      twoFactor: false,
-      emailNotifications: true,
-      marketingEmails: false,
-    },
-  });
-
-  const onSubmit = (data: any) => {
-    toast.success("Configuración de cuenta actualizada");
-    console.log(data);
-  };
-
+const AccountSettings: React.FC = () => {
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Preferencias generales</CardTitle>
-          <CardDescription>
-            Configura las preferencias básicas de tu cuenta
-          </CardDescription>
+          <CardTitle>Configuración de Cuenta</CardTitle>
         </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="language"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Idioma</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        Idioma preferido para la interfaz de la plataforma
-                      </FormDescription>
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="timezone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Zona horaria</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        Zona horaria para programación de actividades
-                      </FormDescription>
-                    </FormItem>
-                  )}
-                />
-              </div>
-              
-              <FormField
-                control={form.control}
-                name="twoFactor"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                    <div className="space-y-0.5">
-                      <FormLabel className="text-base">
-                        Autenticación de dos factores
-                      </FormLabel>
-                      <FormDescription>
-                        Aumenta la seguridad de tu cuenta con verificación adicional
-                      </FormDescription>
-                    </div>
-                    <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="emailNotifications"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                    <div className="space-y-0.5">
-                      <FormLabel className="text-base">
-                        Notificaciones por correo
-                      </FormLabel>
-                      <FormDescription>
-                        Recibe actualizaciones sobre tus cursos y actividades
-                      </FormDescription>
-                    </div>
-                    <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="marketingEmails"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                    <div className="space-y-0.5">
-                      <FormLabel className="text-base">
-                        Correos promocionales
-                      </FormLabel>
-                      <FormDescription>
-                        Recibe ofertas, descuentos y novedades de la plataforma
-                      </FormDescription>
-                    </div>
-                    <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              
-              <div className="flex justify-end">
-                <Button type="submit">Guardar cambios</Button>
-              </div>
-            </form>
-          </Form>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="username">Nombre de usuario</Label>
+            <Input id="username" defaultValue="trader_juan" />
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="timezone">Zona horaria</Label>
+            <Select defaultValue="america/mexico">
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="america/mexico">América/México</SelectItem>
+                <SelectItem value="america/new_york">América/Nueva York</SelectItem>
+                <SelectItem value="europe/london">Europa/Londres</SelectItem>
+                <SelectItem value="asia/tokyo">Asia/Tokio</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="currency">Moneda preferida</Label>
+            <Select defaultValue="usd">
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="usd">USD - Dólar Americano</SelectItem>
+                <SelectItem value="eur">EUR - Euro</SelectItem>
+                <SelectItem value="mxn">MXN - Peso Mexicano</SelectItem>
+                <SelectItem value="btc">BTC - Bitcoin</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex items-center justify-between space-x-2">
+            <Label htmlFor="email-verification" className="cursor-pointer">
+              Verificación de email en dos pasos
+            </Label>
+            <Switch id="email-verification" />
+          </div>
+
+          <Button>Actualizar Configuración</Button>
         </CardContent>
       </Card>
-      
-      <Card className="border-red-200">
-        <CardHeader className="text-red-600">
-          <CardTitle>Zona de peligro</CardTitle>
-          <CardDescription className="text-red-500">
-            Las acciones a continuación no se pueden deshacer
-          </CardDescription>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Preferencias de Trading</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="flex flex-col space-y-2">
-              <h4 className="font-medium">Eliminar todos los datos de progreso</h4>
-              <p className="text-sm text-gray-500">
-                Esta acción eliminará permanentemente todo tu avance en los cursos, pero mantendrá tu cuenta activa.
-              </p>
-              <div className="flex justify-start">
-                <Button variant="outline" className="text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600">
-                  Eliminar progreso
-                </Button>
-              </div>
-            </div>
-            
-            <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200">
-              <h4 className="font-medium">Eliminar cuenta</h4>
-              <p className="text-sm text-gray-500">
-                Esta acción eliminará permanentemente tu cuenta y todos los datos asociados. Esta acción no se puede deshacer.
-              </p>
-              <div className="flex justify-start">
-                <Button variant="destructive">
-                  Eliminar cuenta permanentemente
-                </Button>
-              </div>
-            </div>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="risk-level">Nivel de riesgo</Label>
+            <Select defaultValue="moderate">
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="conservative">Conservador</SelectItem>
+                <SelectItem value="moderate">Moderado</SelectItem>
+                <SelectItem value="aggressive">Agresivo</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="trading-style">Estilo de trading</Label>
+            <Select defaultValue="swing">
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="scalping">Scalping</SelectItem>
+                <SelectItem value="day">Day Trading</SelectItem>
+                <SelectItem value="swing">Swing Trading</SelectItem>
+                <SelectItem value="position">Position Trading</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </CardContent>
       </Card>

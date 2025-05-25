@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
@@ -37,9 +36,9 @@ const AssessmentFilters: React.FC<AssessmentFiltersProps> = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todas las categorías</SelectItem>
-            <SelectItem value="mining">Minería</SelectItem>
-            <SelectItem value="engineering">Ingeniería</SelectItem>
-            <SelectItem value="management">Gestión</SelectItem>
+            <SelectItem value="forex">Forex</SelectItem>
+            <SelectItem value="crypto">Criptomonedas</SelectItem>
+            <SelectItem value="stocks">Acciones</SelectItem>
           </SelectContent>
         </Select>
       </div>

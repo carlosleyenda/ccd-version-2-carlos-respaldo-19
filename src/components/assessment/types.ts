@@ -1,6 +1,6 @@
 
 export type AssessmentType = "practice" | "certification" | "skill-check";
-export type AssessmentCategory = "mining" | "engineering" | "management";
+export type AssessmentCategory = "forex" | "crypto" | "stocks";
 export type AssessmentLevel = "Principiante" | "Intermedio" | "Avanzado" | "Profesional" | "Especialista" | "Experto";
 export type AssessmentPopularity = "Popular" | "Destacado" | "Nuevo" | null;
 
