@@ -1,10 +1,14 @@
-
 import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import CourseCarousel from "@/components/courses/CourseCarousel";
 import { Button } from "@/components/ui/button";
 import { CourseCardProps } from "@/components/dashboard/CourseCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Card from "@/components/ui/card";
+import CardContent from "@/components/ui/card-content";
+import Brain from "@/components/ui/icons/brain";
+import Shield from "@/components/ui/icons/shield";
+import Target from "@/components/ui/icons/target";
 
 const Management = () => {
   const purchasedCourses: CourseCardProps[] = [
@@ -133,7 +137,55 @@ const Management = () => {
       title="Gestión Pública" 
       subtitle="Descubre cursos especializados en gestión y administración del sector minero"
     >
-      <div className="mb-6">
+      <div className="space-y-8">
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            Gestión y Psicología del Trading
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Desarrolla la mentalidad ganadora y las habilidades de gestión necesarias para ser un trader exitoso. 
+            Domina la psicología del trading y la gestión de riesgo.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10" />
+            <CardContent className="relative p-6">
+              <Brain className="h-12 w-12 text-purple-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Psicología del Trading</h3>
+              <p className="text-muted-foreground mb-4">
+                Controla tus emociones y desarrolla la mentalidad disciplinada del trader profesional.
+              </p>
+              <Button className="w-full">Explorar Cursos</Button>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-green-500/10" />
+            <CardContent className="relative p-6">
+              <Shield className="h-12 w-12 text-teal-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Gestión de Riesgo</h3>
+              <p className="text-muted-foreground mb-4">
+                Aprende técnicas avanzadas de gestión de capital y protección de tu cuenta de trading.
+              </p>
+              <Button className="w-full">Empezar Ahora</Button>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
+            <CardContent className="relative p-6">
+              <Target className="h-12 w-12 text-blue-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Plan de Trading</h3>
+              <p className="text-muted-foreground mb-4">
+                Desarrolla un plan de trading profesional y sistemático para alcanzar tus objetivos.
+              </p>
+              <Button className="w-full">Ver Detalles</Button>
+            </CardContent>
+          </Card>
+        </div>
+
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid grid-cols-3 mb-6">
             <TabsTrigger value="all">Todos los cursos</TabsTrigger>

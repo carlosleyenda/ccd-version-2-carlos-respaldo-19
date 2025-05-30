@@ -18,3 +18,11 @@ export interface Course {
   duration: string;
   completed: boolean;
 }
+
+export interface Milestone {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+  progress: number;
+}

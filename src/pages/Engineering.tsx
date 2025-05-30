@@ -1,10 +1,14 @@
-
 import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import CourseCarousel from "@/components/courses/CourseCarousel";
 import { Button } from "@/components/ui/button";
 import { CourseCardProps } from "@/components/dashboard/CourseCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Card from "@/components/ui/card";
+import CardContent from "@/components/ui/card-content";
+import TrendingUp from "@/components/ui/icons/TrendingUp";
+import BarChart3 from "@/components/ui/icons/BarChart3";
+import Clock from "@/components/ui/icons/Clock";
 
 const Engineering = () => {
   const purchasedCourses: CourseCardProps[] = [
@@ -133,7 +137,55 @@ const Engineering = () => {
       title="Trading Algorítmico" 
       subtitle="Descubre nuestros cursos especializados en trading automatizado y algorítmico"
     >
-      <div className="mb-6">
+      <div className="space-y-8">
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+            Trading de Forex
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Domina el mercado de divisas más líquido del mundo. Aprende estrategias profesionales de trading forex 
+            desde análisis técnico hasta automatización avanzada.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10" />
+            <CardContent className="relative p-6">
+              <TrendingUp className="h-12 w-12 text-green-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Análisis Técnico Forex</h3>
+              <p className="text-muted-foreground mb-4">
+                Aprende a leer gráficos, identificar patrones y usar indicadores técnicos para el trading de divisas.
+              </p>
+              <Button className="w-full">Explorar Cursos</Button>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10" />
+            <CardContent className="relative p-6">
+              <BarChart3 className="h-12 w-12 text-blue-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Gestión de Riesgo</h3>
+              <p className="text-muted-foreground mb-4">
+                Domina las técnicas de gestión de capital y riesgo específicas para el mercado forex.
+              </p>
+              <Button className="w-full">Empezar Ahora</Button>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10" />
+            <CardContent className="relative p-6">
+              <Clock className="h-12 w-12 text-purple-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Trading Algorítmico</h3>
+              <p className="text-muted-foreground mb-4">
+                Automatiza tus estrategias forex con Expert Advisors y sistemas de trading automático.
+              </p>
+              <Button className="w-full">Ver Detalles</Button>
+            </CardContent>
+          </Card>
+        </div>
+
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid grid-cols-3 mb-6">
             <TabsTrigger value="all">Todos los cursos</TabsTrigger>

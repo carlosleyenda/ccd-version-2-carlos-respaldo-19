@@ -1,10 +1,13 @@
-
 import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import CourseCarousel from "@/components/courses/CourseCarousel";
 import { Button } from "@/components/ui/button";
 import { CourseCardProps } from "@/components/dashboard/CourseCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Card from "@/components/ui/card";
+import CardContent from "@/components/ui/card-content";
+import TrendingUp from "@/components/ui/trending-up";
+import DollarSign from "@/components/ui/dollar-sign";
 
 const Mining = () => {
   const purchasedCourses: CourseCardProps[] = [
@@ -133,118 +136,170 @@ const Mining = () => {
       title="Trading de Criptomonedas" 
       subtitle="Descubre nuestros cursos especializados en trading de criptomonedas y DeFi"
     >
-      <div className="mb-6">
-        <Tabs defaultValue="all" className="w-full">
-          <TabsList className="grid grid-cols-3 mb-6">
-            <TabsTrigger value="all">Todos los cursos</TabsTrigger>
-            <TabsTrigger value="purchased">Mis cursos</TabsTrigger>
-            <TabsTrigger value="available">Disponibles</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="all">
-            {purchasedCourses.length > 0 && (
-              <CourseCarousel
-                title="Continúa aprendiendo"
-                courses={purchasedCourses}
-                viewAllLink="/courses?category=mining&purchased=true"
-              />
-            )}
-            
-            <CourseCarousel
-              title="Top 10 más vendidos"
-              courses={topSelling}
-              badge={{ text: "MÁS POPULARES", variant: "secondary" }}
-              viewAllLink="/courses?category=mining&sort=popular"
-            />
-            
-            <CourseCarousel
-              title="Nuevos cursos"
-              courses={newCourses}
-              badge={{ text: "NUEVO", variant: "destructive" }}
-              viewAllLink="/courses?category=mining&sort=newest"
-            />
-            
-            <div className="mt-8 text-center">
-              <h3 className="text-xl font-bold mb-4">Planes de membresía</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Accede a todos nuestros cursos de minería con una membresía
+      <div className="space-y-8">
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+            Trading de Criptomonedas
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Especialízate en el trading de criptomonedas y activos digitales. Desde Bitcoin hasta DeFi, 
+            domina todos los aspectos del mercado cripto.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-amber-500/10" />
+            <CardContent className="relative p-6">
+              <svg className="h-12 w-12 text-orange-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3M18.82 9L12 12.72L5.18 9L12 5.28L18.82 9M17 16L12 18.72L7 16V12.27L12 15L17 12.27V16Z" />
+              </svg>
+              <h3 className="text-xl font-semibold mb-2">Bitcoin & Altcoins</h3>
+              <p className="text-muted-foreground mb-4">
+                Aprende a tradear Bitcoin, Ethereum y las principales altcoins con estrategias específicas.
               </p>
-              <Button 
-                variant="action" 
-                size="lg" 
-                className="mx-auto"
-                onClick={() => window.location.href = "/pricing"}
-              >
-                Ver planes de membresía
-              </Button>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="purchased">
-            {purchasedCourses.length > 0 ? (
+              <Button className="w-full">Explorar Cursos</Button>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10" />
+            <CardContent className="relative p-6">
+              <TrendingUp className="h-12 w-12 text-yellow-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Análisis On-Chain</h3>
+              <p className="text-muted-foreground mb-4">
+                Domina el análisis de métricas on-chain para tomar mejores decisiones de trading.
+              </p>
+              <Button className="w-full">Empezar Ahora</Button>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10" />
+            <CardContent className="relative p-6">
+              <DollarSign className="h-12 w-12 text-green-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">DeFi Trading</h3>
+              <p className="text-muted-foreground mb-4">
+                Explora las oportunidades de trading en protocolos DeFi y yield farming.
+              </p>
+              <Button className="w-full">Ver Detalles</Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="mb-6">
+          <Tabs defaultValue="all" className="w-full">
+            <TabsList className="grid grid-cols-3 mb-6">
+              <TabsTrigger value="all">Todos los cursos</TabsTrigger>
+              <TabsTrigger value="purchased">Mis cursos</TabsTrigger>
+              <TabsTrigger value="available">Disponibles</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="all">
+              {purchasedCourses.length > 0 && (
+                <CourseCarousel
+                  title="Continúa aprendiendo"
+                  courses={purchasedCourses}
+                  viewAllLink="/courses?category=mining&purchased=true"
+                />
+              )}
+              
               <CourseCarousel
-                title="Tus cursos de minería"
-                courses={purchasedCourses}
-                viewAllLink="/courses?category=mining&purchased=true"
+                title="Top 10 más vendidos"
+                courses={topSelling}
+                badge={{ text: "MÁS POPULARES", variant: "secondary" }}
+                viewAllLink="/courses?category=mining&sort=popular"
               />
-            ) : (
-              <div className="text-center py-12">
-                <h3 className="text-xl font-bold mb-2">Aún no tienes cursos de minería</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Explora nuestra oferta y comienza a aprender hoy
+              
+              <CourseCarousel
+                title="Nuevos cursos"
+                courses={newCourses}
+                badge={{ text: "NUEVO", variant: "destructive" }}
+                viewAllLink="/courses?category=mining&sort=newest"
+              />
+              
+              <div className="mt-8 text-center">
+                <h3 className="text-xl font-bold mb-4">Planes de membresía</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  Accede a todos nuestros cursos de minería con una membresía
                 </p>
                 <Button 
-                  variant="default" 
+                  variant="action" 
                   size="lg" 
-                  onClick={() => window.location.href = "/courses?category=mining"}
+                  className="mx-auto"
+                  onClick={() => window.location.href = "/pricing"}
                 >
-                  Explorar cursos
+                  Ver planes de membresía
                 </Button>
               </div>
-            )}
-          </TabsContent>
-          
-          <TabsContent value="available">
-            <CourseCarousel
-              title="Top 10 más vendidos"
-              courses={topSelling}
-              badge={{ text: "MÁS POPULARES", variant: "secondary" }}
-              viewAllLink="/courses?category=mining&sort=popular"
-            />
+            </TabsContent>
             
-            <CourseCarousel
-              title="Nuevos cursos"
-              courses={newCourses}
-              badge={{ text: "NUEVO", variant: "destructive" }}
-              viewAllLink="/courses?category=mining&sort=newest"
-            />
-            
-            <div className="mt-8 text-center">
-              <h3 className="text-xl font-bold mb-4">Opciones de compra</h3>
-              <div className="flex flex-col md:flex-row gap-6 justify-center">
-                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-lg mb-2">Compra única</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    Adquiere cursos individuales con acceso de por vida
-                  </p>
-                  <Button variant="outline">Ver cursos</Button>
-                </div>
-                <div className="bg-primary-50 dark:bg-primary-900/30 p-6 rounded-lg shadow-sm border border-primary/20">
-                  <h4 className="font-semibold text-lg mb-2">Membresía</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    Acceso ilimitado a todos nuestros cursos
+            <TabsContent value="purchased">
+              {purchasedCourses.length > 0 ? (
+                <CourseCarousel
+                  title="Tus cursos de minería"
+                  courses={purchasedCourses}
+                  viewAllLink="/courses?category=mining&purchased=true"
+                />
+              ) : (
+                <div className="text-center py-12">
+                  <h3 className="text-xl font-bold mb-2">Aún no tienes cursos de minería</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-6">
+                    Explora nuestra oferta y comienza a aprender hoy
                   </p>
                   <Button 
-                    variant="action"
-                    onClick={() => window.location.href = "/pricing"}
+                    variant="default" 
+                    size="lg" 
+                    onClick={() => window.location.href = "/courses?category=mining"}
                   >
-                    Ver planes
+                    Explorar cursos
                   </Button>
                 </div>
+              )}
+            </TabsContent>
+            
+            <TabsContent value="available">
+              <CourseCarousel
+                title="Top 10 más vendidos"
+                courses={topSelling}
+                badge={{ text: "MÁS POPULARES", variant: "secondary" }}
+                viewAllLink="/courses?category=mining&sort=popular"
+              />
+              
+              <CourseCarousel
+                title="Nuevos cursos"
+                courses={newCourses}
+                badge={{ text: "NUEVO", variant: "destructive" }}
+                viewAllLink="/courses?category=mining&sort=newest"
+              />
+              
+              <div className="mt-8 text-center">
+                <h3 className="text-xl font-bold mb-4">Opciones de compra</h3>
+                <div className="flex flex-col md:flex-row gap-6 justify-center">
+                  <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+                    <h4 className="font-semibold text-lg mb-2">Compra única</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      Adquiere cursos individuales con acceso de por vida
+                    </p>
+                    <Button variant="outline">Ver cursos</Button>
+                  </div>
+                  <div className="bg-primary-50 dark:bg-primary-900/30 p-6 rounded-lg shadow-sm border border-primary/20">
+                    <h4 className="font-semibold text-lg mb-2">Membresía</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      Acceso ilimitado a todos nuestros cursos
+                    </p>
+                    <Button 
+                      variant="action"
+                      onClick={() => window.location.href = "/pricing"}
+                    >
+                      Ver planes
+                    </Button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </TabsContent>
-        </Tabs>
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
     </PageLayout>
   );

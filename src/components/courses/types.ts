@@ -1,3 +1,4 @@
+
 export interface CourseModule {
   id: string;
   title: string;
@@ -20,10 +21,19 @@ export interface Instructor {
   avatar: string;
 }
 
+export interface CourseReview {
+  id: string;
+  user: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
 export interface CourseDetailProps {
   id: string;
   title: string;
   description: string;
+  longDescription?: string;
   instructor: {
     name: string;
     title: string;
