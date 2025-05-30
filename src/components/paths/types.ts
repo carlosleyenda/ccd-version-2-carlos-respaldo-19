@@ -25,4 +25,6 @@ export interface Milestone {
   description: string;
   completed: boolean;
   progress: number;
+  courses?: Course[];
+  skills?: string[];
 }

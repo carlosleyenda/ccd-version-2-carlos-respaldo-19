@@ -1,114 +1,75 @@
 
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Navbar from "@/components/layout/Navbar";
-import Sidebar from "@/components/layout/Sidebar";
-import Footer from "@/components/layout/Footer";
+import { useParams, Navigate } from "react-router-dom";
 import CourseDetail from "@/components/courses/CourseDetail";
-import { toast } from "sonner";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
+import { CourseReview } from "@/components/courses/types";
 
 const CourseView = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { id } = useParams();
-  const isMobile = useIsMobile();
+  const { id } = useParams<{ id: string }>();
   
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-  
-  // Handle sidebar toggle event
-  useEffect(() => {
-    const handleSidebarToggle = () => {
-      setSidebarOpen(!sidebarOpen);
-    };
-    
-    document.addEventListener('toggle-sidebar', handleSidebarToggle);
-    
-    return () => {
-      document.removeEventListener('toggle-sidebar', handleSidebarToggle);
-    };
-  }, [sidebarOpen]);
+  if (!id) {
+    return <Navigate to="/courses" replace />;
+  }
 
-  // Mock course data - in a real app, this would come from an API
+  // Sample course data - replace with actual data fetching
   const courseData = {
-    id: id || "",
-    title: "Programa Maestro en Forex",
-    description: "Domina el mercado de divisas desde cero hasta nivel profesional",
-    longDescription: "Este curso comprehensivo cubre todos los aspectos fundamentales y avanzados del trading en forex, incluyendo análisis técnico, análisis fundamental, gestión de riesgo y psicología del trading.",
+    id: id,
+    title: "Máster en Trading de Forex",
+    description: "Curso completo para dominar el trading en el mercado de divisas más líquido del mundo.",
+    longDescription: "Este curso te llevará desde los conceptos básicos del forex hasta estrategias avanzadas de trading. Aprenderás análisis técnico, gestión de riesgo, psicología del trading y mucho más.",
     instructor: {
-      name: "Dr. Carlos Rodríguez",
-      title: "Trader Profesional y Educador",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80",
+      name: "Dr. Pedro Valdés",
+      title: "Experto en Trading Forex",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80"
     },
-    category: "forex" as "forex" | "crypto" | "stocks" | "management",
-    level: "advanced" as "beginner" | "intermediate" | "advanced",
-    duration: "40 horas",
-    enrolled: 324,
-    rating: 4.8,
-    reviews: 156,
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
-    lastUpdated: "2024-03-15",
+    category: "forex" as const,
+    level: "advanced" as const,
+    duration: "32h 15m",
+    enrolled: 1289,
+    rating: 4.9,
+    image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80",
+    lastUpdated: "Diciembre 2024",
     language: "Español",
+    progress: 0,
     modules: [
       {
-        id: "m1",
-        title: "Introducción al Trading de Forex",
-        duration: "4h",
+        id: "module-1",
+        title: "Fundamentos del Forex",
+        duration: "8h 30m",
         lessons: [
-          {
-            id: "l1",
-            title: "Conceptos Fundamentales del Forex",
-            duration: "45min",
-            type: "video" as "video" | "quiz" | "reading",
-          },
-          {
-            id: "l2",
-            title: "Evaluación Inicial",
-            duration: "30min",
-            type: "quiz" as "video" | "quiz" | "reading",
-          },
-        ],
+          { id: "lesson-1", title: "¿Qué es el Forex?", duration: "30m", type: "video" as const },
+          { id: "lesson-2", title: "Pares de divisas", duration: "45m", type: "video" as const },
+          { id: "lesson-3", title: "Quiz: Conceptos básicos", duration: "15m", type: "quiz" as const }
+        ]
       },
       {
-        id: "m2",
+        id: "module-2", 
         title: "Análisis Técnico",
-        duration: "6h",
+        duration: "12h 45m",
         lessons: [
-          {
-            id: "l3",
-            title: "Indicadores Técnicos Avanzados",
-            duration: "1h",
-            type: "video" as "video" | "quiz" | "reading",
-          },
-          {
-            id: "l4",
-            title: "Patrones de Gráficos",
-            duration: "2h",
-            type: "reading" as "video" | "quiz" | "reading",
-          },
-        ],
-      },
+          { id: "lesson-4", title: "Gráficos y timeframes", duration: "60m", type: "video" as const },
+          { id: "lesson-5", title: "Indicadores técnicos", duration: "90m", type: "video" as const }
+        ]
+      }
     ],
+    reviews: [
+      {
+        id: "review-1",
+        user: "María González",
+        rating: 5,
+        comment: "Excelente curso, muy completo y bien explicado.",
+        date: "2024-01-15"
+      },
+      {
+        id: "review-2",
+        user: "Carlos Rodríguez",
+        rating: 4,
+        comment: "Muy bueno, aunque podría tener más ejemplos prácticos.",
+        date: "2024-01-10"
+      }
+    ] as CourseReview[]
   };
 
-  return (
-    <div className="min-h-screen flex flex-col w-full">
-      <Navbar toggleSidebar={toggleSidebar} />
-      
-      <div className="flex flex-1 w-full">
-        <Sidebar isOpen={sidebarOpen} />
-        <div className={cn(
-          "flex-1 transition-all duration-300 ease-in-out pt-16 w-full",
-          !isMobile && sidebarOpen ? 'lg:ml-64' : ''
-        )}>
-          <CourseDetail {...courseData} />
-          <Footer />
-        </div>
-      </div>
-    </div>
-  );
+  return <CourseDetail {...courseData} />;
 };
 
 export default CourseView;
