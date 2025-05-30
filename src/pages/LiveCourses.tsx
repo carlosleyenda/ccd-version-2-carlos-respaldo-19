@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
@@ -32,41 +31,41 @@ const LiveCourses = () => {
   const liveCourses: CourseCardProps[] = [
     {
       id: "live-1",
-      title: "Webinar: Innovaciones en Perforación y Voladura",
-      description: "Aprende sobre las últimas tecnologías y técnicas en perforación y voladura para operaciones mineras.",
+      title: "Webinar: Estrategias Avanzadas de Forex",
+      description: "Aprende sobre las últimas estrategias y técnicas en trading de divisas.",
       instructor: "Ing. Carlos Morales",
-      category: "mining",
+      category: "forex",
       level: "intermediate",
       duration: "2h",
       enrolled: 342,
       rating: 4.8,
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
       isLive: true,
     },
     {
       id: "live-2",
-      title: "Taller: Modelamiento Geológico 3D",
-      description: "Sesión práctica sobre el uso de software especializado para modelamiento geológico tridimensional.",
+      title: "Taller: Trading Algorítmico en Vivo",
+      description: "Sesión práctica sobre el desarrollo de algoritmos de trading en tiempo real.",
       instructor: "Dr. Miguel Soto",
-      category: "engineering",
+      category: "stocks",
       level: "advanced",
       duration: "3h",
       enrolled: 189,
       rating: 4.7,
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
       liveDate: "Mañana - 18:00",
     },
     {
       id: "live-3",
-      title: "Panel: Desafíos Ambientales en la Minería",
-      description: "Discusión con expertos sobre los retos ambientales actuales y soluciones sostenibles.",
+      title: "Panel: El Futuro del Trading de Criptomonedas",
+      description: "Discusión con expertos sobre tendencias y oportunidades en el trading cripto.",
       instructor: "Panel de expertos",
-      category: "management",
+      category: "crypto",
       level: "intermediate",
       duration: "1h 30m",
       enrolled: 276,
       rating: 4.5,
-      image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80",
       liveDate: "Viernes - 15:30",
     },
   ];
@@ -75,41 +74,41 @@ const LiveCourses = () => {
   const upcomingLiveCourses: CourseCardProps[] = [
     {
       id: "upcoming-1",
-      title: "Curso en Vivo: Seguridad Minera con Nuevas Normativas",
-      description: "Actualización sobre normativas de seguridad en operaciones mineras y su aplicación práctica.",
+      title: "Curso en Vivo: Psicología del Trading",
+      description: "Programa sobre control emocional y disciplina en el trading profesional.",
       instructor: "Ing. Patricia Gómez",
-      category: "mining",
+      category: "management",
       level: "beginner",
       duration: "5h (5 sesiones)",
       enrolled: 425,
       rating: 4.9,
-      image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
       liveDate: "Inicia: 15 Mayo",
     },
     {
       id: "upcoming-2",
-      title: "Bootcamp: Gestión de Proyectos Mineros",
-      description: "Programa intensivo de capacitación en metodologías de gestión de proyectos para el sector minero.",
+      title: "Bootcamp: Trading Cuantitativo",
+      description: "Programa intensivo de trading cuantitativo y desarrollo de estrategias.",
       instructor: "Dr. Manuel Vega",
-      category: "management",
+      category: "stocks",
       level: "advanced",
       duration: "20h (10 sesiones)",
       enrolled: 312,
       rating: 4.7,
-      image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       liveDate: "Inicia: 20 Mayo",
     },
     {
       id: "upcoming-3",
-      title: "Workshop: Tecnologías de Procesamiento de Minerales",
-      description: "Taller práctico sobre las últimas tecnologías en procesamiento de minerales y su implementación.",
+      title: "Workshop: DeFi y Trading Descentralizado",
+      description: "Taller práctico sobre finanzas descentralizadas y trading en protocolos DeFi.",
       instructor: "Dra. Laura Sandoval",
-      category: "engineering",
+      category: "crypto",
       level: "intermediate",
       duration: "12h (4 sesiones)",
       enrolled: 198,
       rating: 4.6,
-      image: "https://images.unsplash.com/photo-1579547945413-497e1b99dac0?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80",
       liveDate: "Inicia: 28 Mayo",
     },
   ];
@@ -118,47 +117,47 @@ const LiveCourses = () => {
   const recordedSessions = [
     {
       id: "recorded-1",
-      title: "Minería Digital: Automatización y Control Remoto",
-      description: "Cómo la digitalización está transformando las operaciones mineras con sistemas automatizados y control remoto.",
+      title: "Trading Digital: Automatización y Algoritmos",
+      description: "Cómo la digitalización está transformando el trading con sistemas automatizados.",
       instructor: "Dr. Ricardo Montero",
-      category: "engineering",
+      category: "stocks",
       date: "25 Abril, 2023",
       duration: "1h 45m",
       viewers: 834,
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "recorded-2",
-      title: "Mesa Redonda: Sostenibilidad en la Industria Minera",
-      description: "Discusión sobre prácticas sostenibles y responsabilidad ambiental en la industria minera actual.",
+      title: "Mesa Redonda: Futuro del Trading Institucional",
+      description: "Discusión sobre el trading institucional y las nuevas tecnologías.",
       instructor: "Panel de expertos",
       category: "management",
       date: "18 Abril, 2023",
       duration: "2h 10m",
       viewers: 756,
-      image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "recorded-3",
-      title: "Webinar: Avances en Hidrometalurgia",
-      description: "Los últimos avances en procesos hidrometalúrgicos para la extracción y recuperación de metales.",
+      title: "Webinar: Avances en Trading de Criptomonedas",
+      description: "Los últimos avances en estrategias de trading para el mercado cripto.",
       instructor: "Dra. Carmen Valdivia",
-      category: "mining",
+      category: "crypto",
       date: "10 Abril, 2023",
       duration: "1h 30m",
       viewers: 689,
-      image: "https://images.unsplash.com/photo-1578079999898-221a4df608f6?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "recorded-4",
-      title: "Masterclass: Liderazgo en Operaciones Mineras",
-      description: "Estrategias de liderazgo efectivo en la gestión de equipos y operaciones en el sector minero.",
+      title: "Masterclass: Liderazgo en Fondos de Inversión",
+      description: "Estrategias de liderazgo efectivo en la gestión de fondos y equipos de trading.",
       instructor: "Ing. Felipe Rojas",
       category: "management",
       date: "2 Abril, 2023",
       duration: "2h 20m",
       viewers: 712,
-      image: "https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
     },
   ];
 
@@ -222,10 +221,10 @@ const LiveCourses = () => {
                 </div>
                 
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 leading-tight">
-                  Webinar: Innovaciones en Perforación y Voladura
+                  Webinar: Estrategias Avanzadas de Forex
                 </h2>
                 <p className="text-white/90 mb-6 max-w-3xl text-base md:text-lg">
-                  Únete a nuestro experto Ing. Carlos Morales para conocer las últimas tecnologías y técnicas en perforación y voladura para operaciones mineras más eficientes y seguras.
+                  Únete a nuestro experto Ing. Carlos Morales para conocer las últimas estrategias y técnicas en trading de divisas más eficientes y seguras.
                 </p>
                 
                 <div className="flex flex-wrap gap-4 items-center">
