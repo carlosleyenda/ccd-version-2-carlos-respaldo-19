@@ -1,3 +1,4 @@
+
 import { Link, useNavigate } from "react-router-dom";
 import { ExternalLink, Clock, Users, Star, PlayCircle, BookmarkPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -11,7 +12,7 @@ export interface CourseCardProps {
   title: string;
   description: string;
   instructor: string;
-  category: "engineering" | "mining" | "management";
+  category: "forex" | "crypto" | "stocks" | "management";
   level: "beginner" | "intermediate" | "advanced";
   duration: string;
   enrolled: number;
@@ -44,15 +45,17 @@ const CourseCard = ({
   const navigate = useNavigate();
   
   // Fallback image in case the provided image is broken
-  const fallbackImage = "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80";
+  const fallbackImage = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80";
   
   // Get appropriate category-related image if needed
   const getCategoryFallbackImage = () => {
     switch (category) {
-      case "engineering":
-        return "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80";
-      case "mining":
-        return "https://images.unsplash.com/photo-1626438366685-c6dbad875f0b?auto=format&fit=crop&w=800&q=80";
+      case "forex":
+        return "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80";
+      case "crypto":
+        return "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80";
+      case "stocks":
+        return "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80";
       case "management":
         return "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80";
       default:
@@ -65,8 +68,9 @@ const CourseCard = ({
   };
   
   const categoryLabel = {
-    engineering: "Ingeniería",
-    mining: "Minería",
+    forex: "Forex",
+    crypto: "Criptomonedas",
+    stocks: "Acciones",
     management: "Gestión",
   };
 

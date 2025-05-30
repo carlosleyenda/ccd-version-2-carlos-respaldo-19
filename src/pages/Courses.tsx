@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import CourseCard, { CourseCardProps } from "@/components/dashboard/CourseCard";
@@ -17,126 +18,127 @@ const Courses = () => {
   const allCourses: CourseCardProps[] = [
     {
       id: "course-1",
-      title: "Fundamentos de Geomecánica Aplicada a la Minería",
-      description: "Estudio de las propiedades mecánicas de rocas y suelos para el diseño y análisis de estructuras en minería.",
-      instructor: "Dr. Roberto Sánchez",
-      category: "mining",
+      title: "Fundamentos del Trading en Forex",
+      description: "Aprende los conceptos básicos del mercado de divisas, análisis técnico y fundamental para operar con éxito.",
+      instructor: "Dr. Carlos Martínez",
+      category: "forex",
       level: "intermediate",
       duration: "24h 30m",
       enrolled: 1241,
       rating: 4.8,
-      image: "https://images.unsplash.com/photo-1626438366685-c6dbad875f0b?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
       progress: 65,
     },
     {
       id: "course-2",
-      title: "Gestión de Proyectos Mineros",
-      description: "Metodologías y herramientas para la gestión eficiente de proyectos en la industria minera.",
-      instructor: "Ing. Carmen Rodríguez",
+      title: "Gestión de Riesgo en Trading",
+      description: "Domina las técnicas de gestión de capital, stop loss, take profit y psicología del trading profesional.",
+      instructor: "Lic. Ana Rodríguez",
       category: "management",
       level: "advanced",
       duration: "36h 15m",
       enrolled: 893,
       rating: 4.5,
-      image: "https://images.unsplash.com/photo-1638536531518-b0b8fff29c2b?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
       progress: 32,
     },
     {
       id: "course-3",
-      title: "Tecnologías de Procesamiento de Minerales",
-      description: "Técnicas y métodos modernos para el tratamiento y procesamiento de minerales.",
-      instructor: "Dr. Pedro Valdés",
-      category: "engineering",
+      title: "Trading de Criptomonedas Avanzado",
+      description: "Estrategias profesionales para operar Bitcoin, Ethereum y altcoins en mercados volátiles.",
+      instructor: "Prof. Miguel Valdés",
+      category: "crypto",
       level: "advanced",
       duration: "28h 45m",
       enrolled: 765,
       rating: 4.7,
-      image: "https://images.unsplash.com/photo-1579547945413-497e1b99dac0?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80",
       progress: 18,
     },
     {
       id: "course-4",
-      title: "Seguridad y Prevención de Riesgos en Minería",
-      description: "Protocolos y procedimientos para garantizar la seguridad en operaciones mineras.",
+      title: "Análisis Técnico Profesional",
+      description: "Domina los indicadores técnicos, patrones de gráficos y estrategias de entrada y salida.",
       instructor: "Ing. Laura Méndez",
-      category: "mining",
+      category: "forex",
       level: "beginner",
       duration: "16h 20m",
       enrolled: 1578,
       rating: 4.9,
-      image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=800&q=80",
       featured: true,
     },
     {
       id: "course-5",
-      title: "Ingeniería de Ventilación en Minería Subterránea",
-      description: "Diseño y mantenimiento de sistemas de ventilación para minas subterráneas.",
+      title: "Psicología del Trading Exitoso",
+      description: "Controla tus emociones, desarrolla disciplina y mantén una mentalidad ganadora en el trading.",
       instructor: "Dr. Antonio Guzmán",
-      category: "engineering",
+      category: "management",
       level: "intermediate",
       duration: "22h 10m",
       enrolled: 642,
       rating: 4.6,
-      image: "https://images.unsplash.com/photo-1604334204928-e5a248c41090?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "course-6",
-      title: "Evaluación Económica de Proyectos Mineros",
-      description: "Análisis financiero y económico para la viabilidad de proyectos en el sector minero.",
+      title: "Trading de Acciones y ETFs",
+      description: "Aprende a invertir en bolsa, análisis fundamental y construcción de portafolios diversificados.",
       instructor: "Dra. María Fernández",
-      category: "management",
+      category: "stocks",
       level: "advanced",
       duration: "18h 30m",
       enrolled: 524,
       rating: 4.7,
-      image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "course-7",
-      title: "Sostenibilidad en la Industria Minera",
-      description: "Estrategias y prácticas para una minería sostenible y responsable con el medio ambiente.",
+      title: "Day Trading y Scalping",
+      description: "Estrategias de trading intradiario para obtener ganancias rápidas en mercados volátiles.",
       instructor: "Dr. Javier López",
-      category: "management",
+      category: "forex",
       level: "intermediate",
       duration: "20h 15m",
       enrolled: 735,
       rating: 4.8,
-      image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "course-8",
-      title: "Modelamiento Geológico y Estimación de Recursos",
-      description: "Técnicas de modelamiento geológico y métodos de estimación de recursos minerales.",
+      title: "Trading Algorítmico con Python",
+      description: "Desarrolla bots de trading automatizado y estrategias cuantitativas usando Python.",
       instructor: "Ing. Alberto Torres",
-      category: "engineering",
+      category: "stocks",
       level: "advanced",
       duration: "32h 20m",
       enrolled: 489,
       rating: 4.6,
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "course-9",
-      title: "Hidrometalurgia y Procesamiento de Minerales",
-      description: "Fundamentos y aplicaciones de procesos hidrometalúrgicos para la extracción de metales.",
+      title: "DeFi y Yield Farming",
+      description: "Aprende sobre finanzas descentralizadas, protocolos DeFi y estrategias de yield farming.",
       instructor: "Dra. Elena Martínez",
-      category: "mining",
+      category: "crypto",
       level: "intermediate",
       duration: "26h 30m",
       enrolled: 612,
       rating: 4.7,
-      image: "https://images.unsplash.com/photo-1578079999898-221a4df608f6?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80",
     },
   ];
 
-  const engineeringCourses = allCourses.filter(course => course.category === "engineering");
-  const miningCourses = allCourses.filter(course => course.category === "mining");
+  const forexCourses = allCourses.filter(course => course.category === "forex");
+  const cryptoCourses = allCourses.filter(course => course.category === "crypto");
+  const stocksCourses = allCourses.filter(course => course.category === "stocks");
   const managementCourses = allCourses.filter(course => course.category === "management");
   
   const myCourses = allCourses.filter(course => course.progress && course.progress > 0);
 
   return (
-    <PageLayout title="Cursos" subtitle="Explora nuestra biblioteca de cursos especializados.">
+    <PageLayout title="Cursos de Trading" subtitle="Explora nuestra biblioteca de cursos especializados en trading.">
       <div className="mt-4 md:mt-0 flex flex-col sm:flex-row gap-2">
         <div className="relative">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
@@ -165,11 +167,12 @@ const Courses = () => {
       </div>
       
       <Tabs defaultValue="all" className="w-full mt-6">
-        <TabsList className="grid grid-cols-2 sm:grid-cols-5 mb-6">
+        <TabsList className="grid grid-cols-2 sm:grid-cols-6 mb-6">
           <TabsTrigger value="all">Todos</TabsTrigger>
           <TabsTrigger value="my-courses">Mis Cursos</TabsTrigger>
-          <TabsTrigger value="engineering">Ingeniería</TabsTrigger>
-          <TabsTrigger value="mining">Minería</TabsTrigger>
+          <TabsTrigger value="forex">Forex</TabsTrigger>
+          <TabsTrigger value="crypto">Crypto</TabsTrigger>
+          <TabsTrigger value="stocks">Acciones</TabsTrigger>
           <TabsTrigger value="management">Gestión</TabsTrigger>
         </TabsList>
         
@@ -212,35 +215,52 @@ const Courses = () => {
           </div>
         </TabsContent>
         
-        <TabsContent value="engineering">
+        <TabsContent value="forex">
           <div className="mb-6 flex items-center justify-between">
             <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
               <BookOpen className="h-4 w-4" />
-              <span>{engineeringCourses.length} cursos de ingeniería</span>
+              <span>{forexCourses.length} cursos de forex</span>
             </div>
           </div>
           
           <Separator className="mb-6" />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {engineeringCourses.map((course) => (
+            {forexCourses.map((course) => (
               <CourseCard key={course.id} {...course} />
             ))}
           </div>
         </TabsContent>
         
-        <TabsContent value="mining">
+        <TabsContent value="crypto">
           <div className="mb-6 flex items-center justify-between">
             <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
               <BookOpen className="h-4 w-4" />
-              <span>{miningCourses.length} cursos de minería</span>
+              <span>{cryptoCourses.length} cursos de criptomonedas</span>
             </div>
           </div>
           
           <Separator className="mb-6" />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {miningCourses.map((course) => (
+            {cryptoCourses.map((course) => (
+              <CourseCard key={course.id} {...course} />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="stocks">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <BookOpen className="h-4 w-4" />
+              <span>{stocksCourses.length} cursos de acciones</span>
+            </div>
+          </div>
+          
+          <Separator className="mb-6" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {stocksCourses.map((course) => (
               <CourseCard key={course.id} {...course} />
             ))}
           </div>

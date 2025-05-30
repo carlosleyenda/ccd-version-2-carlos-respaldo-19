@@ -8,26 +8,31 @@ import { learningPaths } from "@/components/paths/pathsData";
 const LearningPaths = () => {
   return (
     <PageLayout 
-      title="Rutas de Aprendizaje" 
-      subtitle="Sigue una hoja de ruta estructurada para alcanzar tus objetivos profesionales"
+      title="Rutas de Aprendizaje en Trading" 
+      subtitle="Sigue una hoja de ruta estructurada para alcanzar tus objetivos como trader profesional"
     >
-      <Tabs defaultValue="engineering" className="w-full">
-        <TabsList className="w-full max-w-xl mx-auto grid grid-cols-3 mb-8">
-          <TabsTrigger value="engineering">Ingeniería</TabsTrigger>
-          <TabsTrigger value="mining">Minería</TabsTrigger>
-          <TabsTrigger value="management">Gestión Pública</TabsTrigger>
+      <Tabs defaultValue="forex" className="w-full">
+        <TabsList className="w-full max-w-2xl mx-auto grid grid-cols-4 mb-8">
+          <TabsTrigger value="forex">Forex</TabsTrigger>
+          <TabsTrigger value="crypto">Crypto</TabsTrigger>
+          <TabsTrigger value="stocks">Acciones</TabsTrigger>
+          <TabsTrigger value="algorithmic">Algorítmico</TabsTrigger>
         </TabsList>
         
-        <TabsContent value="engineering">
-          <PathsList paths={learningPaths.filter(path => path.category === "engineering")} />
+        <TabsContent value="forex">
+          <PathsList paths={learningPaths.filter(path => path.category === "forex")} />
         </TabsContent>
         
-        <TabsContent value="mining">
-          <PathsList paths={learningPaths.filter(path => path.category === "mining")} />
+        <TabsContent value="crypto">
+          <PathsList paths={learningPaths.filter(path => path.category === "crypto")} />
         </TabsContent>
         
-        <TabsContent value="management">
-          <PathsList paths={learningPaths.filter(path => path.category === "management")} />
+        <TabsContent value="stocks">
+          <PathsList paths={learningPaths.filter(path => path.category === "stocks")} />
+        </TabsContent>
+        
+        <TabsContent value="algorithmic">
+          <PathsList paths={learningPaths.filter(path => path.category === "algorithmic")} />
         </TabsContent>
       </Tabs>
     </PageLayout>

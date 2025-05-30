@@ -34,32 +34,32 @@ const CourseView = () => {
   // Mock course data - in a real app, this would come from an API
   const courseData = {
     id: id || "",
-    title: "Técnicas Avanzadas de Minería Subterránea",
-    description: "Aprende las últimas técnicas y metodologías en minería subterránea",
-    longDescription: "Este curso comprehensivo cubre todos los aspectos fundamentales y avanzados de la minería subterránea moderna, incluyendo técnicas de excavación, sistemas de soporte, ventilación y seguridad.",
+    title: "Programa Maestro en Forex",
+    description: "Domina el mercado de divisas desde cero hasta nivel profesional",
+    longDescription: "Este curso comprehensivo cubre todos los aspectos fundamentales y avanzados del trading en forex, incluyendo análisis técnico, análisis fundamental, gestión de riesgo y psicología del trading.",
     instructor: {
       name: "Dr. Carlos Rodríguez",
-      title: "Ingeniero de Minas Senior",
+      title: "Trader Profesional y Educador",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80",
     },
-    category: "mining" as "mining" | "engineering" | "management",
+    category: "forex" as "forex" | "crypto" | "stocks" | "management",
     level: "advanced" as "beginner" | "intermediate" | "advanced",
     duration: "40 horas",
     enrolled: 324,
     rating: 4.8,
     reviews: 156,
-    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
     lastUpdated: "2024-03-15",
     language: "Español",
     modules: [
       {
         id: "m1",
-        title: "Introducción a la Minería Subterránea",
+        title: "Introducción al Trading de Forex",
         duration: "4h",
         lessons: [
           {
             id: "l1",
-            title: "Conceptos Fundamentales",
+            title: "Conceptos Fundamentales del Forex",
             duration: "45min",
             type: "video" as "video" | "quiz" | "reading",
           },
@@ -73,18 +73,18 @@ const CourseView = () => {
       },
       {
         id: "m2",
-        title: "Técnicas de Excavación",
+        title: "Análisis Técnico",
         duration: "6h",
         lessons: [
           {
             id: "l3",
-            title: "Métodos Modernos de Excavación",
+            title: "Indicadores Técnicos Avanzados",
             duration: "1h",
             type: "video" as "video" | "quiz" | "reading",
           },
           {
             id: "l4",
-            title: "Prácticas de Laboratorio Virtual",
+            title: "Patrones de Gráficos",
             duration: "2h",
             type: "reading" as "video" | "quiz" | "reading",
           },

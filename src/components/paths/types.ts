@@ -3,7 +3,7 @@ export interface LearningPath {
   id: string;
   title: string;
   description: string;
-  category: "engineering" | "mining" | "management";
+  category: "forex" | "crypto" | "stocks" | "algorithmic";
   level: "Principiante" | "Intermedio" | "Avanzado";
   duration: string;
   courses: {

@@ -27,7 +27,7 @@ export interface CourseDetailProps {
   description: string;
   longDescription: string;
   instructor: Instructor;
-  category: "engineering" | "mining" | "management";
+  category: "forex" | "crypto" | "stocks" | "management";
   level: "beginner" | "intermediate" | "advanced";
   duration: string;
   enrolled: number;
@@ -43,9 +43,10 @@ export interface CourseDetailProps {
 }
 
 export const categoryLabel: Record<string, string> = {
-  engineering: "Ingeniería",
-  mining: "Minería",
-  management: "Gestión Pública",
+  forex: "Forex",
+  crypto: "Criptomonedas", 
+  stocks: "Acciones",
+  management: "Gestión",
 };
 
 export const levelLabel: Record<string, string> = {
