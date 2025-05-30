@@ -3,26 +3,18 @@ export interface LearningPath {
   id: string;
   title: string;
   description: string;
-  category: "forex" | "crypto" | "stocks" | "algorithmic";
+  category: "forex" | "crypto" | "stocks" | "management" | "algorithmic";
   level: "Principiante" | "Intermedio" | "Avanzado";
   duration: string;
-  courses: {
-    id: string;
-    title: string;
-    duration: string;
-    completed: boolean;
-  }[];
-  skills: string[];
   progress: number;
   color: string;
-  image?: string;
+  courses: Course[];
+  skills: string[];
 }
 
-export interface Milestone {
+export interface Course {
   id: string;
   title: string;
-  description: string;
-  courses: string[];
-  skills: string[];
+  duration: string;
   completed: boolean;
 }

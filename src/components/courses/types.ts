@@ -1,4 +1,3 @@
-
 export interface CourseModule {
   id: string;
   title: string;
@@ -25,21 +24,27 @@ export interface CourseDetailProps {
   id: string;
   title: string;
   description: string;
-  longDescription: string;
-  instructor: Instructor;
-  category: "forex" | "crypto" | "stocks" | "management";
+  instructor: {
+    name: string;
+    title: string;
+    avatar: string;
+  };
+  category: "forex" | "crypto" | "stocks" | "management" | "algorithmic";
   level: "beginner" | "intermediate" | "advanced";
   duration: string;
   enrolled: number;
   rating: number;
-  reviews: number;
   image: string;
-  progress?: number;
-  lastUpdated: string;
-  language: string;
-  modules: CourseModule[];
+  price?: number;
+  originalPrice?: number;
   isLive?: boolean;
   liveDate?: string;
+  liveTime?: string;
+  modules: CourseModule[];
+  reviews: CourseReview[];
+  lastUpdated: string;
+  language: string;
+  progress?: number;
 }
 
 export const categoryLabel: Record<string, string> = {
@@ -47,6 +52,7 @@ export const categoryLabel: Record<string, string> = {
   crypto: "Criptomonedas", 
   stocks: "Acciones",
   management: "Gestión",
+  algorithmic: "Algoritmia",
 };
 
 export const levelLabel: Record<string, string> = {

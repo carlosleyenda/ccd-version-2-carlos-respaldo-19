@@ -6,7 +6,7 @@ import {
   CreditCard, BarChart3, Layers, 
   FolderOpen, FileSpreadsheet, Briefcase,
   Settings, HelpCircle, User, UserPlus,
-  Shield
+  Shield, TrendingUp, DollarSign, Activity
 } from "lucide-react";
 
 export const SidebarData = [
@@ -19,7 +19,7 @@ export const SidebarData = [
         path: "/dashboard",
       },
       {
-        title: "Rutas de Aprendizaje",
+        title: "Rutas de Trading",
         icon: <Book className="h-5 w-5" />,
         path: "/learning-paths",
       },
@@ -31,16 +31,16 @@ export const SidebarData = [
     ],
   },
   {
-    title: "Aprendizaje",
+    title: "Educación Trading",
     links: [
       {
-        title: "Cursos",
+        title: "Cursos de Trading",
         icon: <BookOpen className="h-5 w-5" />,
         path: "/courses",
         notifications: 3,
       },
       {
-        title: "Cursos en Vivo",
+        title: "Trading en Vivo",
         icon: <Clock className="h-5 w-5" />,
         path: "/live-courses",
       },
@@ -50,22 +50,22 @@ export const SidebarData = [
         path: "/certifications",
       },
       {
-        title: "Biblioteca de Recursos",
+        title: "Biblioteca Trading",
         icon: <FolderOpen className="h-5 w-5" />,
         path: "/resources",
       },
     ],
   },
   {
-    title: "Especialidades",
+    title: "Mercados",
     links: [
       {
-        title: "Ingeniería",
-        icon: <Layers className="h-5 w-5" />,
+        title: "Forex",
+        icon: <DollarSign className="h-5 w-5" />,
         path: "/engineering",
       },
       {
-        title: "Minería",
+        title: "Criptomonedas",
         icon: (
           <svg
             className="h-5 w-5"
@@ -79,46 +79,37 @@ export const SidebarData = [
         path: "/mining",
       },
       {
-        title: "Gestión Pública",
-        icon: (
-          <svg
-            className="h-5 w-5"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M16,11.78L20.24,4.45L21.97,5.45L16.74,14.5L10.23,10.75L5.46,19H22V21H2V3H4V17.54L9.5,8L16,11.78Z" />
-          </svg>
-        ),
+        title: "Acciones & ETFs",
+        icon: <TrendingUp className="h-5 w-5" />,
         path: "/management",
       },
     ],
   },
   {
-    title: "Comunidad",
+    title: "Comunidad Trading",
     links: [
       {
-        title: "Foros",
+        title: "Foros de Trading",
         icon: <Users className="h-5 w-5" />,
         path: "/forums",
       },
       {
-        title: "Ranking",
+        title: "Ranking Traders",
         icon: <Award className="h-5 w-5" />,
         path: "/ranking",
       },
       {
-        title: "Calendario",
+        title: "Calendario Económico",
         icon: <Calendar className="h-5 w-5" />,
         path: "/schedule",
       },
       {
-        title: "Bolsa de Trabajo",
+        title: "Oportunidades Trading",
         icon: <Briefcase className="h-5 w-5" />,
         path: "/job-board",
       },
       {
-        title: "Programa de Referidos",
+        title: "Programa de Afiliados",
         icon: <UserPlus className="h-5 w-5" />,
         path: "/referrals",
         highlight: true,
@@ -126,15 +117,15 @@ export const SidebarData = [
     ],
   },
   {
-    title: "Marketplace",
+    title: "Tienda Trading",
     links: [
       {
-        title: "Tienda",
+        title: "Herramientas & Robots",
         icon: <ShoppingBag className="h-5 w-5" />,
         path: "/store",
       },
       {
-        title: "Planes",
+        title: "Planes de Suscripción",
         icon: <CreditCard className="h-5 w-5" />,
         path: "/pricing",
       },
@@ -170,7 +161,7 @@ export const getSidebarFooterItems = () => {
   return [
     {
       icon: <User className="h-5 w-5 mr-2" />,
-      text: "Mi Perfil",
+      text: "Mi Perfil Trader",
       to: "/profile",
     },
     {
@@ -180,7 +171,7 @@ export const getSidebarFooterItems = () => {
     },
     {
       icon: <HelpCircle className="h-5 w-5 mr-2" />,
-      text: "Ayuda",
+      text: "Soporte Trading",
       to: "/help",
     },
   ];

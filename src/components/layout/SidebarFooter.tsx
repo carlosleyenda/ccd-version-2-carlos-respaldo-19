@@ -21,7 +21,7 @@ const SidebarFooter: React.FC<SidebarFooterProps> = ({ footerItems }) => {
 
   const handleUpgradePlan = () => {
     navigate("/pricing");
-    toast.info("Explorando planes de suscripción disponibles");
+    toast.info("Explorando planes de trading premium disponibles");
   };
 
   return (
@@ -46,18 +46,18 @@ const SidebarFooter: React.FC<SidebarFooterProps> = ({ footerItems }) => {
       </ul>
       
       <div className="p-4">
-        <div className="rounded-lg bg-mining-50 p-3 dark:bg-mining-900/30">
-          <h3 className="text-sm font-medium text-mining-900 dark:text-mining-200">
-            Plan Actual: Gratuito
+        <div className="rounded-lg bg-blue-50 p-3 dark:bg-blue-900/30">
+          <h3 className="text-sm font-medium text-blue-900 dark:text-blue-200">
+            Plan Actual: Trader Básico
           </h3>
-          <p className="mt-1 text-xs text-mining-700 dark:text-mining-300">
-            Actualiza a Premium para acceso completo
+          <p className="mt-1 text-xs text-blue-700 dark:text-blue-300">
+            Actualiza a Pro Trader para acceso completo
           </p>
           <button 
-            className="mt-2 w-full rounded-md bg-mining-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-mining-700"
+            className="mt-2 w-full rounded-md bg-blue-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-blue-700"
             onClick={handleUpgradePlan}
           >
-            Actualizar Plan
+            Actualizar a Pro
           </button>
         </div>
       </div>
