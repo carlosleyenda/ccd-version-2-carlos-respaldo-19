@@ -1,22 +1,20 @@
+
 import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import CourseCarousel from "@/components/courses/CourseCarousel";
 import { Button } from "@/components/ui/button";
 import { CourseCardProps } from "@/components/dashboard/CourseCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Card from "@/components/ui/card";
-import CardContent from "@/components/ui/card-content";
-import Brain from "@/components/ui/icons/brain";
-import Shield from "@/components/ui/icons/shield";
-import Target from "@/components/ui/icons/target";
+import { Card, CardContent } from "@/components/ui/card";
+import { Brain, Shield, Target } from "lucide-react";
 
 const Management = () => {
   const purchasedCourses: CourseCardProps[] = [
     {
       id: "mgt-purchased-1",
-      title: "Gestión de Proyectos Mineros",
-      description: "Metodologías y herramientas para la gestión eficiente de proyectos en la industria minera.",
-      instructor: "Ing. Carmen Rodríguez",
+      title: "Psicología del Trading Avanzada",
+      description: "Metodologías y técnicas para dominar la psicología del trading profesional.",
+      instructor: "Dra. Carmen Rodríguez",
       category: "management",
       level: "advanced",
       duration: "36h 15m",
@@ -27,8 +25,8 @@ const Management = () => {
     },
     {
       id: "mgt-purchased-2",
-      title: "Sostenibilidad en la Industria Minera",
-      description: "Estrategias y prácticas para una minería sostenible y responsable con el medio ambiente.",
+      title: "Gestión de Capital en Trading",
+      description: "Estrategias y prácticas para una gestión eficiente del capital de trading.",
       instructor: "Dr. Javier López",
       category: "management",
       level: "intermediate",
@@ -43,8 +41,8 @@ const Management = () => {
   const topSelling: CourseCardProps[] = [
     {
       id: "mgt-top-1",
-      title: "Evaluación Económica de Proyectos Mineros",
-      description: "Análisis financiero y económico para la viabilidad de proyectos en el sector minero.",
+      title: "Plan de Trading Profesional",
+      description: "Crea y ejecuta un plan de trading sistemático y disciplinado.",
       instructor: "Dra. María Fernández",
       category: "management",
       level: "advanced",
@@ -56,8 +54,8 @@ const Management = () => {
     },
     {
       id: "mgt-top-2",
-      title: "Liderazgo en Operaciones Mineras",
-      description: "Desarrollo de habilidades de liderazgo para la gestión de equipos en minería.",
+      title: "Control Emocional en Trading",
+      description: "Desarrolla habilidades para controlar las emociones durante el trading.",
       instructor: "Dr. Alberto Sánchez",
       category: "management",
       level: "intermediate",
@@ -68,8 +66,8 @@ const Management = () => {
     },
     {
       id: "mgt-top-3",
-      title: "Gestión de Recursos Humanos en Minería",
-      description: "Estrategias y prácticas para la gestión efectiva del talento en empresas mineras.",
+      title: "Gestión de Riesgo Avanzada",
+      description: "Técnicas profesionales para la gestión del riesgo en operaciones de trading.",
       instructor: "Dra. Claudia Vega",
       category: "management",
       level: "intermediate",
@@ -80,9 +78,9 @@ const Management = () => {
     },
     {
       id: "mgt-top-4",
-      title: "Normativa y Legislación Minera",
-      description: "Aspectos legales y regulatorios que rigen las operaciones mineras.",
-      instructor: "Abg. Ricardo Morales",
+      title: "Diario y Análisis de Trading",
+      description: "Aprende a llevar un diario de trading efectivo y analizar tus operaciones.",
+      instructor: "Lic. Ricardo Morales",
       category: "management",
       level: "intermediate",
       duration: "20h 45m",
@@ -95,8 +93,8 @@ const Management = () => {
   const newCourses: CourseCardProps[] = [
     {
       id: "mgt-new-1",
-      title: "Gestión de la Innovación en Minería",
-      description: "Estrategias para fomentar y gestionar la innovación en empresas del sector minero.",
+      title: "Mentalidad del Trader Exitoso",
+      description: "Desarrolla la mentalidad y disciplina necesaria para ser un trader exitoso.",
       instructor: "Dr. Francisco Torres",
       category: "management",
       level: "advanced",
@@ -108,8 +106,8 @@ const Management = () => {
     },
     {
       id: "mgt-new-2",
-      title: "Relaciones Comunitarias y Responsabilidad Social",
-      description: "Gestión de relaciones con comunidades y programas de responsabilidad social en minería.",
+      title: "Objetivos y Metas en Trading",
+      description: "Establece objetivos realistas y crea un plan para alcanzar tus metas de trading.",
       instructor: "Dra. Ana María Rodríguez",
       category: "management",
       level: "intermediate",
@@ -120,12 +118,12 @@ const Management = () => {
     },
     {
       id: "mgt-new-3",
-      title: "Gestión de Riesgos en Proyectos Mineros",
-      description: "Identificación, evaluación y mitigación de riesgos en proyectos del sector minero.",
-      instructor: "Ing. Marco Valencia",
+      title: "Stress Management para Traders",
+      description: "Técnicas para manejar el estrés y mantener la calma durante el trading.",
+      instructor: "Lic. Marco Valencia",
       category: "management",
-      level: "advanced",
-      duration: "28h 45m",
+      level: "beginner",
+      duration: "18h 45m",
       enrolled: 234,
       rating: 4.8,
       image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80",
@@ -134,8 +132,8 @@ const Management = () => {
 
   return (
     <PageLayout 
-      title="Gestión Pública" 
-      subtitle="Descubre cursos especializados en gestión y administración del sector minero"
+      title="Gestión y Psicología del Trading" 
+      subtitle="Descubre cursos especializados en psicología y gestión del trading"
     >
       <div className="space-y-8">
         <div className="text-center space-y-4">

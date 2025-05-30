@@ -1,13 +1,12 @@
+
 import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import CourseCarousel from "@/components/courses/CourseCarousel";
 import { Button } from "@/components/ui/button";
 import { CourseCardProps } from "@/components/dashboard/CourseCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Card from "@/components/ui/card";
-import CardContent from "@/components/ui/card-content";
-import TrendingUp from "@/components/ui/trending-up";
-import DollarSign from "@/components/ui/dollar-sign";
+import { Card, CardContent } from "@/components/ui/card";
+import { TrendingUp, DollarSign } from "lucide-react";
 
 const Mining = () => {
   const purchasedCourses: CourseCardProps[] = [
@@ -200,7 +199,7 @@ const Mining = () => {
                 <CourseCarousel
                   title="Continúa aprendiendo"
                   courses={purchasedCourses}
-                  viewAllLink="/courses?category=mining&purchased=true"
+                  viewAllLink="/courses?category=crypto&purchased=true"
                 />
               )}
               
@@ -208,20 +207,20 @@ const Mining = () => {
                 title="Top 10 más vendidos"
                 courses={topSelling}
                 badge={{ text: "MÁS POPULARES", variant: "secondary" }}
-                viewAllLink="/courses?category=mining&sort=popular"
+                viewAllLink="/courses?category=crypto&sort=popular"
               />
               
               <CourseCarousel
                 title="Nuevos cursos"
                 courses={newCourses}
                 badge={{ text: "NUEVO", variant: "destructive" }}
-                viewAllLink="/courses?category=mining&sort=newest"
+                viewAllLink="/courses?category=crypto&sort=newest"
               />
               
               <div className="mt-8 text-center">
                 <h3 className="text-xl font-bold mb-4">Planes de membresía</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Accede a todos nuestros cursos de minería con una membresía
+                  Accede a todos nuestros cursos de criptomonedas con una membresía
                 </p>
                 <Button 
                   variant="action" 
@@ -237,20 +236,20 @@ const Mining = () => {
             <TabsContent value="purchased">
               {purchasedCourses.length > 0 ? (
                 <CourseCarousel
-                  title="Tus cursos de minería"
+                  title="Tus cursos de criptomonedas"
                   courses={purchasedCourses}
-                  viewAllLink="/courses?category=mining&purchased=true"
+                  viewAllLink="/courses?category=crypto&purchased=true"
                 />
               ) : (
                 <div className="text-center py-12">
-                  <h3 className="text-xl font-bold mb-2">Aún no tienes cursos de minería</h3>
+                  <h3 className="text-xl font-bold mb-2">Aún no tienes cursos de criptomonedas</h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
                     Explora nuestra oferta y comienza a aprender hoy
                   </p>
                   <Button 
                     variant="default" 
                     size="lg" 
-                    onClick={() => window.location.href = "/courses?category=mining"}
+                    onClick={() => window.location.href = "/courses?category=crypto"}
                   >
                     Explorar cursos
                   </Button>
@@ -263,14 +262,14 @@ const Mining = () => {
                 title="Top 10 más vendidos"
                 courses={topSelling}
                 badge={{ text: "MÁS POPULARES", variant: "secondary" }}
-                viewAllLink="/courses?category=mining&sort=popular"
+                viewAllLink="/courses?category=crypto&sort=popular"
               />
               
               <CourseCarousel
                 title="Nuevos cursos"
                 courses={newCourses}
                 badge={{ text: "NUEVO", variant: "destructive" }}
-                viewAllLink="/courses?category=mining&sort=newest"
+                viewAllLink="/courses?category=crypto&sort=newest"
               />
               
               <div className="mt-8 text-center">

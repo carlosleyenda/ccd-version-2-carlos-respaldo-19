@@ -1,23 +1,21 @@
+
 import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import CourseCarousel from "@/components/courses/CourseCarousel";
 import { Button } from "@/components/ui/button";
 import { CourseCardProps } from "@/components/dashboard/CourseCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Card from "@/components/ui/card";
-import CardContent from "@/components/ui/card-content";
-import TrendingUp from "@/components/ui/icons/TrendingUp";
-import BarChart3 from "@/components/ui/icons/BarChart3";
-import Clock from "@/components/ui/icons/Clock";
+import { Card, CardContent } from "@/components/ui/card";
+import { TrendingUp, BarChart3, Clock } from "lucide-react";
 
 const Engineering = () => {
   const purchasedCourses: CourseCardProps[] = [
     {
       id: "eng-purchased-1",
-      title: "Algoritmos de Trading con Python",
-      description: "Desarrolla algoritmos de trading automatizado usando Python y bibliotecas especializadas.",
+      title: "Estrategias Avanzadas de Forex",
+      description: "Desarrolla estrategias avanzadas de trading para el mercado de divisas.",
       instructor: "Dr. Pedro Valdés",
-      category: "algorithmic",
+      category: "forex",
       level: "advanced",
       duration: "28h 45m",
       enrolled: 765,
@@ -27,10 +25,10 @@ const Engineering = () => {
     },
     {
       id: "eng-purchased-2",
-      title: "Machine Learning para Trading",
-      description: "Aplica técnicas de machine learning para predecir movimientos de mercado.",
+      title: "Trading Automático en Forex",
+      description: "Aplica técnicas de automatización para el trading de divisas.",
       instructor: "Dr. Antonio Guzmán",
-      category: "algorithmic",
+      category: "forex",
       level: "intermediate",
       duration: "22h 10m",
       enrolled: 642,
@@ -43,10 +41,10 @@ const Engineering = () => {
   const topSelling: CourseCardProps[] = [
     {
       id: "eng-top-1",
-      title: "Trading Algorítmico Profesional",
-      description: "Curso completo para convertirte en un desarrollador de algoritmos de trading.",
+      title: "Maestría en Trading Forex",
+      description: "Curso completo para convertirte en un trader profesional de forex.",
       instructor: "Ing. Francisco Méndez",
-      category: "algorithmic",
+      category: "forex",
       level: "advanced",
       duration: "32h 15m",
       enrolled: 1289,
@@ -56,10 +54,10 @@ const Engineering = () => {
     },
     {
       id: "eng-top-2",
-      title: "APIs para Trading Automatizado",
-      description: "Aprende a conectar y usar APIs de brokers para trading automatizado.",
+      title: "APIs para Trading Forex",
+      description: "Aprende a conectar y usar APIs de brokers para trading de divisas.",
       instructor: "Dra. Carmen Olivares",
-      category: "stocks",
+      category: "forex",
       level: "intermediate",
       duration: "26h 20m",
       enrolled: 876,
@@ -68,10 +66,10 @@ const Engineering = () => {
     },
     {
       id: "eng-top-3",
-      title: "Backtesting y Optimización",
-      description: "Técnicas avanzadas para probar y optimizar estrategias de trading.",
+      title: "Análisis Técnico Forex",
+      description: "Técnicas avanzadas de análisis técnico para el mercado de divisas.",
       instructor: "Dr. Roberto Gutiérrez",
-      category: "algorithmic",
+      category: "forex",
       level: "advanced",
       duration: "30h 45m",
       enrolled: 754,
@@ -80,8 +78,8 @@ const Engineering = () => {
     },
     {
       id: "eng-top-4",
-      title: "Gestión de Riesgo Automatizada",
-      description: "Implementa sistemas automáticos de gestión de riesgo en tus algoritmos.",
+      title: "Gestión de Riesgo en Forex",
+      description: "Implementa sistemas de gestión de riesgo en tus operaciones forex.",
       instructor: "Ing. Mario Sánchez",
       category: "management",
       level: "intermediate",
@@ -95,10 +93,10 @@ const Engineering = () => {
   const newCourses: CourseCardProps[] = [
     {
       id: "eng-new-1",
-      title: "IA y Trading Cuantitativo",
-      description: "Aplica inteligencia artificial para desarrollar estrategias de trading cuantitativo.",
+      title: "Scalping en Forex",
+      description: "Domina las técnicas de scalping para obtener ganancias rápidas en forex.",
       instructor: "Dr. Luis Martínez",
-      category: "algorithmic",
+      category: "forex",
       level: "advanced",
       duration: "28h 15m",
       enrolled: 342,
@@ -108,10 +106,10 @@ const Engineering = () => {
     },
     {
       id: "eng-new-2",
-      title: "Desarrollo de Bots de Trading",
-      description: "Crea bots de trading profesionales para diferentes mercados financieros.",
+      title: "Trading de Sesiones Forex",
+      description: "Aprende a tradear en las diferentes sesiones del mercado forex.",
       instructor: "Ing. Patricia Vega",
-      category: "algorithmic",
+      category: "forex",
       level: "intermediate",
       duration: "22h 30m",
       enrolled: 287,
@@ -120,10 +118,10 @@ const Engineering = () => {
     },
     {
       id: "eng-new-3",
-      title: "Análisis Cuantitativo Avanzado",
-      description: "Técnicas matemáticas y estadísticas aplicadas al trading profesional.",
+      title: "Fundamentos del Mercado Forex",
+      description: "Comprende los fundamentos económicos que mueven el mercado de divisas.",
       instructor: "Ing. Carlos Díaz",
-      category: "stocks",
+      category: "forex",
       level: "beginner",
       duration: "18h 20m",
       enrolled: 198,
@@ -134,8 +132,8 @@ const Engineering = () => {
 
   return (
     <PageLayout 
-      title="Trading Algorítmico" 
-      subtitle="Descubre nuestros cursos especializados en trading automatizado y algorítmico"
+      title="Trading de Forex" 
+      subtitle="Descubre nuestros cursos especializados en trading de divisas"
     >
       <div className="space-y-8">
         <div className="text-center space-y-4">
@@ -177,7 +175,7 @@ const Engineering = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10" />
             <CardContent className="relative p-6">
               <Clock className="h-12 w-12 text-purple-500 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Trading Algorítmico</h3>
+              <h3 className="text-xl font-semibold mb-2">Trading Automático</h3>
               <p className="text-muted-foreground mb-4">
                 Automatiza tus estrategias forex con Expert Advisors y sistemas de trading automático.
               </p>
@@ -198,7 +196,7 @@ const Engineering = () => {
               <CourseCarousel
                 title="Continúa aprendiendo"
                 courses={purchasedCourses}
-                viewAllLink="/courses?category=engineering&purchased=true"
+                viewAllLink="/courses?category=forex&purchased=true"
               />
             )}
             
@@ -206,20 +204,20 @@ const Engineering = () => {
               title="Top 10 más vendidos"
               courses={topSelling}
               badge={{ text: "MÁS POPULARES", variant: "secondary" }}
-              viewAllLink="/courses?category=engineering&sort=popular"
+              viewAllLink="/courses?category=forex&sort=popular"
             />
             
             <CourseCarousel
               title="Nuevos cursos"
               courses={newCourses}
               badge={{ text: "NUEVO", variant: "destructive" }}
-              viewAllLink="/courses?category=engineering&sort=newest"
+              viewAllLink="/courses?category=forex&sort=newest"
             />
             
             <div className="mt-8 text-center">
               <h3 className="text-xl font-bold mb-4">Planes de membresía</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Accede a todos nuestros cursos de ingeniería con una membresía
+                Accede a todos nuestros cursos de forex con una membresía
               </p>
               <Button 
                 variant="action" 
@@ -235,20 +233,20 @@ const Engineering = () => {
           <TabsContent value="purchased">
             {purchasedCourses.length > 0 ? (
               <CourseCarousel
-                title="Tus cursos de ingeniería"
+                title="Tus cursos de forex"
                 courses={purchasedCourses}
-                viewAllLink="/courses?category=engineering&purchased=true"
+                viewAllLink="/courses?category=forex&purchased=true"
               />
             ) : (
               <div className="text-center py-12">
-                <h3 className="text-xl font-bold mb-2">Aún no tienes cursos de ingeniería</h3>
+                <h3 className="text-xl font-bold mb-2">Aún no tienes cursos de forex</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
                   Explora nuestra oferta y comienza a aprender hoy
                 </p>
                 <Button 
                   variant="default" 
                   size="lg" 
-                  onClick={() => window.location.href = "/courses?category=engineering"}
+                  onClick={() => window.location.href = "/courses?category=forex"}
                 >
                   Explorar cursos
                 </Button>
@@ -261,14 +259,14 @@ const Engineering = () => {
               title="Top 10 más vendidos"
               courses={topSelling}
               badge={{ text: "MÁS POPULARES", variant: "secondary" }}
-              viewAllLink="/courses?category=engineering&sort=popular"
+              viewAllLink="/courses?category=forex&sort=popular"
             />
             
             <CourseCarousel
               title="Nuevos cursos"
               courses={newCourses}
               badge={{ text: "NUEVO", variant: "destructive" }}
-              viewAllLink="/courses?category=engineering&sort=newest"
+              viewAllLink="/courses?category=forex&sort=newest"
             />
             
             <div className="mt-8 text-center">
