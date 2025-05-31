@@ -1,7 +1,6 @@
 
 import { useParams, Navigate } from "react-router-dom";
 import CourseDetail from "@/components/courses/CourseDetail";
-import { CourseReview } from "@/components/courses/types";
 
 const CourseView = () => {
   const { id } = useParams<{ id: string }>();
@@ -66,7 +65,7 @@ const CourseView = () => {
         comment: "Muy bueno, aunque podría tener más ejemplos prácticos.",
         date: "2024-01-10"
       }
-    ] as CourseReview[]
+    ]
   };
 
   return <CourseDetail {...courseData} />;
