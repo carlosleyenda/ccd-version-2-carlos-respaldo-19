@@ -19,33 +19,49 @@ const PathMilestones: React.FC<PathMilestonesProps> = ({ pathId }) => {
         id: "m1",
         title: "Fundamentos",
         description: "Dominar los conceptos básicos y principios fundamentales de la especialidad.",
-        courses: ["safety-fundamentals", "metallurgy-fundamentals"],
-        skills: ["Comprensión teórica", "Conocimiento normativo"],
-        completed: true
+        completed: true,
+        progress: 100,
+        courses: [
+          { id: "safety-fundamentals", title: "Fundamentos de Seguridad", duration: "4h", completed: true },
+          { id: "metallurgy-fundamentals", title: "Fundamentos de Metalurgia", duration: "6h", completed: true }
+        ],
+        skills: ["Comprensión teórica", "Conocimiento normativo"]
       },
       {
         id: "m2",
         title: "Aplicación práctica",
         description: "Aplicar los conocimientos en escenarios reales y desarrollar habilidades prácticas.",
-        courses: ["risk-assessment", "hydrometallurgy"],
-        skills: ["Resolución de problemas", "Análisis técnico"],
-        completed: true
+        completed: true,
+        progress: 100,
+        courses: [
+          { id: "risk-assessment", title: "Evaluación de Riesgos", duration: "5h", completed: true },
+          { id: "hydrometallurgy", title: "Hidrometalurgia", duration: "8h", completed: true }
+        ],
+        skills: ["Resolución de problemas", "Análisis técnico"]
       },
       {
         id: "m3",
         title: "Especialización técnica",
         description: "Profundizar en áreas específicas y desarrollar experiencia especializada.",
-        courses: ["pyrometallurgy", "emergency-protocols"],
-        skills: ["Optimización de procesos", "Gestión de emergencias"],
-        completed: false
+        completed: false,
+        progress: 45,
+        courses: [
+          { id: "pyrometallurgy", title: "Pirometalurgia", duration: "10h", completed: false },
+          { id: "emergency-protocols", title: "Protocolos de Emergencia", duration: "6h", completed: false }
+        ],
+        skills: ["Optimización de procesos", "Gestión de emergencias"]
       },
       {
         id: "m4",
         title: "Maestría y certificación",
         description: "Consolidar conocimientos, demostrar competencia y obtener certificación oficial.",
-        courses: ["process-optimization", "safety-leadership"],
-        skills: ["Liderazgo técnico", "Mejora continua"],
-        completed: false
+        completed: false,
+        progress: 0,
+        courses: [
+          { id: "process-optimization", title: "Optimización de Procesos", duration: "12h", completed: false },
+          { id: "safety-leadership", title: "Liderazgo en Seguridad", duration: "8h", completed: false }
+        ],
+        skills: ["Liderazgo técnico", "Mejora continua"]
       }
     ];
     
@@ -85,7 +101,7 @@ const PathMilestones: React.FC<PathMilestonesProps> = ({ pathId }) => {
               <div>
                 <h4 className="text-sm font-medium mb-2">Habilidades desarrolladas:</h4>
                 <div className="flex flex-wrap gap-2">
-                  {milestone.skills.map((skill, i) => (
+                  {milestone.skills?.map((skill, i) => (
                     <span key={i} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-full">
                       {skill}
                     </span>
@@ -96,10 +112,10 @@ const PathMilestones: React.FC<PathMilestonesProps> = ({ pathId }) => {
               <div>
                 <h4 className="text-sm font-medium mb-2">Cursos relacionados:</h4>
                 <ul className="space-y-1">
-                  {milestone.courses.map((courseId, i) => (
-                    <li key={i} className="text-sm flex items-center">
+                  {milestone.courses?.map((course) => (
+                    <li key={course.id} className="text-sm flex items-center">
                       <ArrowRight size={14} className="mr-1 text-gray-400" />
-                      {courseId}
+                      {course.title} - {course.duration}
                     </li>
                   ))}
                 </ul>
